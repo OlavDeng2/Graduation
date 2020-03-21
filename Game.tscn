@@ -1,6 +1,6 @@
 [gd_scene load_steps=39 format=2]
 
-[ext_resource path="res://Game.cs" type="Script" id=1]
+[ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Assets/CGTuts_OceanHDRI_Freebie_001.hdr" type="Texture" id=2]
 [ext_resource path="res://Scenes/Left_Controller.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Right_Controller.tscn" type="PackedScene" id=4]
