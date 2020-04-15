@@ -174,8 +174,8 @@ func _on_button_pressed_grab():
 
 	if held_object == null:
 		_pickup_rigidbody()
-	else:
-		_throw_rigidbody()
+	#else:
+	#	_throw_rigidbody()
 
 	hand_pickup_drop_sound.play()
 
@@ -256,6 +256,8 @@ func _on_button_pressed_menu():
 func button_released(button_index):
 	if button_index == 15:
 		_on_button_released_trigger()
+	if button_index ==2:
+		_on_button_released_grab()
 
 
 func _on_button_released_trigger():
@@ -271,6 +273,14 @@ func _on_button_released_trigger():
 		teleport_mesh.visible = false
 		teleport_raycast.visible = false
 		teleport_pos = null
+
+func _on_button_released_grab():
+	if teleport_button_down == true:
+		return
+
+	if held_object != null:
+		_throw_rigidbody()
+	hand_pickup_drop_sound.play()
 
 
 func sleep_area_entered(body):

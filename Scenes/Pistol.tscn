@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
+[ext_resource path="res://Scripts/Pistol.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Pistol.scn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Assets_Material.tres" type="Material" id=3]
 [ext_resource path="res://Assets/Pistol_Flash.scn" type="PackedScene" id=4]
@@ -17,6 +18,7 @@ flags_unshaded = true
 albedo_color = Color( 1, 0, 0, 0.54902 )
 
 [node name="Pistol" type="RigidBody"]
+script = ExtResource( 1 )
 
 [node name="Pistol" parent="." instance=ExtResource( 2 )]
 transform = Transform( -1, 0, -8.74228e-08, 1.43301e-08, 0.986474, -0.163917, 8.62403e-08, -0.163917, -0.986474, 6.03814e-07, 0.0136842, 0.0101029 )

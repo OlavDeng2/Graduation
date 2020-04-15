@@ -1,0 +1,6 @@
+C:\Users\Olav\Desktop\Programming\Github\Godot\Graduation\.mono\temp\bin\Debug\Graduation.dll
+C:\Users\Olav\Desktop\Programming\Github\Godot\Graduation\.mono\temp\bin\Debug\Graduation.pdb
+C:\Users\Olav\Desktop\Programming\Github\Godot\Graduation\.mono\temp\obj\Debug\Graduation.csprojAssemblyReference.cache
+C:\Users\Olav\Desktop\Programming\Github\Godot\Graduation\.mono\temp\obj\Debug\Graduation.csproj.CoreCompileInputs.cache
+C:\Users\Olav\Desktop\Programming\Github\Godot\Graduation\.mono\temp\obj\Debug\Graduation.dll
+C:\Users\Olav\Desktop\Programming\Github\Godot\Graduation\.mono\temp\obj\Debug\Graduation.pdb

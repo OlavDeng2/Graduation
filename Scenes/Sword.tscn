@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
+[ext_resource path="res://Scripts/Sword.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sword.scn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Assets_Material.tres" type="Material" id=3]
 [ext_resource path="res://Audio/Gamemaster_audio_Punch_and_Combat_Sounds/punch_grit_wet_impact_05.ogg" type="AudioStream" id=4]
@@ -11,6 +12,7 @@ points = PoolVector3Array( 0.0154495, 0.162354, 0.0275726, 0.0275726, 0.162354, 
 extents = Vector3( 0.02, 0.8, 0.02 )
 
 [node name="Sword" type="RigidBody"]
+script = ExtResource( 1 )
 
 [node name="Sword" parent="." instance=ExtResource( 2 )]
 transform = Transform( -4.51501e-08, -3.85492e-10, 1, -0.939692, 0.34202, -4.22953e-08, -0.34202, -0.939692, -1.58044e-08, 0, -0.0149358, 0.0885395 )

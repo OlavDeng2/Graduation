@@ -1,10 +1,9 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Assets/CGTuts_OceanHDRI_Freebie_001.hdr" type="Texture" id=2]
 [ext_resource path="res://Scenes/Left_Controller.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Right_Controller.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Movement_Vignette.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Sphere_Target.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Main_VR_GUI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Pistol.tscn" type="PackedScene" id=8]
@@ -423,9 +422,6 @@ current = true
 [node name="Left_Controller" parent="ARVROrigin" instance=ExtResource( 3 )]
 
 [node name="Right_Controller" parent="ARVROrigin" instance=ExtResource( 4 )]
-
-[node name="Movement_Vignette" parent="ARVROrigin" instance=ExtResource( 5 )]
-visible = false
 
 [node name="Spheres" type="Spatial" parent="."]
 

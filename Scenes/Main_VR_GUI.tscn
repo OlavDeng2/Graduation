@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/GUI.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Base_Control.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Titillium-Regular.otf" type="DynamicFontData" id=3]
 
 [sub_resource type="QuadMesh" id=1]
@@ -57,6 +58,7 @@ gui_snap_controls_to_pixels = false
 [node name="Base_Control" type="Control" parent="GUI"]
 margin_right = 800.0
 margin_bottom = 800.0
+script = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="GUI/Base_Control"]
 anchor_right = 1.0
