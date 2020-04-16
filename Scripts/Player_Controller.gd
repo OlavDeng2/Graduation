@@ -7,6 +7,8 @@ var movement_mode = "Joystick"
 var movement_direction = null
 var movement_speed = null
 
+var has_rotated = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	left_controller = get_node("Left_Controller")
@@ -27,8 +29,22 @@ func _change_movement_mode(currentMovementMode):
 	right_controller.movement_mode = movement_mode
 
 
-func _snapturn():
-	pass
+func snapturn(direction):
+	if !has_rotated:
+		if direction == 0:
+			return
+		elif direction < 0:
+			#turn right 25 degrees
+			rotate_y(45)
+			has_rotated = true	
+		elif direction > 0:
+			#turn left 25 degrees
+			rotate_y(-45)
+			has_rotated = true
+
+	if has_rotated:
+		if direction == 0:
+			has_rotated = false
 
 
 #this is used for the teleport movement method	
