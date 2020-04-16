@@ -17,13 +17,19 @@ func _ready():
 #func _process(delta):
 #	pass
 
-func _change_movement_mode(movementMode):
-	movement_mode = movementMode
+func _change_movement_mode(currentMovementMode):
+	if currentMovementMode == "Teleport":
+		movement_mode = "Smooth"
+	if currentMovementMode == "Smooth":
+		movement_mode = "Teleport"
+		
 	left_controller.movement_mode = movement_mode
 	right_controller.movement_mode = movement_mode
-	
+
+
 func _snapturn():
 	pass
+
 
 #this is used for the teleport movement method	
 func _teleport():
@@ -33,9 +39,11 @@ func _teleport():
 func _rotate_world():
 	pass
 
+
 #Amrswinger movement method
 func _armswinger():
 	pass
+
 
 #smooth locomotion
 func _smooth_locomotion():
