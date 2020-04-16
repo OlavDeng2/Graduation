@@ -153,9 +153,6 @@ func button_pressed(button_index):
 	if button_index == 2:
 		_on_button_pressed_grab()
 
-	if button_index == 1:
-		_on_button_pressed_menu()
-
 
 func _on_button_pressed_trigger():
 	if held_object == null:
@@ -191,15 +188,6 @@ func _pickup_rigidbody():
 					if !("NO_PICKUP" in body):
 						rigid_body = body
 						break
-
-	elif grab_mode == "RAYCAST":
-		grab_raycast.force_raycast_update()
-		if (grab_raycast.is_colliding()):
-			var body = grab_raycast.get_collider()
-			if body is RigidBody:
-				if !("NO_PICKUP" in body):
-					rigid_body = body
-
 
 	if rigid_body != null:
 
@@ -240,18 +228,6 @@ func _throw_rigidbody():
 
 	if grab_mode == "RAYCAST":
 		grab_raycast.visible = true
-
-
-func _on_button_pressed_menu():
-	if grab_mode == "AREA":
-		grab_mode = "RAYCAST"
-		if held_object == null:
-			grab_raycast.visible = true
-
-	elif grab_mode == "RAYCAST":
-		grab_mode = "AREA"
-		grab_raycast.visible = false
-
 
 func button_released(button_index):
 	if button_index == 15:
