@@ -64,7 +64,7 @@ script = ExtResource( 2 )
 anchor_right = 1.0
 margin_bottom = 99.0
 custom_fonts/font = SubResource( 5 )
-text = "Godot VR Tutorial"
+text = "Motion Sickness in VR"
 align = 1
 valign = 1
 
