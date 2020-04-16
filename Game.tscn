@@ -1,9 +1,10 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Assets/CGTuts_OceanHDRI_Freebie_001.hdr" type="Texture" id=2]
 [ext_resource path="res://Scenes/Left_Controller.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Right_Controller.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scripts/Player_Controller.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Sphere_Target.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Main_VR_GUI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Pistol.tscn" type="PackedScene" id=8]
@@ -415,6 +416,7 @@ shadow_enabled = true
 
 [node name="ARVROrigin" type="ARVROrigin" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.177191, 14 )
+script = ExtResource( 5 )
 
 [node name="Player_Camera" type="ARVRCamera" parent="ARVROrigin"]
 current = true

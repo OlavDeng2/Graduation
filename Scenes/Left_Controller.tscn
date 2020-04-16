@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/VR_Controller.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Hand_Left.scn" type="PackedScene" id=2]
@@ -32,14 +32,6 @@ albedo_color = Color( 0.460938, 0.633606, 1, 0.431373 )
 radius = 0.1
 
 [sub_resource type="SphereShape" id=5]
-
-[sub_resource type="CubeMesh" id=6]
-size = Vector3( 0.01, 0.5, 0.01 )
-
-[sub_resource type="SpatialMaterial" id=7]
-flags_transparent = true
-flags_unshaded = true
-albedo_color = Color( 0.667298, 1, 0.460938, 0.431373 )
 
 [node name="Left_Controller" type="ARVRController"]
 script = ExtResource( 1 )
@@ -75,12 +67,3 @@ shape = SubResource( 5 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 4 )
-
-[node name="Grab_Cast" type="RayCast" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.5, -0.866025, 0, 0.866025, 0.5, 0, 0, 0 )
-cast_to = Vector3( 0, -0.5, 0 )
-
-[node name="Mesh" type="MeshInstance" parent="Grab_Cast"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.244232, 7.45058e-09 )
-mesh = SubResource( 6 )
-material/0 = SubResource( 7 )

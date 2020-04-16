@@ -1,5 +1,8 @@
 extends ARVRController
 
+var movement_mode = "Joystick"
+var player_controller = null;
+
 var controller_velocity = Vector3(0,0,0)
 var prior_controller_position = Vector3(0,0,0)
 var prior_controller_velocities = []
@@ -8,9 +11,7 @@ var held_object = null
 var held_object_data = {"mode":RigidBody.MODE_RIGID, "layer":1, "mask":1}
 
 var grab_area
-var grab_raycast
 
-var grab_mode = "AREA"
 var grab_pos_node
 
 var hand_mesh
@@ -37,6 +38,7 @@ func _ready():
 	# Ignore the warnings the from the connect function calls.
 	# (We will not need the returned values for this tutorial)
 	# warning-ignore-all:return_value_discarded
+	player_controller = get_parent()
 
 	teleport_raycast = get_node("RayCast")
 
@@ -47,11 +49,7 @@ func _ready():
 	teleport_raycast.visible = false
 
 	grab_area = get_node("Area")
-	grab_raycast = get_node("Grab_Cast")
 	grab_pos_node = get_node("Grab_Pos")
-
-	grab_mode = "AREA"
-	grab_raycast.visible = false
 
 	get_node("Sleep_Area").connect("body_entered", self, "sleep_area_entered")
 	get_node("Sleep_Area").connect("body_exited", self, "sleep_area_exited")
@@ -69,6 +67,7 @@ func _physics_process(delta):
 		if rumble < 0:
 			rumble = 0
 
+	#change this over to handling all the different movement modes rather than just teleport
 	if teleport_button_down == true:
 		teleport_raycast.force_raycast_update()
 		if teleport_raycast.is_colliding():
@@ -152,6 +151,9 @@ func button_pressed(button_index):
 
 	if button_index == 2:
 		_on_button_pressed_grab()
+		
+	if button_index == 1:
+		_on_button_pressed_b()
 
 
 func _on_button_pressed_trigger():
@@ -168,26 +170,28 @@ func _on_button_pressed_trigger():
 func _on_button_pressed_grab():
 	if teleport_button_down == true:
 		return
-
+		
 	if held_object == null:
 		_pickup_rigidbody()
 	#else:
 	#	_throw_rigidbody()
-
 	hand_pickup_drop_sound.play()
+
+
+func _on_button_pressed_b():
+	player_controller._change_movement_mode("Teleport")
 
 
 func _pickup_rigidbody():
 	var rigid_body = null
 
-	if grab_mode == "AREA":
-		var bodies = grab_area.get_overlapping_bodies()
-		if len(bodies) > 0:
-			for body in bodies:
-				if body is RigidBody:
-					if !("NO_PICKUP" in body):
-						rigid_body = body
-						break
+	var bodies = grab_area.get_overlapping_bodies()
+	if len(bodies) > 0:
+		for body in bodies:
+			if body is RigidBody:
+				if !("NO_PICKUP" in body):
+					rigid_body = body
+					break
 
 	if rigid_body != null:
 
@@ -202,7 +206,6 @@ func _pickup_rigidbody():
 		held_object.collision_mask = 0
 
 		hand_mesh.visible = false
-		grab_raycast.visible = false
 
 		if held_object is VR_Interactable_Rigidbody:
 			held_object.controller = self
@@ -226,8 +229,6 @@ func _throw_rigidbody():
 	held_object = null
 	hand_mesh.visible = true
 
-	if grab_mode == "RAYCAST":
-		grab_raycast.visible = true
 
 func button_released(button_index):
 	if button_index == 15:
@@ -249,6 +250,7 @@ func _on_button_released_trigger():
 		teleport_mesh.visible = false
 		teleport_raycast.visible = false
 		teleport_pos = null
+
 
 func _on_button_released_grab():
 	if teleport_button_down == true:
