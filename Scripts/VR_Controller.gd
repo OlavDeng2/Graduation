@@ -1,6 +1,8 @@
 extends ARVRController
 
 var movement_mode = "Smooth"
+var move_button_down = false
+
 var player_controller = null
 
 #0 = unkown, 1 = left, 2 = right
@@ -26,9 +28,10 @@ var teleport_raycast
 # A constant to define the dead zone for both the trackpad and the joystick.
 # See (http://www.third-helix.com/2013/04/12/doing-thumbstick-dead-zones-right.html)
 # for more information on what dead zones are, and how we are using them in this project.
-const CONTROLLER_DEADZONE = 0.65
+const CONTROLLER_DEADZONE = 0.1
 
-const MOVEMENT_SPEED = 1.5
+const MOVEMENT_SPEED = 2.5
+const ARMSWINGER_SPEED = 1.0
 
 const CONTROLLER_RUMBLE_FADE_SPEED = 2.0
 
@@ -42,13 +45,15 @@ func _ready():
 	player_controller = get_parent()
 	controller_hand = get_controller_id()
 
+	move_button_down = false
+
 	teleport_raycast = get_node("RayCast")
 
 	teleport_mesh = get_tree().root.get_node("Game/Teleport_Mesh")
 
 	teleport_mesh.visible = false
 	teleport_raycast.visible = false
-
+	
 	grab_area = get_node("Area")
 	grab_pos_node = get_node("Grab_Pos")
 
@@ -63,11 +68,14 @@ func _ready():
 
 
 func _physics_process(delta):
+	print_debug(controller_velocity)
+	
 	if rumble > 0:
 		rumble -= delta * CONTROLLER_RUMBLE_FADE_SPEED
 		if rumble < 0:
 			rumble = 0
 
+	#this applies only for teleport and smooth locomotion for now
 	_move_player(delta)
 	_snapturn()
 
@@ -88,14 +96,21 @@ func _physics_process_update_controller_velocity(delta):
 			controller_velocity += vel
 
 		controller_velocity = controller_velocity / prior_controller_velocities.size()
+	
+	#Global transform
+	#var relative_controller_position = (global_transform.origin - prior_controller_position)
+	#local transform
+	var relative_controller_position = (transform.origin - prior_controller_position)
 
-	var relative_controller_position = (global_transform.origin - prior_controller_position)
 
 	controller_velocity += relative_controller_position
 
 	prior_controller_velocities.append(relative_controller_position)
 
-	prior_controller_position = global_transform.origin
+	#global transform
+	#prior_controller_position = global_transform.origin
+	#local transform
+	prior_controller_position = transform.origin
 
 	controller_velocity /= delta;
 
@@ -107,66 +122,25 @@ func _snapturn():
 	if controller_hand == 2:
 		var joystick_x_axis = get_joystick_axis(0)
 		if joystick_x_axis < CONTROLLER_DEADZONE and joystick_x_axis > -CONTROLLER_DEADZONE:
-			print_debug(joystick_x_axis)
 			joystick_x_axis = 0
 		player_controller.snapturn(joystick_x_axis)
 
 func _move_player(delta):
-	if controller_hand == 1:
-		var trackpad_vector = Vector2(-get_joystick_axis(1), get_joystick_axis(0))
-		
-		if movement_mode == "Smooth":
-			if trackpad_vector.length() < CONTROLLER_DEADZONE:
-				trackpad_vector = Vector2(0,0)
-			else:
-				trackpad_vector = trackpad_vector.normalized() * ((trackpad_vector.length() - CONTROLLER_DEADZONE) / (1 - CONTROLLER_DEADZONE))
-	
-			var forward_direction = get_parent().get_node("Player_Camera").global_transform.basis.z.normalized()
-			var right_direction = get_parent().get_node("Player_Camera").global_transform.basis.x.normalized()
-	
-			# Because the trackpad and the joystick will both move the player, we can add them together and normalize
-			# the result, giving the combined movement direction
-			var movement_vector = (trackpad_vector).normalized()
-	
-			var movement_forward = forward_direction * movement_vector.x * delta * MOVEMENT_SPEED
-			var movement_right = right_direction * movement_vector.y * delta * MOVEMENT_SPEED
-	
-			movement_forward.y = 0
-			movement_right.y = 0
-	
-			if (movement_right.length() > 0 or movement_forward.length() > 0):
-				get_parent().global_translate(movement_right + movement_forward)
-				directional_movement = true
-			else:
-				directional_movement = false
-				
-		elif movement_mode == "Teleport":
-			if trackpad_vector.length() > CONTROLLER_DEADZONE:
-				if teleport_mesh.visible == false:
-					teleport_mesh.visible = true
-					teleport_raycast.visible = true
-					
-				teleport_raycast.force_raycast_update()
-				if teleport_raycast.is_colliding():
-					if teleport_raycast.get_collider() is StaticBody:
-						if teleport_raycast.get_collision_normal().y >= 0.85:
-							teleport_pos = teleport_raycast.get_collision_point()
-							teleport_mesh.global_transform.origin = teleport_pos
-	
-			if trackpad_vector.length() < CONTROLLER_DEADZONE:
-				if teleport_pos != null and teleport_mesh.visible == true:
-					print_debug("we got this far")
-					var camera_offset = get_parent().get_node("Player_Camera").global_transform.origin - get_parent().global_transform.origin
-					camera_offset.y = 0
-					get_parent().global_transform.origin = teleport_pos - camera_offset
-					teleport_mesh.visible = false
-					teleport_raycast.visible = false
-					teleport_pos = null
-	else:
-		return
+	if movement_mode == "Smooth":
+		if controller_hand == 1:
+			var trackpad_vector = Vector2(-get_joystick_axis(1), get_joystick_axis(0))
+			smoothLocomotion(delta, trackpad_vector)
+	elif movement_mode == "Teleport":
+		if controller_hand == 1:
+			var trackpad_vector = Vector2(-get_joystick_axis(1), get_joystick_axis(0))
+			teleport(trackpad_vector)
+	elif movement_mode == "Armswinger":
+		if move_button_down == true:
+			armswinger(delta)
 
 
 func button_pressed(button_index):
+	print_debug(button_index)
 	if button_index == 15:
 		_on_button_pressed_trigger()
 
@@ -178,6 +152,8 @@ func button_pressed(button_index):
 
 
 func _on_button_pressed_trigger():
+	#temporarily used for armswinger testing
+	move_button_down = true
 	if held_object != null: 
 		if held_object is VR_Interactable_Rigidbody:
 			held_object.interact()
@@ -192,7 +168,6 @@ func _on_button_pressed_grab():
 
 
 func _on_button_pressed_b():
-	
 	player_controller._change_movement_mode(movement_mode)
 
 
@@ -245,8 +220,14 @@ func _throw_rigidbody():
 
 
 func button_released(button_index):
-	if button_index ==2:
+	if button_index == 15:
+		_on_button_released_trigger()
+	if button_index == 2:
 		_on_button_released_grab()
+
+#temporary function for moving with armswinger
+func _on_button_released_trigger():
+	move_button_down = false
 
 
 func _on_button_released_grab():
@@ -265,3 +246,68 @@ func sleep_area_exited(body):
 	if "can_sleep" in body:
 		# Allow the CollisionBody to sleep by setting the "can_sleep" variable to true
 		body.can_sleep = true
+
+
+func smoothLocomotion(delta, trackpad_vector):
+	if trackpad_vector.length() < CONTROLLER_DEADZONE:
+		trackpad_vector = Vector2(0,0)
+	else:
+		trackpad_vector = trackpad_vector.normalized() * ((trackpad_vector.length() - CONTROLLER_DEADZONE) / (1 - CONTROLLER_DEADZONE))
+	
+	var forward_direction = get_parent().get_node("Player_Camera").global_transform.basis.z.normalized()
+	var right_direction = get_parent().get_node("Player_Camera").global_transform.basis.x.normalized()
+	
+	var movement_vector = (trackpad_vector).normalized()
+	
+	var movement_forward = forward_direction * movement_vector.x * delta * MOVEMENT_SPEED
+	var movement_right = right_direction * movement_vector.y * delta * MOVEMENT_SPEED
+	
+	movement_forward.y = 0
+	movement_right.y = 0
+	
+	if (movement_right.length() > 0 or movement_forward.length() > 0):
+		get_parent().global_translate(movement_right + movement_forward)
+		directional_movement = true
+	else:
+		directional_movement = false
+
+
+func teleport(trackpad_vector):
+	if trackpad_vector.length() > CONTROLLER_DEADZONE:
+		if teleport_mesh.visible == false:
+			teleport_mesh.visible = true
+			teleport_raycast.visible = true
+					
+		teleport_raycast.force_raycast_update()
+		if teleport_raycast.is_colliding():
+			if teleport_raycast.get_collider() is StaticBody:
+				if teleport_raycast.get_collision_normal().y >= 0.85:
+					teleport_pos = teleport_raycast.get_collision_point()
+					teleport_mesh.global_transform.origin = teleport_pos
+	
+	if trackpad_vector.length() < CONTROLLER_DEADZONE:
+		if teleport_pos != null and teleport_mesh.visible == true:
+			var camera_offset = get_parent().get_node("Player_Camera").global_transform.origin - get_parent().global_transform.origin
+			camera_offset.y = 0
+			get_parent().global_transform.origin = teleport_pos - camera_offset
+			teleport_mesh.visible = false
+			teleport_raycast.visible = false
+			teleport_pos = null
+
+
+func armswinger(delta):
+	var movement_forward = Vector3(0, 0, 0)
+	#get direction of controllers, make it negative otherwise we get the wrong direction
+	var direction = -get_transform().basis.z.normalized()
+	#translate the directions into top down 2d
+	direction.y = 0
+	#add the speed for the movement
+	#movement_forward = direction * delta * ARMSWINGER_SPEED
+	#move player in direction of controllers at a set speed when button is pressed
+	get_parent().global_translate(movement_forward)
+	
+	#get velocity of controllers
+	movement_forward = direction * controller_velocity.length() * delta
+
+	#move the player in the direction that the controller is pointing
+	get_parent().global_translate(movement_forward)

@@ -37,7 +37,7 @@ radius = 0.1
 script = ExtResource( 1 )
 
 [node name="Hand" parent="." instance=ExtResource( 2 )]
-transform = Transform( -0.845723, 0.197862, 0.235802, 0, 0.68944, -0.578509, -0.307818, -0.543621, -0.647862, -0.00853791, 0, 0.0342013 )
+transform = Transform( -0.657785, 0.153893, 0.183402, 0, 0.536231, -0.449952, -0.239414, -0.422816, -0.503892, -0.00853791, 0, 0.0342013 )
 mesh = SubResource( 1 )
 
 [node name="RayCast" type="RayCast" parent="."]

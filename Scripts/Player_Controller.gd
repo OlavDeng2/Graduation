@@ -23,6 +23,8 @@ func _change_movement_mode(currentMovementMode):
 	if currentMovementMode == "Teleport":
 		movement_mode = "Smooth"
 	if currentMovementMode == "Smooth":
+		movement_mode = "Armswinger"
+	if currentMovementMode == "Armswinger":
 		movement_mode = "Teleport"
 		
 	left_controller.movement_mode = movement_mode
@@ -56,11 +58,10 @@ func _rotate_world():
 	pass
 
 
-#Amrswinger movement method
-func _armswinger():
-	pass
-
-
 #smooth locomotion
 func _smooth_locomotion():
+	pass
+
+#Amrswinger movement method
+func _armswinger():
 	pass
