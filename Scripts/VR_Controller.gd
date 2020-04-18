@@ -302,7 +302,7 @@ func armswinger(delta):
 	#translate the directions into top down 2d
 	direction.y = 0
 	#add the speed for the movement
-	#movement_forward = direction * delta * ARMSWINGER_SPEED
+	movement_forward = direction * delta * ARMSWINGER_SPEED
 	#move player in direction of controllers at a set speed when button is pressed
 	get_parent().global_translate(movement_forward)
 	
