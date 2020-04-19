@@ -1,7 +1,6 @@
 extends Control
 
 var sphere_count_label
-var current_movement_mode_label
 
 func _ready():
 	sphere_count_label = get_node("Label_Sphere_Count")
@@ -14,9 +13,6 @@ func update_sphere_count(sphere_count):
 		sphere_count_label.text = str(sphere_count) + " Spheres remaining"
 	else:
 		sphere_count_label.text = "No spheres remaining! Good job!"
-
-func update_current_movement_mode(current_movement_mode):
-	pass
 
 
 func update_current_dominant_hand(current_dominant_hand):

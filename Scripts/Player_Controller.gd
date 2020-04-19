@@ -8,7 +8,7 @@ var dominant_hand = 2
 export var max_movement_speed = 5
 var left_controller = null
 var right_controller = null
-var movement_mode = "Joystick"
+var movement_mode = "Smooth"
 var movement_direction = null
 var movement_speed = null
 
@@ -37,6 +37,8 @@ func _change_movement_mode(currentMovementMode):
 		movement_mode = "Armswinger"
 	if currentMovementMode == "Armswinger":
 		movement_mode = "Teleport"
+		
+	print_debug(movement_mode)
 		
 	left_controller.movement_mode = movement_mode
 	right_controller.movement_mode = movement_mode
