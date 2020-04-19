@@ -95,13 +95,7 @@ margin_bottom = 326.0
 rect_scale = Vector2( 0.7, 0.7 )
 custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0.992188, 1, 0, 1 )
-text = "Move with the  the joysticks
-
-Grab and release objects by pressing the grip button
-
-Change movement modes by pressing the \"B\" button
-
-While holding a object, press the trigger to interact"
+text = "Thank you for testing my prototype"
 align = 1
 valign = 1
 

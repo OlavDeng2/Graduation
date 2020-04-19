@@ -149,8 +149,6 @@ func button_pressed(button_index):
 
 
 func _on_button_pressed_trigger():
-	#temporarily used for armswinger testing
-	move_button_down = true
 	if held_object != null: 
 		if held_object is VR_Interactable_Rigidbody:
 			held_object.interact()
@@ -165,7 +163,7 @@ func _on_button_pressed_grab():
 
 
 func _on_button_pressed_b():
-	player_controller._change_movement_mode(movement_mode)
+	move_button_down = true
 
 
 func _pickup_rigidbody():
@@ -218,12 +216,12 @@ func _throw_rigidbody():
 
 func button_released(button_index):
 	if button_index == 15:
-		_on_button_released_trigger()
+		_on_button_released_b()
 	if button_index == 2:
 		_on_button_released_grab()
 
-#temporary function for moving with armswinger
-func _on_button_released_trigger():
+
+func _on_button_released_b():
 	move_button_down = false
 
 

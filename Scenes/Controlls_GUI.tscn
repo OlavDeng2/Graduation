@@ -84,11 +84,14 @@ text = "Move with  the joysticks
 
 Grab and release objects by pressing the grip button
 
-While holding a object, press the trigger to interact"
+While holding a object, press the trigger to interact
+
+Current Movement Mode:
+"
 align = 1
 valign = 1
 
-[node name="Label_Movement_mode" type="Label" parent="GUI/Base_Control"]
+[node name="Label_Movement_Mode" type="Label" parent="GUI/Base_Control"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -99,9 +102,7 @@ margin_right = 400.0
 margin_bottom = -315.0
 custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0, 1, 0.273438, 1 )
-text = "Current Movement Mode:
-
-Teleport"
+text = "Smooth"
 align = 1
 valign = 1
 
