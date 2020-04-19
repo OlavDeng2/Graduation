@@ -18,4 +18,4 @@ func remove_sphere():
 	spheres_left -= 1
 
 	if sphere_ui != null:
-		sphere_ui.update_ui(spheres_left)
+		sphere_ui.update_sphere_count(spheres_left)

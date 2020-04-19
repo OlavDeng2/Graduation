@@ -68,8 +68,6 @@ func _ready():
 
 
 func _physics_process(delta):
-	print_debug(controller_velocity)
-	
 	if rumble > 0:
 		rumble -= delta * CONTROLLER_RUMBLE_FADE_SPEED
 		if rumble < 0:
@@ -119,7 +117,7 @@ func _physics_process_update_controller_velocity(delta):
 
 
 func _snapturn():
-	if controller_hand == 2:
+	if controller_hand == player_controller.dominant_hand:
 		var joystick_x_axis = get_joystick_axis(0)
 		if joystick_x_axis < CONTROLLER_DEADZONE and joystick_x_axis > -CONTROLLER_DEADZONE:
 			joystick_x_axis = 0
@@ -127,11 +125,11 @@ func _snapturn():
 
 func _move_player(delta):
 	if movement_mode == "Smooth":
-		if controller_hand == 1:
+		if controller_hand != player_controller.dominant_hand:
 			var trackpad_vector = Vector2(-get_joystick_axis(1), get_joystick_axis(0))
 			smoothLocomotion(delta, trackpad_vector)
 	elif movement_mode == "Teleport":
-		if controller_hand == 1:
+		if controller_hand != player_controller.dominant_hand:
 			var trackpad_vector = Vector2(-get_joystick_axis(1), get_joystick_axis(0))
 			teleport(trackpad_vector)
 	elif movement_mode == "Armswinger":
@@ -140,7 +138,6 @@ func _move_player(delta):
 
 
 func button_pressed(button_index):
-	print_debug(button_index)
 	if button_index == 15:
 		_on_button_pressed_trigger()
 
@@ -308,6 +305,10 @@ func armswinger(delta):
 	
 	#get velocity of controllers
 	movement_forward = direction * controller_velocity.length() * delta
-
 	#move the player in the direction that the controller is pointing
 	get_parent().global_translate(movement_forward)
+	
+	#options for improving armswinger to be more natural:
+	#Use average controller velocity for the last 1-2 seconds from the point of button press
+	
+	#Get average direction of both controllers if both controllers are being used

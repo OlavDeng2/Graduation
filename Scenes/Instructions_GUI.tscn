@@ -27,7 +27,7 @@ font_data = ExtResource( 3 )
 size = 42
 font_data = ExtResource( 3 )
 
-[node name="Main_VR_GUI" type="Spatial"]
+[node name="Instructions_GUI" type="Spatial"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 4.77395, 4.96041, 19.7775 )
 
 [node name="GUI_Mesh" type="MeshInstance" parent="."]
