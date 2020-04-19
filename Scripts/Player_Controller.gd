@@ -33,12 +33,14 @@ func _process(delta):
 func _change_movement_mode(currentMovementMode):
 	if currentMovementMode == "Teleport":
 		movement_mode = "Smooth"
-	if currentMovementMode == "Smooth":
+	elif currentMovementMode == "Smooth":
 		movement_mode = "Armswinger"
-	if currentMovementMode == "Armswinger":
+	elif currentMovementMode == "Armswinger":
 		movement_mode = "Teleport"
-		
-	print_debug(movement_mode)
+	else:
+		movement_mode = "Smooth"
+		print_debug(currentMovementMode)
+	
 		
 	left_controller.movement_mode = movement_mode
 	right_controller.movement_mode = movement_mode
