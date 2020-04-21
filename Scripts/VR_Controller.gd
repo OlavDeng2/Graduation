@@ -3,6 +3,8 @@ extends ARVRController
 var movement_mode = "Smooth"
 var move_button_down = false
 
+var armswinger_movement_directions = []
+
 var player_controller = null
 
 #0 = unkown, 1 = left, 2 = right
@@ -164,6 +166,9 @@ func _on_button_pressed_grab():
 
 func _on_button_pressed_b():
 	move_button_down = true
+	
+	#Empty the armswinger array to get clear data for movement while swinging arms
+	armswinger_movement_directions.clear()
 
 
 func _pickup_rigidbody():
@@ -215,7 +220,7 @@ func _throw_rigidbody():
 
 
 func button_released(button_index):
-	if button_index == 15:
+	if button_index == 1:
 		_on_button_released_b()
 	if button_index == 2:
 		_on_button_released_grab()
@@ -303,10 +308,13 @@ func armswinger(delta):
 	
 	#get velocity of controllers
 	movement_forward = direction * controller_velocity.length() * delta
+	armswinger_movement_directions.append(movement_forward)
+	
+	#Get the average movement for the last second to make a more "forgiving" armswinger
+	var average_movement = Vector3(0,0,0)
+	for i in armswinger_movement_directions:
+		average_movement += movement_forward
+	average_movement = average_movement/armswinger_movement_directions.size()
+	
 	#move the player in the direction that the controller is pointing
-	get_parent().global_translate(movement_forward)
-	
-	#options for improving armswinger to be more natural:
-	#Use average controller velocity for the last 1-2 seconds from the point of button press
-	
-	#Get average direction of both controllers if both controllers are being used
+	get_parent().global_translate(average_movement)

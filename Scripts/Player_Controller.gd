@@ -20,7 +20,7 @@ func _ready():
 	right_controller = get_node("Right_Controller")
 	player_rigidbody = get_parent()
 	player_camera = get_node("Player_Camera")
-	player_collision = get_node("../CollisionPolygon")
+	player_collision = get_node("../CollisionShape")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
