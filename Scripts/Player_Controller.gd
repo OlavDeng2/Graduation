@@ -3,6 +3,10 @@ extends ARVROrigin
 var player_rigidbody = null
 var player_camera = null
 var player_collision = null
+var is_falling = false
+
+export var player_height = 0.8
+var raycast = null
 
 var dominant_hand = 2
 export var max_movement_speed = 5
@@ -22,13 +26,13 @@ func _ready():
 	player_rigidbody = get_parent()
 	player_camera = get_node("Player_Camera")
 	player_collision = get_node("../CollisionShape")
-
+	raycast = get_node("Player_Camera/RayCast")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _physics_process(delta):
 	#moves the collider so that it is always where the camera is
-	_move_collider()
+	#_ground_collider()
+	pass
 
 
 func _change_movement_mode(currentMovementMode):
@@ -83,8 +87,39 @@ func _armswinger(controller_id, movement_velocity):
 	pass
 
 
-#moves the collider so that it is always where the camera is
-func _move_collider():
-	#do not move the y axis, the y axis will be handled by the arvr origin to avoid crouching and the likes causing the player to fall through the world
-	player_collision.get_transform().basis.x = player_camera.get_transform().basis.x
-	player_collision.get_transform().basis.z = player_camera.get_transform().basis.z
+func _ground_collider():
+	raycast.force_raycast_update()
+	
+	if raycast.is_colliding():
+		var col_point = raycast.get_collision_point()
+		
+		#calculate height raycast hits
+		var height = player_camera.get_transform().origin.y - col_point.y
+		
+		print_debug(height)
+		#is the player standing or falling
+		if height <= player_height:
+			#match the colider with where the player is standing
+			player_collision.transform.basis.x = player_camera.get_transform().basis.x
+			player_collision.transform.basis.z = player_camera.get_transform().basis.z
+			#disable gravity
+			player_rigidbody.gravity_scale = 0
+			is_falling = false
+			if height < player_height:
+				#set height above the ground
+				var new_player_pos = Vector3(col_point.x, col_point.y + player_height, col_point.z)
+				var new_transform : Transform
+				new_transform.origin = col_point
+				player_rigidbody.set_transform(new_transform)
+			
+
+		#player is falling
+		elif height > player_height:
+			is_falling = true
+			#enable gravity
+			player_rigidbody.gravity_scale = 1
+		
+	else:
+		#if is not colliding, enable gravity
+		is_falling = true
+		#player_rigidbody.gravity_scale = 1

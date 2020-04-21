@@ -37,7 +37,8 @@ var teleport_raycast
 const CONTROLLER_DEADZONE = 0.1
 
 const MOVEMENT_SPEED = 2.5
-const ARMSWINGER_SPEED = 1.0
+const ARMSWINGER_SPEED = 2.0
+const MIN_ARMSWINGER_SPEED = 1.0
 
 const CONTROLLER_RUMBLE_FADE_SPEED = 2.0
 
@@ -288,14 +289,16 @@ func smoothLocomotion(delta, trackpad_vector):
 	
 	var movement_vector = (trackpad_vector).normalized()
 	
-	var movement_forward = forward_direction * movement_vector.x * delta * MOVEMENT_SPEED
-	var movement_right = right_direction * movement_vector.y * delta * MOVEMENT_SPEED
+	var movement_forward = forward_direction * movement_vector.x * MOVEMENT_SPEED
+	var movement_right = right_direction * movement_vector.y * MOVEMENT_SPEED
 	
 	movement_forward.y = 0
 	movement_right.y = 0
 	
 	if (movement_right.length() > 0 or movement_forward.length() > 0):
-		get_parent().global_translate(movement_right + movement_forward)
+		player_controller.player_rigidbody.set_axis_velocity(movement_forward + movement_right)
+		#player_controller.player_rigidbody.global_translate(movement_right + movement_forward)
+		#get_parent().global_translate(movement_right + movement_forward)
 		directional_movement = true
 	else:
 		directional_movement = false
@@ -331,12 +334,13 @@ func armswinger(delta):
 	#translate the directions into top down 2d
 	direction.y = 0
 	#add the speed for the movement
-	movement_forward = direction * delta * ARMSWINGER_SPEED
+	movement_forward = direction * MIN_ARMSWINGER_SPEED
 	#move player in direction of controllers at a set speed when button is pressed
-	get_parent().global_translate(movement_forward)
+	#get_parent().global_translate(movement_forward)
+	player_controller.player_rigidbody.set_axis_velocity(movement_forward)
 	
 	#get velocity of controllers
-	movement_forward = direction * controller_velocity.length() * delta
+	movement_forward = direction * controller_velocity.length() * ARMSWINGER_SPEED
 	armswinger_movement_directions.append(movement_forward)
 	
 	#Get the average movement for the last second to make a more "forgiving" armswinger
@@ -346,4 +350,5 @@ func armswinger(delta):
 	average_movement = average_movement/armswinger_movement_directions.size()
 	
 	#move the player in the direction that the controller is pointing
-	get_parent().global_translate(average_movement)
+	#get_parent().global_translate(average_movement)
+	player_controller.player_rigidbody.set_axis_velocity(average_movement)
