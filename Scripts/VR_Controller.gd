@@ -14,6 +14,10 @@ var controller_velocity = Vector3(0,0,0)
 var prior_controller_position = Vector3(0,0,0)
 var prior_controller_velocities = []
 
+var global_controller_velocity = Vector3(0,0,0)
+var global_prior_controller_position = Vector3(0,0,0)
+var global_prior_controller_velocities = []
+
 var held_object = null
 var held_object_data = {"mode":RigidBody.MODE_RIGID, "layer":1, "mask":1}
 
@@ -81,6 +85,7 @@ func _physics_process(delta):
 
 	if get_is_active() == true:
 		_physics_process_update_controller_velocity(delta)
+		_physics_process_update_controller_velocity_global(delta)
 
 	if held_object != null:
 		var held_scale = held_object.scale
@@ -102,7 +107,6 @@ func _physics_process_update_controller_velocity(delta):
 	#local transform
 	var relative_controller_position = (transform.origin - prior_controller_position)
 
-
 	controller_velocity += relative_controller_position
 
 	prior_controller_velocities.append(relative_controller_position)
@@ -116,6 +120,31 @@ func _physics_process_update_controller_velocity(delta):
 
 	if prior_controller_velocities.size() > 30:
 		prior_controller_velocities.remove(0)
+
+
+func _physics_process_update_controller_velocity_global(delta):
+	global_controller_velocity = Vector3(0,0,0)
+
+	if global_prior_controller_velocities.size() > 0:
+		for vel in global_prior_controller_velocities:
+			global_controller_velocity += vel
+
+		global_controller_velocity = global_controller_velocity / global_prior_controller_velocities.size()
+	
+	#Global transform
+	var relative_controller_position = (global_transform.origin - global_prior_controller_position)
+
+	global_controller_velocity += relative_controller_position
+
+	global_prior_controller_velocities.append(relative_controller_position)
+
+	#global transform
+	global_prior_controller_position = global_transform.origin
+
+	global_controller_velocity /= delta;
+
+	if global_prior_controller_velocities.size() > 30:
+		global_prior_controller_velocities.remove(0)
 
 
 func _snapturn():
@@ -209,7 +238,7 @@ func _throw_rigidbody():
 	held_object.collision_layer = held_object_data["layer"]
 	held_object.collision_mask = held_object_data["mask"]
 
-	held_object.apply_impulse(Vector3(0, 0, 0), controller_velocity)
+	held_object.apply_impulse(Vector3(0, 0, 0), global_controller_velocity)
 
 	if held_object is VR_Interactable_Rigidbody:
 		held_object.dropped()
