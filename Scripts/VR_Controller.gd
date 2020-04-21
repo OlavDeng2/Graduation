@@ -298,7 +298,7 @@ func teleport(trackpad_vector):
 func armswinger(delta):
 	var movement_forward = Vector3(0, 0, 0)
 	#get direction of controllers, make it negative otherwise we get the wrong direction
-	var direction = -get_transform().basis.z.normalized()
+	var direction = -get_global_transform().basis.z.normalized()#-get_transform().basis.z.normalized()
 	#translate the directions into top down 2d
 	direction.y = 0
 	#add the speed for the movement
