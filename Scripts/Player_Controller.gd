@@ -12,6 +12,7 @@ var movement_mode = "Smooth"
 var movement_direction = null
 var movement_speed = null
 
+var snapturn_amount = 45 #in degrees
 var has_rotated = false
 
 # Called when the node enters the scene tree for the first time.
@@ -51,12 +52,12 @@ func snapturn(direction):
 		if direction == 0:
 			return
 		elif direction < 0:
-			#turn right 25 degrees
-			rotate_y(45)
+			#turn right 45 degrees
+			rotate_y(snapturn_amount)
 			has_rotated = true	
 		elif direction > 0:
-			#turn left 25 degrees
-			rotate_y(-45)
+			#turn left 45 degrees
+			rotate_y(-snapturn_amount)
 			has_rotated = true
 
 	if has_rotated:
