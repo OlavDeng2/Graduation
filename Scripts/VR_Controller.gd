@@ -3,7 +3,7 @@ extends ARVRController
 var movement_mode = "Smooth"
 var move_button_down = false
 
-var armswinger_movement_directions = []
+var armswinger_speeds = []
 
 var player_controller = null
 
@@ -198,7 +198,7 @@ func _on_button_pressed_b():
 	move_button_down = true
 	
 	#Empty the armswinger array to get clear data for movement while swinging arms
-	armswinger_movement_directions.clear()
+	armswinger_speeds.clear()
 
 
 func _pickup_rigidbody():
@@ -258,6 +258,12 @@ func button_released(button_index):
 
 func _on_button_released_b():
 	move_button_down = false
+	
+	#set the movement for armswinger false
+	if controller_id == 1:
+		player_controller.left_controller_armswinger = false
+	elif controller_id == 2:
+		player_controller.right_controller_armswinger = false
 
 
 func _on_button_released_grab():
@@ -330,25 +336,38 @@ func teleport(trackpad_vector):
 func armswinger(delta):
 	var movement_forward = Vector3(0, 0, 0)
 	#get direction of controllers, make it negative otherwise we get the wrong direction
-	var direction = -get_global_transform().basis.z.normalized()#-get_transform().basis.z.normalized()
+	var direction = -get_global_transform().basis.z#-get_transform().basis.z.normalized()
 	#translate the directions into top down 2d
 	direction.y = 0
+	direction = direction.normalized()
+	
 	#add the speed for the movement
 	movement_forward = direction * MIN_ARMSWINGER_SPEED
 	#move player in direction of controllers at a set speed when button is pressed
 	#get_parent().global_translate(movement_forward)
 	player_controller.player_rigidbody.set_axis_velocity(movement_forward)
 	
-	#get velocity of controllers
-	movement_forward = direction * controller_velocity.length() * ARMSWINGER_SPEED
-	armswinger_movement_directions.append(movement_forward)
+	#get the current controller speed
+	var current_controller_speed = controller_velocity.length()
+	#add controller speed to the list of average speeds
+	armswinger_speeds.append(current_controller_speed)
 	
-	#Get the average movement for the last second to make a more "forgiving" armswinger
-	var average_movement = Vector3(0,0,0)
-	for i in armswinger_movement_directions:
-		average_movement += movement_forward
-	average_movement = average_movement/armswinger_movement_directions.size()
+	#120 cuz 120fps
+	if armswinger_speeds.size() > 120:
+		armswinger_speeds.remove(0)
+	#add all speeds together
+	var total_speed = 0
+	for i in armswinger_speeds:
+		total_speed += i
+	#get average speed
+	var average_speed = total_speed/armswinger_speeds.size()
+	print_debug(average_speed)
+	
+	#get velocity of controllers
+	movement_forward = direction * average_speed * ARMSWINGER_SPEED# * delta
+
 	
 	#move the player in the direction that the controller is pointing
 	#get_parent().global_translate(average_movement)
-	player_controller.player_rigidbody.set_axis_velocity(average_movement)
+	player_controller.player_rigidbody.set_axis_velocity(movement_forward)
+

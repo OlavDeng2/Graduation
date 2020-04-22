@@ -16,6 +16,12 @@ var movement_mode = "Smooth"
 var movement_direction = null
 var movement_speed = null
 
+#armswinger stuff
+var left_controller_armswinger = false
+var right_controller_armswinger = false
+var left_controller_movement = null
+var right_controller_movement = null
+
 var snapturn_amount = 45 #in degrees
 var has_rotated = false
 
@@ -33,7 +39,6 @@ func _physics_process(delta):
 	#moves the collider so that it is always where the camera is
 	#_ground_collider()
 	pass
-
 
 func _change_movement_mode(currentMovementMode):
 	if currentMovementMode == "Teleport":
