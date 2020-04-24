@@ -1,6 +1,6 @@
 extends VR_Interactable_Rigidbody
 
-const SWORD_DAMAGE = 2
+const SWORD_DAMAGE = 1000
 
 const COLLISION_FORCE = 0.15
 
