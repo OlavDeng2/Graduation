@@ -97,9 +97,11 @@ custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0.992188, 1, 0, 1 )
 text = "Thank you for testing my prototype.
 
-Before you begin, make sure you are standing in the middle of your play area for the best experience. 
+Before you begin, make sure you are standing in the
+middle of your play area for the best experience. 
 
-There are currently 3 movement modes. Please destroy all the spheres once for each movement mode. 
+There are currently 3 movement modes. Please destroy 
+all the spheres once for each movement mode. 
 
 Good luck"
 align = 1

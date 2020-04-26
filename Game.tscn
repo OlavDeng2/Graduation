@@ -1393,7 +1393,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6575, -3.21598, 17.4334 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.32852, 0, 0 )
 
 [node name="OakTree3" parent="World" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8387, 0.649612, 7.00031 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8387, 0.299533, 7.00031 )
 
 [node name="OakTree4" parent="World" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.7088, 0, -1.34197 )
