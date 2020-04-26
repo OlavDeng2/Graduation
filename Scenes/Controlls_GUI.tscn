@@ -118,7 +118,7 @@ margin_bottom = -115.0
 custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "Grab and interact with the
-red Box to change
+red Box next to you to change
 movement mode!"
 align = 1
 valign = 1

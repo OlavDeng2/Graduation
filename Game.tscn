@@ -1318,7 +1318,7 @@ transform = Transform( 0.223386, 0.830958, -0.509517, 0, 0.522726, 0.852501, 0.9
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.71183, 8.91638, 7.7775 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.289724, 0.42249, 3.79029 )
 physics_material_override = SubResource( 24 )
 linear_velocity = Vector3( 0, 1, 0 )
 
@@ -1401,7 +1401,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5851, 1.50581, 27.2947 )
 transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -7.61642, 1.39338, -25.72 )
 
 [node name="Movement_Change_Box" parent="Interactable_Objects" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75432, 0.932521, 18.5536 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.57099, 0.932521, 4.27777 )
 
 [node name="Teleport_Mesh" type="MeshInstance" parent="."]
 visible = false
