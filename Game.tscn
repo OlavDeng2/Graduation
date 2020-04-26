@@ -170,6 +170,54 @@ collision_mask = 3
 [node name="CollisionShape" type="CollisionShape" parent="World/Wall4/StaticBody"]
 shape = SubResource( 6 )
 
+[node name="Wall6" type="MeshInstance" parent="World"]
+transform = Transform( 1, 0, 0, 0, 10, 0, 0, 0, 50, 39.6599, 2.76718, -0.709587 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Wall6"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Wall6/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall8" type="MeshInstance" parent="World"]
+transform = Transform( 1, 0, 0, 0, 10, 0, 0, 0, 50, -39.1531, 2.76718, -0.709587 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Wall8"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Wall8/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall9" type="MeshInstance" parent="World"]
+transform = Transform( -1.62921e-07, 0, 50, 0, 10, 0, -1, 0, -8.14603e-06, -3.00236, 2.76718, -39.4982 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Wall9"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Wall9/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall10" type="MeshInstance" parent="World"]
+transform = Transform( -1.62921e-07, 0, 50, 0, 10, 0, -1, 0, -8.14603e-06, -3.00236, 2.76718, 40.7411 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Wall10"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Wall10/StaticBody"]
+shape = SubResource( 6 )
+
 [node name="Wall5" type="MeshInstance" parent="World"]
 transform = Transform( -0.00147109, 0, -6.99999, 0, 3, 0, 0.999999, 0, -0.0102976, -32.9795, 2.76718, 7.75031 )
 mesh = SubResource( 4 )
