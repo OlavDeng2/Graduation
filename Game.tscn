@@ -1203,6 +1203,18 @@ collision_mask = 3
 [node name="CollisionShape" type="CollisionShape" parent="World/Wall16/StaticBody"]
 shape = SubResource( 6 )
 
+[node name="Wall19" type="MeshInstance" parent="World"]
+transform = Transform( 1.91069e-15, -4.37114e-07, 10, -1, -4.37114e-07, 7.90639e-22, 4.37114e-08, -10, -4.37114e-07, 18.8326, -0.770194, -22.9894 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Wall19"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Wall19/StaticBody"]
+shape = SubResource( 6 )
+
 [node name="Wall17" type="MeshInstance" parent="World"]
 transform = Transform( -4.37114e-08, 0, 6, 0, 6, 0, -1, 0, -2.62268e-07, 22.1302, 5.98328, -14.0189 )
 mesh = SubResource( 4 )
