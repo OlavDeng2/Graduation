@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Assets/CGTuts_OceanHDRI_Freebie_001.hdr" type="Texture" id=2]
@@ -60,6 +60,8 @@ glow_levels/5 = false
 glow_intensity = 1.0
 glow_bicubic_upscale = true
 
+[sub_resource type="PhysicsMaterial" id=24]
+
 [sub_resource type="CylinderMesh" id=13]
 top_radius = 0.2
 bottom_radius = 0.5
@@ -113,7 +115,8 @@ mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
 [node name="StaticBody" type="StaticBody" parent="World/Floor_Main"]
-collision_layer = 3
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+collision_layer = 7
 collision_mask = 3
 
 [node name="CollisionShape" type="CollisionShape" parent="World/Floor_Main/StaticBody"]
@@ -475,7 +478,9 @@ transform = Transform( 0.223386, 0.830958, -0.509517, 0, 0.522726, 0.852501, 0.9
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.71183, 5.18421, -1.82174 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.71183, 8.91638, 7.7775 )
+physics_material_override = SubResource( 24 )
+linear_velocity = Vector3( 0, 1, 0 )
 
 [node name="Controlls_GUI" parent="." instance=ExtResource( 4 )]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, -4.75432, 4.96041, 19.7775 )

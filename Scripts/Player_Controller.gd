@@ -5,7 +5,7 @@ var player_camera = null
 var player_collision = null
 var is_falling = false
 
-export var player_height = 0.8
+export var player_height = 0.9
 var raycast = null
 
 var dominant_hand = 2
@@ -99,32 +99,48 @@ func _ground_collider():
 		var col_point = raycast.get_collision_point()
 		
 		#calculate height raycast hits
-		var height = player_camera.get_transform().origin.y - col_point.y
+		var height = player_rigidbody.get_global_transform().origin.y - col_point.y#player_camera.get_global_transform().origin.y - col_point.y
 		
 		print_debug(height)
 		#is the player standing or falling
-		if height <= player_height:
-			#match the colider with where the player is standing
-			player_collision.transform.basis.x = player_camera.get_transform().basis.x
-			player_collision.transform.basis.z = player_camera.get_transform().basis.z
+		if height <= 0:#player_height:
 			#disable gravity
 			player_rigidbody.gravity_scale = 0
-			is_falling = false
-			if height < player_height:
-				#set height above the ground
-				var new_player_pos = Vector3(col_point.x, col_point.y + player_height, col_point.z)
-				var new_transform : Transform
-				new_transform.origin = col_point
-				player_rigidbody.set_transform(new_transform)
+			player_rigidbody.axis_lock_linear_y = true
 			
+			#match the colider with where the player is standing
+			#player_collision.transform.basis.x = player_camera.get_transform().basis.x
+			#player_collision.transform.basis.z = player_camera.get_transform().basis.z
+			
+			if height < 0 and is_falling:#player_height:
+				print_debug("setting height properly")
+				#set height above the ground
+				var new_player_pos = Vector3(col_point.x, col_point.y, col_point.z)
+				var new_transform : Transform
+				new_transform.origin = new_player_pos
+				#player_collision.set_global_transform(new_transform)
+				#player_rigidbody.global_transform.basis.y = new_transform.basis.y
+			
+			is_falling = false
+
 
 		#player is falling
-		elif height > player_height:
-			is_falling = true
+		elif height > 0:#player_height:
 			#enable gravity
 			player_rigidbody.gravity_scale = 1
-		
-	else:
+			player_rigidbody.axis_lock_linear_y = false
+			
+			if !is_falling:
+				player_rigidbody.set_axis_velocity(Vector3(0, 0.1, 0))
+			is_falling = true
+
+
+	elif !raycast.is_colliding():
+		print_debug("no ground found")
 		#if is not colliding, enable gravity
+		player_rigidbody.gravity_scale = 1
+		player_rigidbody.axis_lock_linear_y = false
+		
+		if !is_falling:
+			player_rigidbody.set_axis_velocity(Vector3(0, 0.1, 0))
 		is_falling = true
-		#player_rigidbody.gravity_scale = 1
