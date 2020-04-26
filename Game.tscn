@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Assets/CGTuts_OceanHDRI_Freebie_001.hdr" type="Texture" id=2]
@@ -15,13 +15,19 @@
 [ext_resource path="res://Scenes/GUI.gd" type="Script" id=13]
 [ext_resource path="res://Assets/Titillium-Regular.otf" type="DynamicFontData" id=14]
 [ext_resource path="res://Audio/Soundrangers_Nature_Ambience/coastal_ambience_01_120_loop.ogg" type="AudioStream" id=15]
+[ext_resource path="res://Assets/Models/LowpolyForestPack/Trees/DeadOak1.fbx" type="PackedScene" id=16]
+[ext_resource path="res://Assets/OakTree2.scn" type="PackedScene" id=17]
+[ext_resource path="res://Assets/BigRock2.scn" type="PackedScene" id=18]
+[ext_resource path="res://Assets/BigRock1.scn" type="PackedScene" id=19]
 
 [sub_resource type="CubeMesh" id=1]
 
+[sub_resource type="Skin" id=25]
+
 [sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 1, 0.871826, 0.707031, 1 )
-metallic = 0.5
-roughness = 0.53
+vertex_color_use_as_albedo = true
+albedo_color = Color( 0, 0.733333, 0.113725, 1 )
+metallic_specular = 0.25
 
 [sub_resource type="ConvexPolygonShape" id=3]
 points = PoolVector3Array( -1, 1, 1, 1, 1, -1, 1, 1, 1, -1, 1, -1, -1, -1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, -1, 1, 1, -1, -1, 1, 1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, 1, 1, 1, -1, -1, 1, -1, 1, 1, 1, -1, 1, 1, 1, -1, -1, -1, -1, -1, 1, -1, 1, -1, -1 )
@@ -112,6 +118,7 @@ script = ExtResource( 1 )
 [node name="Floor_Main" type="MeshInstance" parent="World"]
 transform = Transform( 40, 0, 0, 0, 1, 0, 0, 0, 40, 0, -0.828144, 0 )
 mesh = SubResource( 1 )
+skin = SubResource( 25 )
 material/0 = SubResource( 2 )
 
 [node name="StaticBody" type="StaticBody" parent="World/Floor_Main"]
@@ -121,6 +128,12 @@ collision_mask = 3
 
 [node name="CollisionShape" type="CollisionShape" parent="World/Floor_Main/StaticBody"]
 shape = SubResource( 3 )
+
+[node name="DeadOak1" parent="World/Floor_Main" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.352847, 15.0583, 0.196123 )
+
+[node name="DeadOak2" parent="World/Floor_Main" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.334884, 16.0683, 0.201008 )
 
 [node name="Wall" type="MeshInstance" parent="World"]
 transform = Transform( 1, 0, 0, 0, 3, 0, 0, 0, 8, -20.1266, 2.76718, 0 )
@@ -1357,6 +1370,24 @@ collision_mask = 3
 
 [node name="CollisionShape" type="CollisionShape" parent="World/Item_Holder4/StaticBody"]
 shape = SubResource( 10 )
+
+[node name="BigRock2" parent="World" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.6128, -6.10067, 16.8692 )
+
+[node name="BigRock1" parent="World" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6575, -3.21598, 17.4334 )
+
+[node name="OakTree2" parent="World" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.32852, 0, 0 )
+
+[node name="OakTree3" parent="World" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8387, 0.649612, 7.00031 )
+
+[node name="OakTree4" parent="World" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.7088, 0, -1.34197 )
+
+[node name="OakTree5" parent="World" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30.7563 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 12 )
