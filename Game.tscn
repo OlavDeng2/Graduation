@@ -182,16 +182,904 @@ collision_mask = 3
 [node name="CollisionShape" type="CollisionShape" parent="World/Wall5/StaticBody"]
 shape = SubResource( 6 )
 
-[node name="Wall6" type="MeshInstance" parent="World"]
-transform = Transform( -0.00735542, 0, -6.99999, 0, 1, 0, 4.99999, 0, -0.0102976, 28.492, -0.63273, 30.3279 )
+[node name="Stairs" type="MeshInstance" parent="World"]
+transform = Transform( -0.00735542, 0, -6.99999, 0, 1, 0, 4.99999, 0, -0.0102976, 28.492, -0.744, 30.31 )
 mesh = SubResource( 4 )
 material/0 = SubResource( 5 )
 
-[node name="StaticBody" type="StaticBody" parent="World/Wall6"]
+[node name="StaticBody" type="StaticBody" parent="World/Stairs"]
 collision_layer = 3
 collision_mask = 3
 
-[node name="CollisionShape" type="CollisionShape" parent="World/Wall6/StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall8" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 1, 0, 1.16415e-09, 0, 1, 0, 0, 0, 0.285715, 0.00144625, 0.081, 0.702285 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall8"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall8/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall25" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 1, 0, 1.16415e-09, 0, 1, 0, 0, 0, 0.285715, 0.0046463, 0.153599, 0.689275 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall25"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall25/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="Wall26" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 1, 0, 1.16415e-09, 0, 1, 0, 0, 0, 0.285715, 0.0048008, 0.247375, 0.677082 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall26"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall26/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall9" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999999, 0, 1.10595e-09, 0, 1, 0, 1.16415e-10, 0, 0.285715, 0.00137091, 0.327478, 0.665718 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall9"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall9/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall28" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999999, 0, 1.10595e-09, 0, 1, 0, 1.16415e-10, 0, 0.285715, 0.00457144, 0.400077, 0.652709 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall28"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall28/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="Wall27" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999999, 0, 1.10595e-09, 0, 1, 0, 1.16415e-10, 0, 0.285715, 0.00472546, 0.493854, 0.640515 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall27"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall27/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall11" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999999, 0, 1.10595e-09, 0, 1, 0, 1.16415e-10, 0, 0.285715, 0.00130272, 0.571133, 0.632538 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall11"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall11/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall32" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999999, 0, 1.10595e-09, 0, 1, 0, 1.16415e-10, 0, 0.285715, 0.00450325, 0.643732, 0.619528 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall32"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall32/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="Wall31" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999999, 0, 1.10595e-09, 0, 1, 0, 1.16415e-10, 0, 0.285715, 0.00465727, 0.737508, 0.607334 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall31"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall31/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall10" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999997, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00122738, 0.817611, 0.595971 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall10"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall10/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall30" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999997, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00442791, 0.89021, 0.582962 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall30"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall30/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="Wall29" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999997, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00458193, 0.983986, 0.570767 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall29"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall29/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall15" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999999, 0, 1.10595e-09, 0, 1, 0, 1.16415e-10, 0, 0.285715, 0.00115013, 1.07191, 0.558553 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall15"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall15/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall40" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999999, 0, 1.10595e-09, 0, 1, 0, 1.16415e-10, 0, 0.285715, 0.00435066, 1.1445, 0.545544 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall40"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall40/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="Wall39" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999999, 0, 1.10595e-09, 0, 1, 0, 1.16415e-10, 0, 0.285715, 0.00450516, 1.23828, 0.533351 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall39"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall39/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall14" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999997, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00107479, 1.31838, 0.521987 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall14"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall14/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall38" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999997, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00427532, 1.39098, 0.508978 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall38"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall38/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="Wall37" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999997, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00442982, 1.48476, 0.496783 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall37"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall37/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall13" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999997, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.0010066, 1.56204, 0.488806 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall13"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall13/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall36" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999997, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00420713, 1.63464, 0.475797 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall36"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall36/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="Wall35" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999997, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00436115, 1.72841, 0.463603 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall35"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall35/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall12" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999996, 0, 1.10595e-09, 0, 1, 0, 3.49246e-10, 0, 0.285715, 0.000931263, 1.80852, 0.45224 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall12"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall12/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall34" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999996, 0, 1.10595e-09, 0, 1, 0, 3.49246e-10, 0, 0.285715, 0.00413179, 1.88112, 0.439231 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall34"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall34/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="Wall33" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999996, 0, 1.10595e-09, 0, 1, 0, 3.49246e-10, 0, 0.285715, 0.00428581, 1.97489, 0.427037 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall33"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall33/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall23" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999998, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00084877, 2.08035, 0.412072 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall23"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall23/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall56" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999998, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.0040493, 2.15295, 0.399063 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall56"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall56/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="Wall55" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999998, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00420332, 2.24672, 0.386869 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall55"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall55/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall22" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999997, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00077343, 2.32683, 0.375506 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall22"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall22/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall54" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999997, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00397396, 2.39943, 0.362497 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall54"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall54/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="Wall53" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999997, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00412798, 2.4932, 0.350303 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall53"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall53/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall21" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999997, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.000704765, 2.57048, 0.342326 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall21"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall21/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall52" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999997, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.0039053, 2.64308, 0.329316 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall52"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall52/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="Wall51" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999997, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00405979, 2.73686, 0.317122 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall51"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall51/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall20" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999995, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.000629902, 2.81696, 0.305758 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall20"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall20/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall50" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999995, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00382996, 2.88956, 0.292751 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall50"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall50/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="Wall49" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999995, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00398445, 2.98333, 0.280555 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall49"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall49/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall19" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999997, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.000552654, 3.07125, 0.268341 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall19"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall19/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall48" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999997, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00375319, 3.14385, 0.255332 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall48"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall48/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="Wall47" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999997, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.0039072, 3.23763, 0.243139 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall47"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall47/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall18" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999995, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.000477314, 3.31773, 0.231775 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall18"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall18/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall46" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999995, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00367785, 3.39033, 0.218767 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall46"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall46/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="Wall45" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999995, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00383186, 3.48411, 0.206572 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall45"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall45/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall17" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999995, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.000409126, 3.56139, 0.198595 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall17"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall17/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall44" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999995, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00360918, 3.63399, 0.185585 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall44"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall44/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="Wall43" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999995, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00376368, 3.72776, 0.173391 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall43"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall43/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall16" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999994, 0, 1.10595e-09, 0, 1, 0, 1.16415e-10, 0, 0.285715, 0.000333786, 3.80787, 0.162028 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall16"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall16/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall42" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999994, 0, 1.10595e-09, 0, 1, 0, 1.16415e-10, 0, 0.285715, 0.00353432, 3.88046, 0.14902 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall42"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall42/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="Wall41" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999994, 0, 1.10595e-09, 0, 1, 0, 1.16415e-10, 0, 0.285715, 0.00368834, 3.97424, 0.136825 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall41"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall41/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall62" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999994, 0, 1.10595e-09, 0, 1, 0, 1.16415e-10, 0, 0.285715, 0.00366259, 4.05842, 0.124368 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall62"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall62/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall61" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999994, 0, 1.10595e-09, 0, 1, 0, 1.16415e-10, 0, 0.285715, 0.000239849, 4.1357, 0.116391 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall61"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall61/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall60" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999994, 0, 1.10595e-09, 0, 1, 0, 1.16415e-10, 0, 0.285715, 0.0034399, 4.2083, 0.103382 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall60"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall60/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="Wall59" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999994, 0, 1.10595e-09, 0, 1, 0, 1.16415e-10, 0, 0.285715, 0.0035944, 4.30208, 0.0911891 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall59"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall59/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall24" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999993, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.000164509, 4.38218, 0.0798252 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall24"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall24/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall58" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999993, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00336552, 4.45478, 0.0668149 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall58"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall58/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="Wall57" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999993, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00351906, 4.54855, 0.0546203 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall57"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall57/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall77" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999995, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00330639, 4.64889, 0.0384769 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall77"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall77/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="Wall76" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999995, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00346041, 4.74267, 0.0262814 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall76"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall76/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall75" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999995, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 3.76701e-05, 4.81995, 0.0183063 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall75"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall75/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall74" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999995, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.0032382, 4.89254, 0.00529528 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall74"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall74/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="Wall73" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999995, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00339222, 4.98632, -0.00689888 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall73"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall73/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall72" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999993, 0, 1.10595e-09, 0, 1, 0, 1.16415e-10, 0, 0.285715, -3.76701e-05, 5.06642, -0.018261 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall72"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall72/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall71" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999993, 0, 1.10595e-09, 0, 1, 0, 1.16415e-10, 0, 0.285715, 0.00316286, 5.13902, -0.0312705 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall71"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall71/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="Wall70" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999993, 0, 1.10595e-09, 0, 1, 0, 1.16415e-10, 0, 0.285715, 0.00331688, 5.2328, -0.0434656 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall70"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall70/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall69" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999993, 0, 1.10595e-09, 0, 1, 0, 1.16415e-10, 0, 0.285715, 0.00329113, 5.31698, -0.055922 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall69"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall69/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall68" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999993, 0, 1.10595e-09, 0, 1, 0, 1.16415e-10, 0, 0.285715, -0.000131607, 5.39426, -0.0638971 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall68"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall68/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall67" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999993, 0, 1.10595e-09, 0, 1, 0, 1.16415e-10, 0, 0.285715, 0.00306892, 5.46686, -0.0769086 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall67"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall67/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="Wall66" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999993, 0, 1.10595e-09, 0, 1, 0, 1.16415e-10, 0, 0.285715, 0.00322294, 5.56063, -0.0891013 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall66"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall66/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall65" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999992, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, -0.000206947, 5.64074, -0.100464 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall65"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall65/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall64" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999992, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.00299549, 5.71334, -0.113476 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall64"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall64/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="Wall63" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999992, 0, 1.10595e-09, 0, 1, 0, 2.32831e-10, 0, 0.285715, 0.0031476, 5.80711, -0.125669 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall63"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall63/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Wall79" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999991, 0, 1.10595e-09, 0, 1, 0, 3.49246e-10, 0, 0.285715, 0.00294542, 5.87117, -0.137663 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall79"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall79/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 6 )
+
+[node name="Wall78" type="MeshInstance" parent="World/Stairs"]
+transform = Transform( 0.999991, 0, 1.10595e-09, 0, 1, 0, 3.49246e-10, 0, 0.285715, 0.00309801, 5.96495, -0.149854 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="World/Stairs/Wall78"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Stairs/Wall78/StaticBody"]
 shape = SubResource( 6 )
 
 [node name="Wall7" type="MeshInstance" parent="World"]
@@ -204,42 +1092,6 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape" type="CollisionShape" parent="World/Wall7/StaticBody"]
-shape = SubResource( 6 )
-
-[node name="Wall8" type="MeshInstance" parent="World"]
-transform = Transform( -0.00735542, 0, -2, 0, 1, 0, 4.99999, 0, -0.00294217, 26.8845, 1.97055, 29.6801 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
-
-[node name="StaticBody" type="StaticBody" parent="World/Wall8"]
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape" type="CollisionShape" parent="World/Wall8/StaticBody"]
-shape = SubResource( 6 )
-
-[node name="Wall25" type="MeshInstance" parent="World"]
-transform = Transform( -0.00735542, 0, -2, 0, 1, 0, 4.99999, 0, -0.00294217, 29.4054, 2.98466, 29.6838 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
-
-[node name="StaticBody" type="StaticBody" parent="World/Wall25"]
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape" type="CollisionShape" parent="World/Wall25/StaticBody"]
-shape = SubResource( 6 )
-
-[node name="Wall26" type="MeshInstance" parent="World"]
-transform = Transform( -0.00735542, 0, -2, 0, 1, 0, 4.99999, 0, -0.00294217, 32.3553, 4.06149, 29.6882 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
-
-[node name="StaticBody" type="StaticBody" parent="World/Wall26"]
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape" type="CollisionShape" parent="World/Wall26/StaticBody"]
 shape = SubResource( 6 )
 
 [node name="Wall13" type="MeshInstance" parent="World"]
@@ -312,18 +1164,6 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape" type="CollisionShape" parent="World/Wall18/StaticBody"]
-shape = SubResource( 6 )
-
-[node name="Wall19" type="MeshInstance" parent="World"]
-transform = Transform( -4.37114e-08, 0, 3.2, 0, 1, 0, -1, 0, -1.39876e-07, 13.1193, 0.430355, -14.057 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
-
-[node name="StaticBody" type="StaticBody" parent="World/Wall19"]
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape" type="CollisionShape" parent="World/Wall19/StaticBody"]
 shape = SubResource( 6 )
 
 [node name="Wall27" type="MeshInstance" parent="World"]
