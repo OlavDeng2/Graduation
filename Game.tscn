@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Assets/CGTuts_OceanHDRI_Freebie_001.hdr" type="Texture" id=2]
@@ -14,11 +14,14 @@
 [ext_resource path="res://Scenes/Shotgun.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/GUI.gd" type="Script" id=13]
 [ext_resource path="res://Assets/Titillium-Regular.otf" type="DynamicFontData" id=14]
-[ext_resource path="res://Audio/Soundrangers_Nature_Ambience/coastal_ambience_01_120_loop.ogg" type="AudioStream" id=15]
+[ext_resource path="res://Audio/Free-birds-chirping-sound-effect/Free-birds-chirping-sound-effect.wav" type="AudioStream" id=15]
 [ext_resource path="res://Assets/Models/LowpolyForestPack/Trees/DeadOak1.fbx" type="PackedScene" id=16]
 [ext_resource path="res://Assets/OakTree2.scn" type="PackedScene" id=17]
 [ext_resource path="res://Assets/BigRock2.scn" type="PackedScene" id=18]
 [ext_resource path="res://Assets/BigRock1.scn" type="PackedScene" id=19]
+[ext_resource path="res://Assets/SpruceTree1.scn" type="PackedScene" id=20]
+[ext_resource path="res://Assets/OakTree1.scn" type="PackedScene" id=21]
+[ext_resource path="res://Assets/OakTree3.scn" type="PackedScene" id=22]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -1400,6 +1403,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.7088, 0, -1.34197 )
 
 [node name="OakTree5" parent="World" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30.7563 )
+
+[node name="OakTree1" parent="World" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.69624, -0.0563796, 0.0168262 )
+
+[node name="SpruceTree1" parent="World" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.9232, 0, -18.1034 )
+
+[node name="OakTree6" parent="World" instance=ExtResource( 22 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.746, 6, 31 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 12 )

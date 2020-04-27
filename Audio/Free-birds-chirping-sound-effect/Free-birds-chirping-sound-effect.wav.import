@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Free-birds-chirping-sound-effect.wav-c2a5a3583a78d9eaffd0e99ce3df8eb9.sample"
+
+[deps]
+
+source_file="res://Audio/Free-birds-chirping-sound-effect/Free-birds-chirping-sound-effect.wav"
+dest_files=[ "res://.import/Free-birds-chirping-sound-effect.wav-c2a5a3583a78d9eaffd0e99ce3df8eb9.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
