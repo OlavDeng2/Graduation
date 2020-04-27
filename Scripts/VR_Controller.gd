@@ -259,6 +259,9 @@ func button_released(button_index):
 func _on_button_released_b():
 	move_button_down = false
 	
+	#Simple to slow down the player once they stop armswinging
+	player_controller.player_rigidbody.linear_velocity = Vector3(0,0,0)
+	
 	#set the movement for armswinger false
 	if controller_id == 1:
 		player_controller.left_controller_armswinger = false
@@ -287,6 +290,7 @@ func sleep_area_exited(body):
 func smoothLocomotion(delta, trackpad_vector):
 	if trackpad_vector.length() < CONTROLLER_DEADZONE:
 		trackpad_vector = Vector2(0,0)
+		#player_controller.player_rigidbody.linear_velocity = Vector3(0,0,0)
 	else:
 		trackpad_vector = trackpad_vector.normalized() * ((trackpad_vector.length() - CONTROLLER_DEADZONE) / (1 - CONTROLLER_DEADZONE))
 	
@@ -334,7 +338,7 @@ func teleport(trackpad_vector):
 
 
 func armswinger(delta):
-	var movement_forward = Vector3(0, 0, 0)
+	var movement_forward_min = Vector3(0, 0, 0)
 	#get direction of controllers, make it negative otherwise we get the wrong direction
 	var direction = -get_global_transform().basis.z#-get_transform().basis.z.normalized()
 	#translate the directions into top down 2d
@@ -342,10 +346,10 @@ func armswinger(delta):
 	direction = direction.normalized()
 	
 	#add the speed for the movement
-	movement_forward = direction * MIN_ARMSWINGER_SPEED
+	movement_forward_min = direction * MIN_ARMSWINGER_SPEED
 	#move player in direction of controllers at a set speed when button is pressed
 	#get_parent().global_translate(movement_forward)
-	player_controller.player_rigidbody.set_axis_velocity(movement_forward)
+	#player_controller.player_rigidbody.set_axis_velocity(movement_forward)
 	
 	#get the current controller speed
 	var current_controller_speed = controller_velocity.length()
@@ -361,13 +365,17 @@ func armswinger(delta):
 		total_speed += i
 	#get average speed
 	var average_speed = total_speed/armswinger_speeds.size()
-	print_debug(average_speed)
 	
+	var movement_forward = Vector3(0, 0, 0)
 	#get velocity of controllers
 	movement_forward = direction * average_speed * ARMSWINGER_SPEED# * delta
 
 	
 	#move the player in the direction that the controller is pointing
-	#get_parent().global_translate(average_movement)
-	player_controller.player_rigidbody.set_axis_velocity(movement_forward)
+	if movement_forward_min.length() > movement_forward.length():
+		player_controller.player_rigidbody.set_axis_velocity(movement_forward_min)
+	
+	elif movement_forward_min.length() < movement_forward.length():
+		#get_parent().global_translate(average_movement)
+		player_controller.player_rigidbody.set_axis_velocity(movement_forward)
 
