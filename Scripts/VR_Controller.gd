@@ -5,6 +5,8 @@ var move_button_down = false
 
 var armswinger_speeds = []
 
+var is_moving = false
+
 var player_controller = null
 
 #0 = unkown, 1 = left, 2 = right
@@ -32,13 +34,11 @@ var teleport_mesh
 var teleport_raycast
 
 # A constant to define the dead zone for both the trackpad and the joystick.
-# See (http://www.third-helix.com/2013/04/12/doing-thumbstick-dead-zones-right.html)
-# for more information on what dead zones are, and how we are using them in this project.
 const CONTROLLER_DEADZONE = 0.1
 
-const MOVEMENT_SPEED = 2.5
+const MOVEMENT_SPEED = 3.0
 const ARMSWINGER_SPEED = 2.0
-const MIN_ARMSWINGER_SPEED = 1.0
+const MIN_ARMSWINGER_SPEED = 2.0
 
 const CONTROLLER_RUMBLE_FADE_SPEED = 2.0
 
@@ -290,9 +290,13 @@ func sleep_area_exited(body):
 func smoothLocomotion(delta, trackpad_vector):
 	if trackpad_vector.length() < CONTROLLER_DEADZONE:
 		trackpad_vector = Vector2(0,0)
-		#player_controller.player_rigidbody.linear_velocity = Vector3(0,0,0)
+		if is_moving:
+			is_moving = false
+			if player_controller.player_rigidbody.linear_velocity.y == 0:
+				player_controller.player_rigidbody.linear_velocity = Vector3(0,0,0)
 	else:
 		trackpad_vector = trackpad_vector.normalized() * ((trackpad_vector.length() - CONTROLLER_DEADZONE) / (1 - CONTROLLER_DEADZONE))
+		is_moving = true
 	
 	var forward_direction = get_parent().get_node("Player_Camera").global_transform.basis.z.normalized()
 	var right_direction = get_parent().get_node("Player_Camera").global_transform.basis.x.normalized()
