@@ -22,7 +22,8 @@ func _physics_process(delta):
 func interact():
 	# (Ignore the unused variable warning)
 	# warning-ignore:return_value_discarded
-	get_tree().change_scene("res://Game.tscn")
+	#get_tree().change_scene("res://Game.tscn")
+	get_tree().reload_current_scene()
 
 
 func dropped():

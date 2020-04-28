@@ -292,8 +292,8 @@ func smoothLocomotion(delta, trackpad_vector):
 		trackpad_vector = Vector2(0,0)
 		if is_moving:
 			is_moving = false
-			if player_controller.player_rigidbody.linear_velocity.y == 0:
-				player_controller.player_rigidbody.linear_velocity = Vector3(0,0,0)
+			#if player_controller.player_rigidbody.linear_velocity.y == 0:
+			player_controller.player_rigidbody.linear_velocity = Vector3(0,0,0)
 	else:
 		trackpad_vector = trackpad_vector.normalized() * ((trackpad_vector.length() - CONTROLLER_DEADZONE) / (1 - CONTROLLER_DEADZONE))
 		is_moving = true

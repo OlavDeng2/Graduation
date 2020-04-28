@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Assets/CGTuts_OceanHDRI_Freebie_001.hdr" type="Texture" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://Scenes/Sphere_Target.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Instructions_GUI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Pistol.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Reset_Box.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Bomb.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Sword.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Shotgun.tscn" type="PackedScene" id=12]
@@ -1469,9 +1468,6 @@ transform = Transform( -2.32729e-08, 0.258819, 0.965926, 1, -4.37114e-08, 3.5806
 
 [node name="Pistol2" parent="Interactable_Objects" instance=ExtResource( 8 )]
 transform = Transform( -1.50459e-08, -0.258819, -0.965926, 1, 7.54979e-08, -3.58063e-08, 8.21927e-08, -0.965926, 0.258819, 26.3313, 7.48704, 17.6496 )
-
-[node name="Reset_Box" parent="Interactable_Objects" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.98995, 0.988414, 18.6295 )
 
 [node name="Bomb" parent="Interactable_Objects" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.7935, 1.38314, -23.8408 )
