@@ -335,7 +335,7 @@ func teleport(trackpad_vector):
 		if teleport_pos != null and teleport_mesh.visible == true:
 			var camera_offset = get_parent().get_node("Player_Camera").global_transform.origin - get_parent().global_transform.origin
 			camera_offset.y = 0
-			get_parent().global_transform.origin = teleport_pos - camera_offset
+			player_controller.player_rigidbody.global_transform.origin = teleport_pos - camera_offset
 			teleport_mesh.visible = false
 			teleport_raycast.visible = false
 			teleport_pos = null
