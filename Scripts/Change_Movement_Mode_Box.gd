@@ -8,7 +8,7 @@ var controls_label
 func _ready():
 	start_transform = global_transform
 	#player_controller = get_node("Player")
-	player_controller = get_tree().get_root().find_node("ARVROrigin", true, false)
+	player_controller = get_tree().get_root().find_node("Player", true, false)
 	current_movement_mode_label = get_tree().get_root().find_node("Label_Movement_Mode", true, false)
 	controls_label = get_tree().get_root().find_node("Label_Controls", true, false)
 

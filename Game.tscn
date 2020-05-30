@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Assets/CGTuts_OceanHDRI_Freebie_001.hdr" type="Texture" id=2]
@@ -68,48 +68,46 @@ glow_levels/5 = false
 glow_intensity = 1.0
 glow_bicubic_upscale = true
 
-[sub_resource type="PhysicsMaterial" id=14]
-
-[sub_resource type="CylinderMesh" id=15]
+[sub_resource type="CylinderMesh" id=14]
 top_radius = 0.2
 bottom_radius = 0.5
 height = 0.2
 
-[sub_resource type="SpatialMaterial" id=16]
+[sub_resource type="SpatialMaterial" id=15]
 flags_transparent = true
 flags_unshaded = true
 albedo_color = Color( 0.460938, 0.633606, 1, 0.431373 )
 
-[sub_resource type="CylinderMesh" id=17]
+[sub_resource type="CylinderMesh" id=16]
 top_radius = 0.01
 bottom_radius = 0.1
 height = 0.8
 
-[sub_resource type="CubeMesh" id=18]
+[sub_resource type="CubeMesh" id=17]
 size = Vector3( 0.4, 0.4, 0.4 )
 
-[sub_resource type="SpatialMaterial" id=19]
+[sub_resource type="SpatialMaterial" id=18]
 albedo_color = Color( 0, 1, 0.0390625, 1 )
 
-[sub_resource type="ConvexPolygonShape" id=20]
+[sub_resource type="ConvexPolygonShape" id=19]
 points = PoolVector3Array( -0.199951, 0.199951, 0.199951, 0.199951, 0.199951, -0.199951, 0.199951, 0.199951, 0.199951, -0.199951, 0.199951, -0.199951, -0.199951, -0.199951, 0.199951, 0.199951, -0.199951, -0.199951, 0.199951, -0.199951, 0.199951, -0.199951, -0.199951, -0.199951, 0.199951, 0.199951, 0.199951, -0.199951, 0.199951, -0.199951, 0.199951, 0.199951, -0.199951, -0.199951, 0.199951, 0.199951, 0.199951, -0.199951, 0.199951, -0.199951, -0.199951, -0.199951, 0.199951, -0.199951, -0.199951, -0.199951, -0.199951, 0.199951, 0.199951, 0.199951, 0.199951, -0.199951, -0.199951, 0.199951, -0.199951, 0.199951, 0.199951, 0.199951, -0.199951, 0.199951, 0.199951, 0.199951, -0.199951, -0.199951, -0.199951, -0.199951, -0.199951, 0.199951, -0.199951, 0.199951, -0.199951, -0.199951 )
 
-[sub_resource type="QuadMesh" id=21]
+[sub_resource type="QuadMesh" id=20]
 size = Vector2( 2, 1 )
 
-[sub_resource type="SpatialMaterial" id=22]
+[sub_resource type="SpatialMaterial" id=21]
 flags_unshaded = true
 
-[sub_resource type="DynamicFont" id=23]
+[sub_resource type="DynamicFont" id=22]
 size = 32
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 14 )
 
-[sub_resource type="SpatialMaterial" id=24]
+[sub_resource type="SpatialMaterial" id=23]
 flags_unshaded = true
 
-[sub_resource type="SpatialMaterial" id=25]
+[sub_resource type="SpatialMaterial" id=24]
 flags_unshaded = true
 
 [node name="Game" type="Spatial"]
@@ -1420,8 +1418,6 @@ shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.289724, 0.42249, 3.79029 )
-physics_material_override = SubResource( 14 )
-linear_velocity = Vector3( 0, 1, 0 )
 
 [node name="Controlls_GUI" parent="." instance=ExtResource( 4 )]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, -4.75432, 4.96041, 19.7775 )
@@ -1503,13 +1499,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.57099, 0.932521, 4.27777 )
 
 [node name="Teleport_Mesh" type="MeshInstance" parent="."]
 visible = false
-mesh = SubResource( 15 )
-material/0 = SubResource( 16 )
+mesh = SubResource( 14 )
+material/0 = SubResource( 15 )
 
 [node name="Teleport_Pointy" type="MeshInstance" parent="Teleport_Mesh"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.679908, 0 )
-mesh = SubResource( 17 )
-material/0 = SubResource( 16 )
+mesh = SubResource( 16 )
+material/0 = SubResource( 15 )
 
 [node name="Rigidbodies" type="Spatial" parent="."]
 
@@ -1517,109 +1513,109 @@ material/0 = SubResource( 16 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.6887, 6.71436, 18.3975 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody"]
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody"]
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody2" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.182, 6.71436, 18.3975 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody2"]
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody2"]
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody3" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.4275, 7.23247, 18.3975 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody3"]
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody3"]
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody4" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.4275, 6.82534, 18.9657 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody4"]
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody4"]
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody5" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.9994, 6.82534, 19.0158 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody5"]
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody5"]
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody6" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.713, 7.33861, 18.9085 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody6"]
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody6"]
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody7" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 0.906308, 0, 0.422618, 0, 1, 0, -0.422618, 0, 0.906308, -30.5758, 0.860854, 31.3453 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody7"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody7"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody8" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 0.906308, 0, 0.422618, 0, 1, 0, -0.422618, 0, 0.906308, -30.5758, 1.72477, 31.3453 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody8"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody8"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody9" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 0.906308, 0, 0.422618, 0, 1, 0, -0.422618, 0, 0.906308, -30.5758, 2.56851, 31.3453 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody9"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody9"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody10" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 0.906308, 0, 0.422618, 0, 1, 0, -0.422618, 0, 0.906308, -30.5758, 3.44398, 31.3453 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody10"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody10"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody11" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.0617, 1.33338, -22.4042 )
@@ -1627,12 +1623,12 @@ mass = 1.25
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody11"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody11"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody12" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.0617, 1.33338, -24.1594 )
@@ -1640,12 +1636,12 @@ mass = 1.25
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody12"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody12"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody13" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.0617, 1.33338, -25.838 )
@@ -1653,12 +1649,12 @@ mass = 1.25
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody13"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody13"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody14" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.0617, 1.33338, -27.5602 )
@@ -1666,12 +1662,12 @@ mass = 1.25
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody14"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody14"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody15" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.0617, 1.33338, -29.2617 )
@@ -1679,12 +1675,12 @@ mass = 1.25
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody15"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody15"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody16" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.0617, 3.11202, -28.7448 )
@@ -1692,12 +1688,12 @@ mass = 1.25
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody16"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody16"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody17" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.0617, 3.11202, -26.8124 )
@@ -1705,12 +1701,12 @@ mass = 1.25
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody17"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody17"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody18" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.0617, 3.11202, -24.9178 )
@@ -1718,12 +1714,12 @@ mass = 1.25
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody18"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody18"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody19" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.0617, 3.11202, -23.089 )
@@ -1731,12 +1727,12 @@ mass = 1.25
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody19"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody19"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody20" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.0617, 4.90355, -23.9719 )
@@ -1744,12 +1740,12 @@ mass = 1.25
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody20"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody20"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody21" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.0617, 4.90355, -25.9742 )
@@ -1757,12 +1753,12 @@ mass = 1.25
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody21"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody21"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody22" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.0617, 4.90355, -27.8589 )
@@ -1770,127 +1766,127 @@ mass = 1.25
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody22"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody22"]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0 )
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody23" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.9383, 0.419056, -27.8589 )
 mass = 1.25
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody23"]
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody23"]
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody24" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4122, 0.419056, -27.8589 )
 mass = 1.25
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody24"]
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody24"]
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody25" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.8691, 0.419056, -27.8589 )
 mass = 1.25
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody25"]
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody25"]
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody26" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.3331, 0.419056, -27.8589 )
 mass = 1.25
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody26"]
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody26"]
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody27" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5897, 0.898549, -27.8589 )
 mass = 1.25
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody27"]
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody27"]
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody28" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.1371, 0.898549, -27.8589 )
 mass = 1.25
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody28"]
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody28"]
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody29" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.6944, 0.898549, -27.8589 )
 mass = 1.25
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody29"]
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody29"]
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody30" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4408, 1.36584, -27.8589 )
 mass = 1.25
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody30"]
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody30"]
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody31" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.8562, 1.36584, -27.8589 )
 mass = 1.25
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody31"]
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody31"]
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="RigidBody32" type="RigidBody" parent="Rigidbodies"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.177, 1.7999, -27.8589 )
 mass = 1.25
 
 [node name="MeshInstance" type="MeshInstance" parent="Rigidbodies/RigidBody32"]
-mesh = SubResource( 18 )
-material/0 = SubResource( 19 )
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Rigidbodies/RigidBody32"]
-shape = SubResource( 20 )
+shape = SubResource( 19 )
 
 [node name="GUI_Pistols" type="MeshInstance" parent="."]
 transform = Transform( 0.943157, 0, 0.332347, 0, 1, 0, -0.332347, 0, 0.943157, 24.7095, 7.78223, 17.74 )
-mesh = SubResource( 21 )
-material/0 = SubResource( 22 )
+mesh = SubResource( 20 )
+material/0 = SubResource( 21 )
 script = ExtResource( 13 )
 gui_viewport_path = NodePath("GUI")
 
@@ -1912,7 +1908,7 @@ anchor_bottom = 1.0
 [node name="Label" type="Label" parent="GUI_Pistols/GUI/Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 23 )
+custom_fonts/font = SubResource( 22 )
 text = "Pistols!
 Grab and interact to fire!
 
@@ -1923,8 +1919,8 @@ valign = 1
 
 [node name="GUI_Shotgun" type="MeshInstance" parent="."]
 transform = Transform( -0.0973867, 0, -0.995247, 0, 1, 0, 0.995247, 0, -0.0973867, -6.29051, 2.78223, -25.26 )
-mesh = SubResource( 21 )
-material/0 = SubResource( 22 )
+mesh = SubResource( 20 )
+material/0 = SubResource( 21 )
 script = ExtResource( 13 )
 gui_viewport_path = NodePath("GUI")
 
@@ -1946,7 +1942,7 @@ anchor_bottom = 1.0
 [node name="Label" type="Label" parent="GUI_Shotgun/GUI/Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 23 )
+custom_fonts/font = SubResource( 22 )
 text = "Shotgun!
 Grab and interact to fire!
 
@@ -1957,8 +1953,8 @@ valign = 1
 
 [node name="GUI_Sword" type="MeshInstance" parent="."]
 transform = Transform( 0.725533, 0, -0.688187, 0, 1, 0, 0.688187, 0, 0.725533, -25.4911, 1.85187, 24.5165 )
-mesh = SubResource( 21 )
-material/0 = SubResource( 24 )
+mesh = SubResource( 20 )
+material/0 = SubResource( 23 )
 script = ExtResource( 13 )
 gui_viewport_path = NodePath("GUI")
 
@@ -1980,7 +1976,7 @@ anchor_bottom = 1.0
 [node name="Label" type="Label" parent="GUI_Sword/GUI/Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 23 )
+custom_fonts/font = SubResource( 22 )
 text = "Sword!
 Grab and start slashing!"
 align = 1
@@ -1988,8 +1984,8 @@ valign = 1
 
 [node name="GUI_Bombs" type="MeshInstance" parent="."]
 transform = Transform( 0.422618, 0, -0.906308, 0, 1, 0, 0.906308, 0, 0.422618, 24.4495, 1.78223, -25.3418 )
-mesh = SubResource( 21 )
-material/0 = SubResource( 25 )
+mesh = SubResource( 20 )
+material/0 = SubResource( 24 )
 script = ExtResource( 13 )
 gui_viewport_path = NodePath("GUI")
 
@@ -2011,7 +2007,7 @@ anchor_bottom = 1.0
 [node name="Label" type="Label" parent="GUI_Bombs/GUI/Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 23 )
+custom_fonts/font = SubResource( 22 )
 text = "Bombs!
 Grab and interact to start the fuse!
 

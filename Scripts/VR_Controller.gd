@@ -260,7 +260,7 @@ func _on_button_released_b():
 	move_button_down = false
 	
 	#Simple to slow down the player once they stop armswinging
-	player_controller.player_rigidbody.linear_velocity = Vector3(0,0,0)
+	#player_controller.player_rigidbody.linear_velocity = Vector3(0,0,0)
 	
 	#set the movement for armswinger false
 	if controller_id == 1:
@@ -290,28 +290,23 @@ func sleep_area_exited(body):
 func smoothLocomotion(delta, trackpad_vector):
 	if trackpad_vector.length() < CONTROLLER_DEADZONE:
 		trackpad_vector = Vector2(0,0)
-		if is_moving:
-			is_moving = false
-			#if player_controller.player_rigidbody.linear_velocity.y == 0:
-			player_controller.player_rigidbody.linear_velocity = Vector3(0,0,0)
+		
 	else:
 		trackpad_vector = trackpad_vector.normalized() * ((trackpad_vector.length() - CONTROLLER_DEADZONE) / (1 - CONTROLLER_DEADZONE))
-		is_moving = true
 	
 	var forward_direction = get_parent().get_node("Player_Camera").global_transform.basis.z.normalized()
 	var right_direction = get_parent().get_node("Player_Camera").global_transform.basis.x.normalized()
 	
 	var movement_vector = (trackpad_vector).normalized()
 	
-	var movement_forward = forward_direction * movement_vector.x * MOVEMENT_SPEED
-	var movement_right = right_direction * movement_vector.y * MOVEMENT_SPEED
+	var movement_forward = forward_direction * movement_vector.x * MOVEMENT_SPEED * delta
+	var movement_right = right_direction * movement_vector.y * MOVEMENT_SPEED * delta
 	
 	movement_forward.y = 0
 	movement_right.y = 0
 	
 	if (movement_right.length() > 0 or movement_forward.length() > 0):
-		player_controller.player_rigidbody.set_axis_velocity(movement_forward + movement_right)
-		#player_controller.player_rigidbody.global_translate(movement_right + movement_forward)
+		player_controller.global_translate(movement_right + movement_forward)
 		#get_parent().global_translate(movement_right + movement_forward)
 		directional_movement = true
 	else:
@@ -335,7 +330,7 @@ func teleport(trackpad_vector):
 		if teleport_pos != null and teleport_mesh.visible == true:
 			var camera_offset = get_parent().get_node("Player_Camera").global_transform.origin - get_parent().global_transform.origin
 			camera_offset.y = 0
-			player_controller.player_rigidbody.global_transform.origin = teleport_pos - camera_offset
+			player_controller.global_transform.origin = teleport_pos - camera_offset
 			teleport_mesh.visible = false
 			teleport_raycast.visible = false
 			teleport_pos = null
@@ -372,14 +367,15 @@ func armswinger(delta):
 	
 	var movement_forward = Vector3(0, 0, 0)
 	#get velocity of controllers
-	movement_forward = direction * average_speed * ARMSWINGER_SPEED# * delta
+	movement_forward = direction * average_speed * ARMSWINGER_SPEED * delta
 
 	
 	#move the player in the direction that the controller is pointing
 	if movement_forward_min.length() > movement_forward.length():
-		player_controller.player_rigidbody.set_axis_velocity(movement_forward_min)
+		get_parent().global_translate(movement_forward)
+		#player_controller.player_rigidbody.set_axis_velocity(movement_forward_min)
 	
 	elif movement_forward_min.length() < movement_forward.length():
-		#get_parent().global_translate(average_movement)
-		player_controller.player_rigidbody.set_axis_velocity(movement_forward)
+		get_parent().global_translate(movement_forward)
+		#player_controller.player_rigidbody.set_axis_velocity(movement_forward)
 
