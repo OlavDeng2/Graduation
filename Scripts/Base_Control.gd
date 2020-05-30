@@ -3,7 +3,7 @@ extends Control
 var sphere_count_label
 
 func _ready():
-	sphere_count_label = get_node("Label_Sphere_Count")
+	sphere_count_label = find_node("Label_Sphere_Count")
 
 	get_tree().root.get_node("Game").sphere_ui = self
 
