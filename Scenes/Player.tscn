@@ -8,6 +8,7 @@
 
 [node name="Player" type="ARVROrigin"]
 script = ExtResource( 3 )
+player_camera = NodePath("Player_Camera")
 
 [node name="Player_Camera" type="ARVRCamera" parent="."]
 current = true
@@ -17,6 +18,7 @@ current = true
 [node name="Right_Controller" parent="." instance=ExtResource( 2 )]
 
 [node name="KinematicBody" type="KinematicBody" parent="."]
+collision_mask = 1048574
 
 [node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
 shape = SubResource( 1 )
