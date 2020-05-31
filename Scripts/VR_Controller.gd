@@ -82,7 +82,6 @@ func _physics_process(delta):
 
 	#this applies only for teleport and smooth locomotion for now
 	_move_player(delta)
-	_snapturn()
 
 	if get_is_active() == true:
 		_physics_process_update_controller_velocity(delta)
@@ -146,14 +145,6 @@ func _physics_process_update_controller_velocity_global(delta):
 
 	if global_prior_controller_velocities.size() > 30:
 		global_prior_controller_velocities.remove(0)
-
-
-func _snapturn():
-	if controller_hand == player_controller.dominant_hand:
-		var joystick_x_axis = get_joystick_axis(0)
-		if joystick_x_axis < CONTROLLER_DEADZONE and joystick_x_axis > -CONTROLLER_DEADZONE:
-			joystick_x_axis = 0
-		player_controller.snapturn(joystick_x_axis)
 
 func _move_player(delta):
 	if movement_mode == "Smooth":

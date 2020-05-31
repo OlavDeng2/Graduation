@@ -181,24 +181,3 @@ func _change_movement_mode(currentMovementMode):
 		
 	left_controller.movement_mode = movement_mode
 	right_controller.movement_mode = movement_mode
-
-
-func snapturn(direction):
-	if !has_rotated:
-		if direction == 0:
-			return
-		elif direction < 0:
-			#turn right 45 degrees
-			rotate_y(snapturn_amount)
-			has_rotated = true	
-		elif direction > 0:
-			#turn left 45 degrees
-			rotate_y(-snapturn_amount)
-			has_rotated = true
-
-	if has_rotated:
-		if direction == 0:
-			has_rotated = false
-
-
-
