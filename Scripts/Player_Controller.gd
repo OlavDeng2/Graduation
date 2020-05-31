@@ -1,32 +1,5 @@
 extends ARVROrigin
 
-
-export (NodePath) var player_camera = null
-
-export var player_height = 0.9
-
-var dominant_hand = 2
-var left_controller = null
-var right_controller = null
-var movement_mode = "Smooth"
-
-var snapturn_amount = 45 #in degrees
-var has_rotated = false
-
-# size of our player
-export var player_radius = 0.4 setget set_player_radius, get_player_radius
-
-# to combat motion sickness we'll 'step' our left/right turning
-export var smooth_rotation = false
-export var smooth_turn_speed = 2.0
-export var step_turn_delay = 0.2
-export var step_turn_angle = 20.0
-
-# and movement
-export var max_speed = 5.0
-export var drag_factor = 0.1
-export var gravity_scale = 9.81
-
 # enum our buttons, should find a way to put this more central
 enum Buttons {
 	VR_BUTTON_BY = 1,
@@ -45,6 +18,38 @@ enum Buttons {
 	VR_PAD = 14,
 	VR_TRIGGER = 15
 }
+
+enum Hands{
+	LEFT_HAND = 1,
+	RIGHT_HAND = 2
+}
+
+
+export (NodePath) var player_camera = null
+
+export var player_height = 0.9
+export var dominant_hand = Hands.RIGHT_HAND
+
+export (NodePath) var left_controller = null
+export (NodePath) var right_controller = null
+var movement_mode = "Smooth"
+
+var snapturn_amount = 45 #in degrees
+var has_rotated = false
+
+# size of our player
+export var player_radius = 0.4 setget set_player_radius, get_player_radius
+
+# to combat motion sickness we'll 'step' our left/right turning
+export var smooth_rotation = false
+export var smooth_turn_speed = 2.0
+export var step_turn_delay = 0.2
+export var step_turn_angle = 20.0
+
+# and movement
+export var max_speed = 5.0
+export var drag_factor = 0.1
+export var gravity_scale = 9.81
 
 var turn_step = 0.0
 var camera_node = null
@@ -83,6 +88,17 @@ func set_player_radius(p_radius):
 	player_radius = p_radius
 
 func _ready():
+	
+	#Get node if not assigned in the editor
+	if(!left_controller):
+		left_controller = get_node("Left_Controller")
+	if(!right_controller):
+		right_controller = get_node("Right_Controller")
+		
+	if(!player_camera):
+		player_camera = get_node("Player_Camera")
+	if(!raycast):
+		raycast = get_node("KinematicBody/RayCast")
 		
 	if player_camera:
 		camera_node = get_node(player_camera)
@@ -96,10 +112,6 @@ func _ready():
 	set_player_radius(player_radius)
 	
 	
-	left_controller = get_node("Left_Controller")
-	right_controller = get_node("Right_Controller")
-	player_camera = get_node("Player_Camera")
-	raycast = get_node("KinematicBody/RayCast")
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

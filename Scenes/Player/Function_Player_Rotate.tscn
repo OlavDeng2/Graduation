@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Player/Player_Rotate.gd" type="Script" id=1]
+
+[node name="Function_Player_Rotate" type="Node"]
+script = ExtResource( 1 )
