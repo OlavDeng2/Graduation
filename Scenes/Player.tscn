@@ -30,6 +30,11 @@ player = NodePath("../..")
 
 [node name="Function_Player_Rotate" parent="Right_Controller" instance=ExtResource( 4 )]
 
+[node name="Function_Direct_movement" parent="Right_Controller" instance=ExtResource( 5 )]
+enabled = false
+camera = NodePath("../../Player_Camera")
+player = NodePath("../..")
+
 [node name="KinematicBody" type="KinematicBody" parent="."]
 collision_mask = 1048574
 

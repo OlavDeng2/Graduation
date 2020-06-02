@@ -7,9 +7,6 @@ export var enabled = true setget set_enabled, get_enabled
 export (NodePath) var camera = null
 export (NodePath) var player = null
 
-# size of our player
-export var player_radius = 0.4 setget set_player_radius, get_player_radius
-
 # and movement
 export var max_speed = 5.0
 export var drag_factor = 0.1
@@ -33,7 +30,6 @@ enum Buttons {
 	VR_TRIGGER = 15
 }
 
-var turn_step = 0.0
 var player_controller = null
 var camera_node = null
 var velocity = Vector3(0.0, 0.0, 0.0)
@@ -55,12 +51,6 @@ func set_enabled(new_value):
 
 func get_enabled():
 	return enabled
-
-func get_player_radius():
-	return player_radius
-
-func set_player_radius(p_radius):
-	player_radius = p_radius
 
 func _ready():
 	# origin node should always be the parent of our parent
@@ -84,16 +74,6 @@ func _physics_process(delta):
 		set_physics_process(false)
 		return
 	
-	# Adjust the height of our player according to our camera position
-	var player_height = camera_node.transform.origin.y + player_radius
-	if player_height < player_radius:
-		# not smaller than this
-		player_height = player_radius
-	
-	collision_shape.shape.radius = player_radius
-	collision_shape.shape.height = player_height - (player_radius * 2.0)
-	collision_shape.transform.origin.y = (player_height / 2.0)
-	
 	# We should be the child or the controller on which the teleport is implemented
 	var controller = get_parent()
 	if controller.get_is_active():
@@ -112,7 +92,7 @@ func _physics_process(delta):
 		var forward_dir = -camera_transform.basis.z
 		forward_dir.y = 0.0
 		if forward_dir.length() > 0.01:
-			curr_transform.origin += forward_dir.normalized() * -0.75 * player_radius
+			curr_transform.origin += forward_dir.normalized() * -0.75 * player_controller.player_radius
 		
 		player_controller.kinematicbody.global_transform = curr_transform
 		
@@ -134,5 +114,3 @@ func _physics_process(delta):
 		var movement = (player_controller.kinematicbody.global_transform.origin - curr_transform.origin)
 		player_controller.global_transform.origin += movement
 			
-		# Return this back to where it was so we can use its collision shape for other things too
-		# $KinematicBody.global_transform.origin = curr_transform.origin
