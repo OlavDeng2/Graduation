@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Left_Controller.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Right_Controller.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Player_Controller.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Player/Function_Player_Rotate.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/godot-xr-tools/functions/Function_Direct_movement.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CapsuleShape" id=1]
 
@@ -20,6 +21,10 @@ script = null
 [node name="Function_Player_Rotate" parent="Left_Controller" instance=ExtResource( 4 )]
 enabled = false
 camera = NodePath("../../Player_Camera")
+
+[node name="Function_Direct_movement" parent="Left_Controller" instance=ExtResource( 5 )]
+camera = NodePath("../../Player_Camera")
+player = NodePath("../..")
 
 [node name="Right_Controller" parent="." instance=ExtResource( 2 )]
 

@@ -1,7 +1,4 @@
 extends KinematicBody
-# should really change this to Spatial once #17401 is resolved
-
-# Add this scene as a sub scene of your ARVRController node to implement a teleport function on that controller.
 
 # Is this active?
 export var enabled = true setget set_enabled, get_enabled

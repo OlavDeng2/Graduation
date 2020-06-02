@@ -43,7 +43,7 @@ func _ready():
 		camera_node = get_node(camera)	
 	else:
 		# see if we can find our default
-		camera_node = get_node(player_controller.player_camera)
+		camera_node = player_controller.camera_node
 
 
 func _physics_process(delta):

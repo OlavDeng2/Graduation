@@ -51,11 +51,11 @@ export var max_speed = 5.0
 export var drag_factor = 0.1
 export var gravity_scale = 9.81
 
-var turn_step = 0.0
 var camera_node = null
 var velocity = Vector3(0.0, 0.0, 0.0)
-var gravity = -30.0
+
 onready var collision_shape: CollisionShape = get_node("KinematicBody/CollisionShape")
+onready var kinematicbody : KinematicBody = get_node("KinematicBody")
 onready var raycast : RayCast = get_node("KinematicBody/RayCast")
 
 # Set our collision layer (need to change this once we can add the proper UI)
@@ -66,17 +66,17 @@ export  (int, FLAGS, "Layer 1", "Layer 2", "Layer 3", "Layer 4", "Layer 5", "Lay
 
 func set_collision_layer(new_layer):
 	collision_layer = new_layer
-	if $KinematicBody:
-		$KinematicBody.collision_layer = collision_layer
+	if kinematicbody:
+		kinematicbody.collision_layer = collision_layer
 
 func get_collision_layer():
 	return collision_layer
 
 func set_collision_mask(new_mask):
 	collision_mask = new_mask
-	if $KinematicBody:
-		$KinematicBody.collision_mask = collision_mask
-		$KinematicBody/RayCast.collision_mask = collision_mask
+	if kinematicbody:
+		kinematicbody.collision_mask = collision_mask
+		raycast.collision_mask = collision_mask
 
 func get_collision_mask():
 	return collision_mask
@@ -131,7 +131,7 @@ func _physics_process(delta):
 	# now we do our movement
 	# We start with placing our KinematicBody in the right place
 	# by centering it on the camera but placing it on the ground
-	var curr_transform = $KinematicBody.global_transform
+	var curr_transform = kinematicbody.global_transform
 	var camera_transform = camera_node.global_transform
 	curr_transform.origin = camera_transform.origin
 	curr_transform.origin.y = self.global_transform.origin.y
@@ -142,7 +142,7 @@ func _physics_process(delta):
 	if forward_dir.length() > 0.01:
 		curr_transform.origin += forward_dir.normalized() * -0.75 * player_radius
 	
-	$KinematicBody.global_transform = curr_transform
+	kinematicbody.global_transform = curr_transform
 	
 	# we'll handle gravity separately
 	var gravity_velocity = Vector3(0.0, velocity.y, 0.0)
@@ -153,15 +153,15 @@ func _physics_process(delta):
 	
 	
 	# apply move and slide to our kinematic body
-	velocity = $KinematicBody.move_and_slide(velocity, Vector3(0.0, 1.0, 0.0))
+	velocity = kinematicbody.move_and_slide(velocity, Vector3(0.0, 1.0, 0.0))
 	
-	# apply our gravity
-	gravity_velocity.y += gravity * delta
-	gravity_velocity = $KinematicBody.move_and_slide(gravity_velocity, Vector3(0.0, 1.0, 0.0))
+	# apply our gravity, it is negative as gravity always points downwards
+	gravity_velocity.y -= gravity_scale * delta
+	gravity_velocity = kinematicbody.move_and_slide(gravity_velocity, Vector3(0.0, 1.0, 0.0))
 	velocity.y = gravity_velocity.y
 	
 	# now use our new position to move our origin point
-	var movement = ($KinematicBody.global_transform.origin - curr_transform.origin)
+	var movement = (kinematicbody.global_transform.origin - curr_transform.origin)
 	self.global_transform.origin += movement
 
 	# Return this back to where it was so we can use its collision shape for other things too
