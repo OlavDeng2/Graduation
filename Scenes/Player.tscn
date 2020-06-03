@@ -11,7 +11,6 @@
 [node name="Player" type="ARVROrigin"]
 script = ExtResource( 3 )
 player_camera = NodePath("Player_Camera")
-player_height = 1.8
 left_controller = NodePath("Left_Controller")
 right_controller = NodePath("Right_Controller")
 player_radius = 0.4
@@ -51,3 +50,7 @@ transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0.9,
 shape = SubResource( 1 )
 
 [node name="RayCast" type="RayCast" parent="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+enabled = true
+cast_to = Vector3( 0, -0.6, 0 )
+collision_mask = 1048574
