@@ -29,6 +29,7 @@ camera = NodePath("../../Player_Camera")
 [node name="Function_Direct_movement" parent="Left_Controller" instance=ExtResource( 5 )]
 camera = NodePath("../../Player_Camera")
 player = NodePath("../..")
+headset_direction = false
 
 [node name="Right_Controller" parent="." instance=ExtResource( 2 )]
 script = null

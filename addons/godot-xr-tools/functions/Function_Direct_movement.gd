@@ -102,6 +102,7 @@ func _physics_process(delta):
 		
 		
 		if ((abs(forwards_backwards) > 0.1 ||  abs(left_right) > 0.1) and tail.is_colliding()):
+			#Direction based on headset orientation
 			if headset_direction:
 				var dir_forward = camera_transform.basis.z
 				dir_forward.y = 0.0				
@@ -109,16 +110,16 @@ func _physics_process(delta):
 				var dir_right = camera_transform.basis.x;
 				dir_right.y = 0.0				
 				velocity = (dir_forward * -forwards_backwards + dir_right * left_right).normalized() * delta * max_speed * ARVRServer.world_scale
-				
+			
+			#Direction based on controller orientation
 			else:
-				pass
-				var dir_forward = camera_transform.basis.z
+				var dir_forward = controller.global_transform.basis.z
 				dir_forward.y = 0.0				
 				# VR Capsule will strafe left and right
-				var dir_right = camera_transform.basis.x;
+				var dir_right = controller.global_transform.basis.x;
 				dir_right.y = 0.0				
 				velocity = (dir_forward * -forwards_backwards + dir_right * left_right).normalized() * delta * max_speed * ARVRServer.world_scale
-			
+				
 		# apply move and slide to our kinematic body
 		velocity = player_controller.kinematicbody.move_and_slide(velocity, Vector3(0.0, 1.0, 0.0))
 			
