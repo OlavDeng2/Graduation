@@ -11,6 +11,10 @@
 [node name="Player" type="ARVROrigin"]
 script = ExtResource( 3 )
 player_camera = NodePath("Player_Camera")
+player_height = 1.8
+left_controller = NodePath("Left_Controller")
+right_controller = NodePath("Right_Controller")
+player_radius = 0.4
 
 [node name="Player_Camera" type="ARVRCamera" parent="."]
 current = true
@@ -27,8 +31,11 @@ camera = NodePath("../../Player_Camera")
 player = NodePath("../..")
 
 [node name="Right_Controller" parent="." instance=ExtResource( 2 )]
+script = null
 
 [node name="Function_Player_Rotate" parent="Right_Controller" instance=ExtResource( 4 )]
+camera = NodePath("../../Player_Camera")
+player = NodePath("../..")
 
 [node name="Function_Direct_movement" parent="Right_Controller" instance=ExtResource( 5 )]
 enabled = false
@@ -39,6 +46,7 @@ player = NodePath("../..")
 collision_mask = 1048574
 
 [node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0.9, 0 )
 shape = SubResource( 1 )
 
 [node name="RayCast" type="RayCast" parent="KinematicBody"]

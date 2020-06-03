@@ -57,8 +57,6 @@ func _physics_process(delta):
 		set_physics_process(false)
 		return
 	
-	player_controller.Buttons.VR_Grip
-	
 	# We should be the child or the controller on which the teleport is implemented
 	var controller = get_parent()
 	if controller.get_is_active():

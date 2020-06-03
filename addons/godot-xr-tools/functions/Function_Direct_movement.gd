@@ -10,6 +10,7 @@ export (NodePath) var player = null
 # and movement
 export var max_speed = 5.0
 export var drag_factor = 0.1
+export var headset_direction = true;
 
 # enum our buttons, should find a way to put this more central
 enum Buttons {
@@ -85,27 +86,38 @@ func _physics_process(delta):
 		# by centering it on the camera but placing it on the ground
 		var curr_transform = player_controller.kinematicbody.global_transform
 		var camera_transform = camera_node.global_transform
-		curr_transform.origin = camera_transform.origin
-		curr_transform.origin.y = player_controller.global_transform.origin.y
+		#curr_transform.origin = camera_transform.origin
+		#curr_transform.origin.y = player_controller.global_transform.origin.y
 			
 		# now we move it slightly back
-		var forward_dir = -camera_transform.basis.z
-		forward_dir.y = 0.0
-		if forward_dir.length() > 0.01:
-			curr_transform.origin += forward_dir.normalized() * -0.75 * player_controller.player_radius
+		#var forward_dir = -camera_transform.basis.z
+		#forward_dir.y = 0.0
+		#if forward_dir.length() > 0.01:
+		#	curr_transform.origin += forward_dir.normalized() * -0.75 * player_controller.player_radius
 		
-		player_controller.kinematicbody.global_transform = curr_transform
+		#player_controller.kinematicbody.global_transform = curr_transform
 		
 		# Apply our drag
 		velocity *= (1.0 - drag_factor)
 		
+		
 		if ((abs(forwards_backwards) > 0.1 ||  abs(left_right) > 0.1) and tail.is_colliding()):
-			var dir_forward = camera_transform.basis.z
-			dir_forward.y = 0.0				
-			# VR Capsule will strafe left and right
-			var dir_right = camera_transform.basis.x;
-			dir_right.y = 0.0				
-			velocity = (dir_forward * -forwards_backwards + dir_right * left_right).normalized() * delta * max_speed * ARVRServer.world_scale
+			if headset_direction:
+				var dir_forward = camera_transform.basis.z
+				dir_forward.y = 0.0				
+				# VR Capsule will strafe left and right
+				var dir_right = camera_transform.basis.x;
+				dir_right.y = 0.0				
+				velocity = (dir_forward * -forwards_backwards + dir_right * left_right).normalized() * delta * max_speed * ARVRServer.world_scale
+				
+			else:
+				pass
+				var dir_forward = camera_transform.basis.z
+				dir_forward.y = 0.0				
+				# VR Capsule will strafe left and right
+				var dir_right = camera_transform.basis.x;
+				dir_right.y = 0.0				
+				velocity = (dir_forward * -forwards_backwards + dir_right * left_right).normalized() * delta * max_speed * ARVRServer.world_scale
 			
 		# apply move and slide to our kinematic body
 		velocity = player_controller.kinematicbody.move_and_slide(velocity, Vector3(0.0, 1.0, 0.0))
