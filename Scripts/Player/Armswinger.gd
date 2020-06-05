@@ -1,17 +1,5 @@
 extends Node
 
-# Is this active?
-export var enabled = true setget set_enabled, get_enabled
-
-# We don't know the name of the camera node... 
-export (NodePath) var camera = null
-export (NodePath) var player = null
-
-# and movement
-export var max_speed = 5.0
-export var drag_factor = 0.1
-export var headset_direction = true;
-
 # enum our buttons, should find a way to put this more central
 enum Buttons {
 	VR_BUTTON_BY = 1,
@@ -31,18 +19,31 @@ enum Buttons {
 	VR_TRIGGER = 15
 }
 
+# Is this active?
+export var enabled = true setget set_enabled, get_enabled
+
+# We don't know the name of the camera node... 
+export (NodePath) var camera = null
+export (NodePath) var player = null
+export (NodePath) var vr_controller = null
+ 
+# and movement
+export var max_speed = 5.0
+export var min_speed = 1.0
+export var drag_factor = 0.1
+export var headset_direction = true;
+
+export var armswinger_button = Buttons.VR_BUTTON_BY
+
 var player_controller = null
 var camera_node = null
 var velocity = Vector3(0.0, 0.0, 0.0)
-onready var collision_shape: CollisionShape = get_node("../KinematicBody/CollisionShape")
-onready var tail : RayCast = get_node("../KinematicBody/Tail")
+
+
+var armswinger_speeds = []
 
 func set_enabled(new_value):
 	enabled = new_value
-	if collision_shape:
-		collision_shape.disabled = !enabled
-	if tail:
-		tail.enabled = enabled
 	if enabled:
 		# make sure our physics process is on
 		set_physics_process(true)
@@ -50,21 +51,41 @@ func set_enabled(new_value):
 		# we turn this off in physics process just in case we want to do some cleanup
 		pass
 
+
 func get_enabled():
 	return enabled
+
 
 func _ready():
 	# origin node should always be the parent of our parent
 	player_controller = get_node("../..")
 	
+	vr_controller = get_node("../")
+	
 	if camera:
 		camera_node = get_node(camera)
 	# Our properties are set before our children are constructed so just re-issue
 	
-	collision_shape.disabled = !enabled
-	tail.enabled = enabled
+
+func armswinger(delta):
+	var movement_forward_min = Vector3(0, 0, 0)
+	
+	var movement_forward = Vector3(0, 0, 0)
+	#get velocity of controllers
+	#movement_forward = direction * average_speed * ARMSWINGER_SPEED * delta
+
+	
+	#move the player in the direction that the controller is pointing
+	if movement_forward_min.length() > movement_forward.length():
+		get_parent().global_translate(movement_forward)
+		#player_controller.player_rigidbody.set_axis_velocity(movement_forward_min)
+	
+	elif movement_forward_min.length() < movement_forward.length():
+		get_parent().global_translate(movement_forward)
+		#player_controller.player_rigidbody.set_axis_velocity(movement_forward)
 
 func _physics_process(delta):
+	
 	if !player_controller:
 		return
 	
@@ -81,49 +102,51 @@ func _physics_process(delta):
 		var left_right = controller.get_joystick_axis(0)
 		var forwards_backwards = controller.get_joystick_axis(1)
 		
-		# now we do our movement
-		# We start with placing our KinematicBody in the right place
-		# by centering it on the camera but placing it on the ground
+		#Get some player transforms
 		var curr_transform = player_controller.kinematicbody.global_transform
 		var camera_transform = camera_node.global_transform
-		#curr_transform.origin = camera_transform.origin
-		#curr_transform.origin.y = player_controller.global_transform.origin.y
-			
-		# now we move it slightly back
-		#var forward_dir = -camera_transform.basis.z
-		#forward_dir.y = 0.0
-		#if forward_dir.length() > 0.01:
-		#	curr_transform.origin += forward_dir.normalized() * -0.75 * player_controller.player_radius
-		
-		#player_controller.kinematicbody.global_transform = curr_transform
 		
 		# Apply our drag
 		velocity *= (1.0 - drag_factor)
 		
-		
-		if ((abs(forwards_backwards) > 0.1 ||  abs(left_right) > 0.1) and tail.is_colliding()):
+		if controller.is_button_pressed(armswinger_button) and player_controller.raycast.is_colliding():
+			#Get the current local controller speed
+			var current_controller_speed =  vr_controller.local_controller_velocity.length()
+			
+			#add controller speed to the list of average speeds
+			armswinger_speeds.append(current_controller_speed)
+			
+			#if array speed is larger than 1second worth of data, remove the first one
+			#TODO: make it based on 1 second instead of just the amount of frames
+			if armswinger_speeds.size() > 120:
+				armswinger_speeds.remove(0)
+			#add all speeds together
+			var total_speed = 0
+			for i in armswinger_speeds:
+				total_speed += i
+			#get average speed
+			var average_controller_speed = total_speed/armswinger_speeds.size()
+			
+			#apply the velocity based on either headset direction or controller direction
 			#Direction based on headset orientation
 			if headset_direction:
 				var dir_forward = camera_transform.basis.z
 				dir_forward.y = 0.0				
-				# VR Capsule will strafe left and right
-				var dir_right = camera_transform.basis.x;
-				dir_right.y = 0.0				
-				velocity = (dir_forward * -forwards_backwards + dir_right * left_right).normalized() * delta * max_speed * ARVRServer.world_scale
+				velocity = (-dir_forward).normalized() * average_controller_speed * delta * max_speed * ARVRServer.world_scale
 			
 			#Direction based on controller orientation
 			else:
 				var dir_forward = controller.global_transform.basis.z
 				dir_forward.y = 0.0				
-				# VR Capsule will strafe left and right
-				var dir_right = controller.global_transform.basis.x;
-				dir_right.y = 0.0				
-				velocity = (dir_forward * -forwards_backwards + dir_right * left_right).normalized() * delta * max_speed * ARVRServer.world_scale
-				
+				velocity = (-dir_forward).normalized() * average_controller_speed * delta * max_speed * ARVRServer.world_scale
+		
+		#clear the armswinger speeds array otherwise the velocity will be remembered
+		elif !controller.is_button_pressed(armswinger_button):
+			armswinger_speeds.clear()
+			
 		# apply move and slide to our kinematic body
 		velocity = player_controller.kinematicbody.move_and_slide(velocity, Vector3(0.0, 1.0, 0.0))
 			
 		# now use our new position to move our origin point
 		var movement = (player_controller.kinematicbody.global_transform.origin - curr_transform.origin)
 		player_controller.global_transform.origin += movement
-			

@@ -12,9 +12,9 @@ var player_controller = null
 #0 = unkown, 1 = left, 2 = right
 var controller_hand = 0
 
-var controller_velocity = Vector3(0,0,0)
-var prior_controller_position = Vector3(0,0,0)
-var prior_controller_velocities = []
+var local_controller_velocity = Vector3(0,0,0)
+var local_prior_controller_position = Vector3(0,0,0)
+var local_prior_controller_velocities = []
 
 var global_controller_velocity = Vector3(0,0,0)
 var global_prior_controller_position = Vector3(0,0,0)
@@ -64,14 +64,14 @@ func _ready():
 	grab_area = get_node("Area")
 	grab_pos_node = get_node("Grab_Pos")
 
-	get_node("Sleep_Area").connect("body_entered", self, "sleep_area_entered")
-	get_node("Sleep_Area").connect("body_exited", self, "sleep_area_exited")
+	#get_node("Sleep_Area").connect("body_entered", self, "sleep_area_entered")
+	#get_node("Sleep_Area").connect("body_exited", self, "sleep_area_exited")
 
 	hand_mesh = get_node("Hand")
 	hand_pickup_drop_sound = get_node("AudioStreamPlayer3D")
 
-	connect("button_pressed", self, "button_pressed")
-	connect("button_release", self, "button_released")
+	#connect("button_pressed", self, "button_pressed")
+	#connect("button_release", self, "button_released")
 
 
 func _physics_process(delta):
@@ -81,7 +81,7 @@ func _physics_process(delta):
 			rumble = 0
 
 	#this applies only for teleport and smooth locomotion for now
-	_move_player(delta)
+	#_move_player(delta)
 
 	if get_is_active() == true:
 		_physics_process_update_controller_velocity(delta)
@@ -94,32 +94,32 @@ func _physics_process(delta):
 
 
 func _physics_process_update_controller_velocity(delta):
-	controller_velocity = Vector3(0,0,0)
+	local_controller_velocity = Vector3(0,0,0)
 
-	if prior_controller_velocities.size() > 0:
-		for vel in prior_controller_velocities:
-			controller_velocity += vel
+	if local_prior_controller_velocities.size() > 0:
+		for vel in local_prior_controller_velocities:
+			local_controller_velocity += vel
 
-		controller_velocity = controller_velocity / prior_controller_velocities.size()
+		local_controller_velocity = local_controller_velocity / local_prior_controller_velocities.size()
 	
 	#Global transform
 	#var relative_controller_position = (global_transform.origin - prior_controller_position)
 	#local transform
-	var relative_controller_position = (transform.origin - prior_controller_position)
+	var relative_controller_position = (transform.origin - local_prior_controller_position)
 
-	controller_velocity += relative_controller_position
+	local_controller_velocity += relative_controller_position
 
-	prior_controller_velocities.append(relative_controller_position)
+	local_prior_controller_velocities.append(relative_controller_position)
 
 	#global transform
 	#prior_controller_position = global_transform.origin
 	#local transform
-	prior_controller_position = transform.origin
+	local_prior_controller_position = transform.origin
 
-	controller_velocity /= delta;
+	local_controller_velocity /= delta;
 
-	if prior_controller_velocities.size() > 30:
-		prior_controller_velocities.remove(0)
+	if local_prior_controller_velocities.size() > 30:
+		local_prior_controller_velocities.remove(0)
 
 
 func _physics_process_update_controller_velocity_global(delta):
@@ -146,227 +146,199 @@ func _physics_process_update_controller_velocity_global(delta):
 	if global_prior_controller_velocities.size() > 30:
 		global_prior_controller_velocities.remove(0)
 
-func _move_player(delta):
-	if movement_mode == "Smooth":
-		if controller_hand != player_controller.dominant_hand:
-			var trackpad_vector = Vector2(-get_joystick_axis(1), get_joystick_axis(0))
-			smoothLocomotion(delta, trackpad_vector)
-	elif movement_mode == "Teleport":
-		if controller_hand != player_controller.dominant_hand:
-			var trackpad_vector = Vector2(-get_joystick_axis(1), get_joystick_axis(0))
-			teleport(trackpad_vector)
-	elif movement_mode == "Armswinger":
-		if move_button_down == true:
-			armswinger(delta)
+#func _move_player(delta):
+#	if movement_mode == "Smooth":
+#		return
+#	elif movement_mode == "Teleport":
+#		if controller_hand != player_controller.dominant_hand:
+#			var trackpad_vector = Vector2(-get_joystick_axis(1), get_joystick_axis(0))
+#			teleport(trackpad_vector)
+#	elif movement_mode == "Armswinger":
+#		if move_button_down == true:
+#			armswinger(delta)
 
 
-func button_pressed(button_index):
-	if button_index == 15:
-		_on_button_pressed_trigger()
+#func button_pressed(button_index):
+#	if button_index == 15:
+#		_on_button_pressed_trigger()
 
-	if button_index == 2:
-		_on_button_pressed_grab()
+#	if button_index == 2:
+#		_on_button_pressed_grab()
 		
-	if button_index == 1:
-		_on_button_pressed_b()
+#	if button_index == 1:
+#		_on_button_pressed_b()
 
 
-func _on_button_pressed_trigger():
-	if held_object != null: 
-		if held_object is VR_Interactable_Rigidbody:
-			held_object.interact()
+#func _on_button_pressed_trigger():
+#	if held_object != null: 
+#		if held_object is VR_Interactable_Rigidbody:
+#			held_object.interact()
 
 
-func _on_button_pressed_grab():
-	if held_object == null:
-		_pickup_rigidbody()
+#func _on_button_pressed_grab():
+#	if held_object == null:
+#		_pickup_rigidbody()
 	#else:
 	#	_throw_rigidbody()
-	hand_pickup_drop_sound.play()
+#	hand_pickup_drop_sound.play()
 
 
-func _on_button_pressed_b():
-	move_button_down = true
+#func _on_button_pressed_b():
+#	move_button_down = true
 	
 	#Empty the armswinger array to get clear data for movement while swinging arms
-	armswinger_speeds.clear()
+#	armswinger_speeds.clear()
 
 
-func _pickup_rigidbody():
-	var rigid_body = null
+#func _pickup_rigidbody():
+#	var rigid_body = null
 
-	var bodies = grab_area.get_overlapping_bodies()
-	if len(bodies) > 0:
-		for body in bodies:
-			if body is RigidBody:
-				if !("NO_PICKUP" in body):
-					rigid_body = body
-					break
+#	var bodies = grab_area.get_overlapping_bodies()
+#	if len(bodies) > 0:
+#		for body in bodies:
+#			if body is RigidBody:
+#				if !("NO_PICKUP" in body):
+#					rigid_body = body
+#					break
 
-	if rigid_body != null:
+#	if rigid_body != null:
 
-		held_object = rigid_body
+#		held_object = rigid_body
 
-		held_object_data["mode"] = held_object.mode
-		held_object_data["layer"] = held_object.collision_layer
-		held_object_data["mask"] = held_object.collision_mask
+#		held_object_data["mode"] = held_object.mode
+#		held_object_data["layer"] = held_object.collision_layer
+#		held_object_data["mask"] = held_object.collision_mask
 
-		held_object.mode = RigidBody.MODE_STATIC
-		held_object.collision_layer = 0
-		held_object.collision_mask = 0
+#		held_object.mode = RigidBody.MODE_STATIC
+#		held_object.collision_layer = 0
+#		held_object.collision_mask = 0
 
-		hand_mesh.visible = false
+#		hand_mesh.visible = false
 
-		if held_object is VR_Interactable_Rigidbody:
-			held_object.controller = self
-			held_object.picked_up()
-
-
-func _throw_rigidbody():
-	if held_object == null:
-		return
-
-	held_object.mode = held_object_data["mode"]
-	held_object.collision_layer = held_object_data["layer"]
-	held_object.collision_mask = held_object_data["mask"]
-
-	held_object.apply_impulse(Vector3(0, 0, 0), global_controller_velocity)
-
-	if held_object is VR_Interactable_Rigidbody:
-		held_object.dropped()
-		held_object.controller = null
-
-	held_object = null
-	hand_mesh.visible = true
+#		if held_object is VR_Interactable_Rigidbody:
+#			held_object.controller = self
+#			held_object.picked_up()
 
 
-func button_released(button_index):
-	if button_index == 1:
-		_on_button_released_b()
-	if button_index == 2:
-		_on_button_released_grab()
+#func _throw_rigidbody():
+#	if held_object == null:
+#		return
+
+#	held_object.mode = held_object_data["mode"]
+#	held_object.collision_layer = held_object_data["layer"]
+#	held_object.collision_mask = held_object_data["mask"]
+
+#	held_object.apply_impulse(Vector3(0, 0, 0), global_controller_velocity)
+
+#	if held_object is VR_Interactable_Rigidbody:
+#		held_object.dropped()
+#		held_object.controller = null
+
+#	held_object = null
+#	hand_mesh.visible = true
 
 
-func _on_button_released_b():
-	move_button_down = false
+#func button_released(button_index):
+#	if button_index == 1:
+#		_on_button_released_b()
+#	if button_index == 2:
+#		_on_button_released_grab()
+
+
+#func _on_button_released_b():
+#	move_button_down = false
 	
 	#Simple to slow down the player once they stop armswinging
 	#player_controller.player_rigidbody.linear_velocity = Vector3(0,0,0)
 	
 	#set the movement for armswinger false
-	if controller_id == 1:
-		player_controller.left_controller_armswinger = false
-	elif controller_id == 2:
-		player_controller.right_controller_armswinger = false
+#	if controller_id == 1:
+#		player_controller.left_controller_armswinger = false
+#	elif controller_id == 2:
+#		player_controller.right_controller_armswinger = false
 
 
-func _on_button_released_grab():
-	if held_object != null:
-		_throw_rigidbody()
-	hand_pickup_drop_sound.play()
+#func _on_button_released_grab():
+#	if held_object != null:
+#		_throw_rigidbody()
+#	hand_pickup_drop_sound.play()
 
 
-func sleep_area_entered(body):
-	if "can_sleep" in body:
-		body.can_sleep = false
-		body.sleeping = false
+#func sleep_area_entered(body):
+#	if "can_sleep" in body:
+#		body.can_sleep = false
+#		body.sleeping = false
 
 
-func sleep_area_exited(body):
-	if "can_sleep" in body:
+#func sleep_area_exited(body):
+#	if "can_sleep" in body:
 		# Allow the CollisionBody to sleep by setting the "can_sleep" variable to true
-		body.can_sleep = true
-
-
-func smoothLocomotion(delta, trackpad_vector):
-	if trackpad_vector.length() < CONTROLLER_DEADZONE:
-		trackpad_vector = Vector2(0,0)
+#		body.can_sleep = true
 		
-	else:
-		trackpad_vector = trackpad_vector.normalized() * ((trackpad_vector.length() - CONTROLLER_DEADZONE) / (1 - CONTROLLER_DEADZONE))
+
+#func teleport(trackpad_vector):
+#	if trackpad_vector.length() > CONTROLLER_DEADZONE:
+#		if teleport_mesh.visible == false:
+#			teleport_mesh.visible = true
+#			teleport_raycast.visible = true
+#					
+#		teleport_raycast.force_raycast_update()
+#		if teleport_raycast.is_colliding():
+#			if teleport_raycast.get_collider() is StaticBody:
+#				if teleport_raycast.get_collision_normal().y >= 0.85:
+#					teleport_pos = teleport_raycast.get_collision_point()
+#					teleport_mesh.global_transform.origin = teleport_pos
 	
-	var forward_direction = get_parent().get_node("Player_Camera").global_transform.basis.z.normalized()
-	var right_direction = get_parent().get_node("Player_Camera").global_transform.basis.x.normalized()
-	
-	var movement_vector = (trackpad_vector).normalized()
-	
-	var movement_forward = forward_direction * movement_vector.x * MOVEMENT_SPEED * delta
-	var movement_right = right_direction * movement_vector.y * MOVEMENT_SPEED * delta
-	
-	movement_forward.y = 0
-	movement_right.y = 0
-	
-	if (movement_right.length() > 0 or movement_forward.length() > 0):
-		player_controller.global_translate(movement_right + movement_forward)
-		#get_parent().global_translate(movement_right + movement_forward)
-		directional_movement = true
-	else:
-		directional_movement = false
+#	if trackpad_vector.length() < CONTROLLER_DEADZONE:
+#		if teleport_pos != null and teleport_mesh.visible == true:
+#			var camera_offset = get_parent().get_node("Player_Camera").global_transform.origin - get_parent().global_transform.origin
+#			camera_offset.y = 0
+#			player_controller.global_transform.origin = teleport_pos - camera_offset
+#			teleport_mesh.visible = false
+#			teleport_raycast.visible = false
+#			teleport_pos = null
 
 
-func teleport(trackpad_vector):
-	if trackpad_vector.length() > CONTROLLER_DEADZONE:
-		if teleport_mesh.visible == false:
-			teleport_mesh.visible = true
-			teleport_raycast.visible = true
-					
-		teleport_raycast.force_raycast_update()
-		if teleport_raycast.is_colliding():
-			if teleport_raycast.get_collider() is StaticBody:
-				if teleport_raycast.get_collision_normal().y >= 0.85:
-					teleport_pos = teleport_raycast.get_collision_point()
-					teleport_mesh.global_transform.origin = teleport_pos
-	
-	if trackpad_vector.length() < CONTROLLER_DEADZONE:
-		if teleport_pos != null and teleport_mesh.visible == true:
-			var camera_offset = get_parent().get_node("Player_Camera").global_transform.origin - get_parent().global_transform.origin
-			camera_offset.y = 0
-			player_controller.global_transform.origin = teleport_pos - camera_offset
-			teleport_mesh.visible = false
-			teleport_raycast.visible = false
-			teleport_pos = null
-
-
-func armswinger(delta):
-	var movement_forward_min = Vector3(0, 0, 0)
-	#get direction of controllers, make it negative otherwise we get the wrong direction
-	var direction = -get_global_transform().basis.z#-get_transform().basis.z.normalized()
-	#translate the directions into top down 2d
-	direction.y = 0
-	direction = direction.normalized()
-	
-	#add the speed for the movement
-	movement_forward_min = direction * MIN_ARMSWINGER_SPEED
-	#move player in direction of controllers at a set speed when button is pressed
-	#get_parent().global_translate(movement_forward)
-	#player_controller.player_rigidbody.set_axis_velocity(movement_forward)
-	
-	#get the current controller speed
-	var current_controller_speed = controller_velocity.length()
-	#add controller speed to the list of average speeds
-	armswinger_speeds.append(current_controller_speed)
-	
-	#120 cuz 120fps
-	if armswinger_speeds.size() > 120:
-		armswinger_speeds.remove(0)
-	#add all speeds together
-	var total_speed = 0
-	for i in armswinger_speeds:
-		total_speed += i
-	#get average speed
-	var average_speed = total_speed/armswinger_speeds.size()
-	
-	var movement_forward = Vector3(0, 0, 0)
-	#get velocity of controllers
-	movement_forward = direction * average_speed * ARMSWINGER_SPEED * delta
+#func armswinger(delta):
+#	var movement_forward_min = Vector3(0, 0, 0)
+#	#get direction of controllers, make it negative otherwise we get the wrong direction
+#	var direction = -get_global_transform().basis.z#-get_transform().basis.z.normalized()
+#	#translate the directions into top down 2d
+#	direction.y = 0
+#	direction = direction.normalized()
+#	
+#	#add the speed for the movement
+#	movement_forward_min = direction * MIN_ARMSWINGER_SPEED
+#	#move player in direction of controllers at a set speed when button is pressed
+#	#get_parent().global_translate(movement_forward)
+#	#player_controller.player_rigidbody.set_axis_velocity(movement_forward)
+#	
+#	#get the current controller speed
+#	var current_controller_speed = local_controller_velocity.length()
+#	#add controller speed to the list of average speeds
+#	armswinger_speeds.append(current_controller_speed)
+#	
+#	#120 cuz 120fps
+#	if armswinger_speeds.size() > 120:
+#		armswinger_speeds.remove(0)
+#	#add all speeds together
+#	var total_speed = 0
+#	for i in armswinger_speeds:
+#		total_speed += i
+#	#get average speed
+#	var average_speed = total_speed/armswinger_speeds.size()
+#	
+#	var movement_forward = Vector3(0, 0, 0)
+#	#get velocity of controllers
+#	movement_forward = direction * average_speed * ARMSWINGER_SPEED * delta
 
 	
 	#move the player in the direction that the controller is pointing
-	if movement_forward_min.length() > movement_forward.length():
-		get_parent().global_translate(movement_forward)
-		#player_controller.player_rigidbody.set_axis_velocity(movement_forward_min)
+#	if movement_forward_min.length() > movement_forward.length():
+#		get_parent().global_translate(movement_forward)
+#		#player_controller.player_rigidbody.set_axis_velocity(movement_forward_min)
 	
-	elif movement_forward_min.length() < movement_forward.length():
-		get_parent().global_translate(movement_forward)
-		#player_controller.player_rigidbody.set_axis_velocity(movement_forward)
+#	elif movement_forward_min.length() < movement_forward.length():
+#		get_parent().global_translate(movement_forward)
+#		#player_controller.player_rigidbody.set_axis_velocity(movement_forward)
 
