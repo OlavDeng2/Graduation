@@ -3,8 +3,6 @@ extends ARVRController
 var movement_mode = "Smooth"
 var move_button_down = false
 
-var armswinger_speeds = []
-
 var is_moving = false
 
 var player_controller = null
@@ -37,8 +35,6 @@ var teleport_raycast
 const CONTROLLER_DEADZONE = 0.1
 
 const MOVEMENT_SPEED = 3.0
-const ARMSWINGER_SPEED = 2.0
-const MIN_ARMSWINGER_SPEED = 2.0
 
 const CONTROLLER_RUMBLE_FADE_SPEED = 2.0
 
@@ -154,8 +150,7 @@ func _physics_process_update_controller_velocity_global(delta):
 #			var trackpad_vector = Vector2(-get_joystick_axis(1), get_joystick_axis(0))
 #			teleport(trackpad_vector)
 #	elif movement_mode == "Armswinger":
-#		if move_button_down == true:
-#			armswinger(delta)
+#		return
 
 
 #func button_pressed(button_index):
@@ -185,9 +180,6 @@ func _physics_process_update_controller_velocity_global(delta):
 
 #func _on_button_pressed_b():
 #	move_button_down = true
-	
-	#Empty the armswinger array to get clear data for movement while swinging arms
-#	armswinger_speeds.clear()
 
 
 #func _pickup_rigidbody():
@@ -251,12 +243,6 @@ func _physics_process_update_controller_velocity_global(delta):
 	#Simple to slow down the player once they stop armswinging
 	#player_controller.player_rigidbody.linear_velocity = Vector3(0,0,0)
 	
-	#set the movement for armswinger false
-#	if controller_id == 1:
-#		player_controller.left_controller_armswinger = false
-#	elif controller_id == 2:
-#		player_controller.right_controller_armswinger = false
-
 
 #func _on_button_released_grab():
 #	if held_object != null:
@@ -297,48 +283,3 @@ func _physics_process_update_controller_velocity_global(delta):
 #			teleport_mesh.visible = false
 #			teleport_raycast.visible = false
 #			teleport_pos = null
-
-
-#func armswinger(delta):
-#	var movement_forward_min = Vector3(0, 0, 0)
-#	#get direction of controllers, make it negative otherwise we get the wrong direction
-#	var direction = -get_global_transform().basis.z#-get_transform().basis.z.normalized()
-#	#translate the directions into top down 2d
-#	direction.y = 0
-#	direction = direction.normalized()
-#	
-#	#add the speed for the movement
-#	movement_forward_min = direction * MIN_ARMSWINGER_SPEED
-#	#move player in direction of controllers at a set speed when button is pressed
-#	#get_parent().global_translate(movement_forward)
-#	#player_controller.player_rigidbody.set_axis_velocity(movement_forward)
-#	
-#	#get the current controller speed
-#	var current_controller_speed = local_controller_velocity.length()
-#	#add controller speed to the list of average speeds
-#	armswinger_speeds.append(current_controller_speed)
-#	
-#	#120 cuz 120fps
-#	if armswinger_speeds.size() > 120:
-#		armswinger_speeds.remove(0)
-#	#add all speeds together
-#	var total_speed = 0
-#	for i in armswinger_speeds:
-#		total_speed += i
-#	#get average speed
-#	var average_speed = total_speed/armswinger_speeds.size()
-#	
-#	var movement_forward = Vector3(0, 0, 0)
-#	#get velocity of controllers
-#	movement_forward = direction * average_speed * ARMSWINGER_SPEED * delta
-
-	
-	#move the player in the direction that the controller is pointing
-#	if movement_forward_min.length() > movement_forward.length():
-#		get_parent().global_translate(movement_forward)
-#		#player_controller.player_rigidbody.set_axis_velocity(movement_forward_min)
-	
-#	elif movement_forward_min.length() < movement_forward.length():
-#		get_parent().global_translate(movement_forward)
-#		#player_controller.player_rigidbody.set_axis_velocity(movement_forward)
-

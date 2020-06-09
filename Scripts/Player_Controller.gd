@@ -34,17 +34,8 @@ export (NodePath) var left_controller = null
 export (NodePath) var right_controller = null
 var movement_mode = "Smooth"
 
-var snapturn_amount = 45 #in degrees
-var has_rotated = false
-
 # size of our player
 export var player_radius = 0.4 setget set_player_radius, get_player_radius
-
-# to combat motion sickness we'll 'step' our left/right turning
-export var smooth_rotation = false
-export var smooth_turn_speed = 2.0
-export var step_turn_delay = 0.2
-export var step_turn_angle = 20.0
 
 # and movement
 export var max_speed = 5.0

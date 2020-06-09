@@ -23,6 +23,7 @@ enum Buttons {
 }
 
 export (Buttons) var teleport_button = Buttons.VR_TRIGGER
+export var joystick_teleport = false
 export (Color) var can_teleport_color = Color(0.0, 1.0, 0.0, 1.0)
 export (Color) var cant_teleport_color = Color(1.0, 0.0, 0.0, 1.0)
 export (Color) var no_collision_color = Color(45.0 / 255.0, 80.0 / 255.0, 220.0 / 255.0, 1.0)
@@ -45,7 +46,7 @@ var teleport_rotation = 0.0;
 var floor_normal = Vector3(0.0, 1.0, 0.0)
 var last_target_transform = Transform()
 var collision_shape = null
-var step_size = 0.5
+var step_size = 2#0.5
 
 # By default we show a capsule to indicate where the player lands.
 # Turn on editable children,
@@ -148,6 +149,7 @@ func _physics_process(delta):
 		$Target/Player_figure.scale = Vector3(ws, ws, ws)
 	
 	if controller and controller.get_is_active() and controller.is_button_pressed(teleport_button):
+		
 		if !is_teleporting:
 			is_teleporting = true
 			$Teleport.visible = true
@@ -212,7 +214,7 @@ func _physics_process(delta):
 				else:
 					# now we cast a ray downwards to see if we're on a surface
 					var up = Vector3(0.0, 1.0, 0.0)
-					var end_pos = target_global_origin - (up * 0.1)
+					var end_pos = target_global_origin - (up * 0.5)
 					var intersects = state.intersect_ray(target_global_origin, end_pos)
 					if intersects.empty():
 						is_on_floor = false
@@ -250,17 +252,9 @@ func _physics_process(delta):
 				color = cant_teleport_color
 			
 			# check our axis to see if we need to rotate
-			teleport_rotation += (delta * controller.get_joystick_axis(0) * -4.0)
+			teleport_rotation = (controller.get_joystick_axis(0)*PI*2)
 			
-			# update target and colour
-			var target_basis = Basis()
-			target_basis.z = Vector3(teleport_global_transform.basis.z.x, 0.0, teleport_global_transform.basis.z.z).normalized()
-			target_basis.y = normal
-			target_basis.x = target_basis.y.cross(target_basis.z)
-			target_basis.z = target_basis.x.cross(target_basis.y)
 			
-			target_basis = target_basis.rotated(normal, teleport_rotation)
-			last_target_transform.basis = target_basis
 			last_target_transform.origin = target_global_origin + Vector3(0.0, 0.02, 0.0)
 			$Target.global_transform = last_target_transform
 
@@ -276,20 +270,12 @@ func _physics_process(delta):
 			
 			# make our target horizontal again
 			var new_transform = last_target_transform
-			new_transform.basis.y = Vector3(0.0, 1.0, 0.0)
-			new_transform.basis.x = new_transform.basis.y.cross(new_transform.basis.z).normalized()
-			new_transform.basis.z = new_transform.basis.x.cross(new_transform.basis.y).normalized()
-			
+
 			# find out our user's feet's transformation
 			var cam_transform = camera_node.transform
 			var user_feet_transform = Transform()
 			user_feet_transform.origin = cam_transform.origin
 			user_feet_transform.origin.y = 0 # the feet are on the ground, but have the same X,Z as the camera
-			
-			# ensure this transform is upright
-			user_feet_transform.basis.y = Vector3(0.0, 1.0, 0.0)
-			user_feet_transform.basis.x = user_feet_transform.basis.y.cross(cam_transform.basis.z).normalized()
-			user_feet_transform.basis.z = user_feet_transform.basis.x.cross(user_feet_transform.basis.y).normalized()
 			
 			# now move the origin such that the new global user_feet_transform would be == new_transform
 			origin_node.global_transform = new_transform * user_feet_transform.inverse()
@@ -298,4 +284,3 @@ func _physics_process(delta):
 		is_teleporting = false;
 		$Teleport.visible = false
 		$Target.visible = false
-

@@ -71,7 +71,7 @@ func _physics_process(delta):
 			
 			t1.origin = -camera_node.transform.origin
 			t2.origin = camera_node.transform.origin
-			rot = rot.rotated(Vector3(0.0, -1.0, 0.0), smooth_turn_speed * delta * left_right)
+			rot = rot.rotated(Vector3(0.0, 1.0, 0.0), -smooth_turn_speed * delta * left_right)
 			player_controller.transform *= t2 * rot * t1
 		
 		#Snapturn
@@ -93,7 +93,7 @@ func _physics_process(delta):
 				t2.origin = camera_node.transform.origin
 				
 				if (left_right > joystick_deadzone):
-					rot = rot.rotated(Vector3(0.0, -1.0, 0.0), snap_turn_angle * PI / 180.0)
+					rot = rot.rotated(Vector3(0.0, 1.0, 0.0), -snap_turn_angle * PI / 180.0)
 				elif(left_right < -joystick_deadzone):
 					rot = rot.rotated(Vector3(0.0, 1.0, 0.0), snap_turn_angle * PI / 180.0)
 					
