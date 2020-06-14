@@ -12,6 +12,8 @@ subdivide_depth = 20
 [node name="Function_pointer" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0 )
 script = ExtResource( 2 )
+laser_pointer = NodePath("Laser")
+raycast_node = NodePath("Laser/RayCast")
 collision_mask = 1048575
 
 [node name="Laser" type="MeshInstance" parent="."]

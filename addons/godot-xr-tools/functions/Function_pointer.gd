@@ -31,6 +31,9 @@ export var ducktyped_body = true
 export (Buttons) var active_button = Buttons.VR_TRIGGER
 export var distance = 10 setget set_distance, get_distance
 
+export (NodePath) var laser_pointer = null
+export (NodePath) var raycast_node = null
+
 # Need to replace this with proper solution once support for layer selection has been added 
 export (int, FLAGS, "Layer 1", "Layer 2", "Layer 3", "Layer 4", "Layer 5", "Layer 6", "Layer 7", "Layer 8", "Layer 9", "Layer 10", "Layer 11", "Layer 12", "Layer 13", "Layer 14", "Layer 15", "Layer 16", "Layer 17", "Layer 18", "Layer 19", "Layer 20") var collision_mask = 15 setget set_collision_mask, get_collision_mask
 
@@ -38,6 +41,8 @@ var target = null
 var last_target = null
 var last_collided_at = Vector3(0, 0, 0)
 var laser_y = -0.05
+var laser = null
+var raycast = null
 
 onready var ws = ARVRServer.world_scale
 
@@ -45,10 +50,10 @@ func set_enabled(p_enabled):
 	enabled = p_enabled
 	
 	# this gets called before our scene is ready, we'll call this again in _ready to enable this
-	if $Laser:
-		$Laser.visible = p_enabled
+	if laser:
+		laser.visible = p_enabled
 		
-		$Laser/RayCast.enabled = p_enabled
+		raycast.enabled = p_enabled
 
 func get_enabled():
 	return enabled
@@ -56,28 +61,28 @@ func get_enabled():
 func set_collision_mask(p_new_mask):
 	collision_mask = p_new_mask
 	
-	if $Laser:
-		$Laser/RayCast.collision_mask = collision_mask
+	if laser:
+		raycast.collision_mask = collision_mask
 
 func get_collision_mask():
 	return collision_mask
 
 func set_distance(p_new_value):
 	distance = p_new_value
-	if $Laser:
-		$Laser.mesh.size.z = distance
-		$Laser.translation.z = distance * -0.5
-		$Laser/RayCast.translation.z = distance * 0.5
-		$Laser/RayCast.cast_to.z = -distance
+	if laser:
+		laser.mesh.size.z = distance
+		laser.translation.z = distance * -0.5
+		raycast.translation.z = distance * 0.5
+		raycast.cast_to.z = -distance
 
 func get_distance():
 	return distance
 
 func _on_button_pressed(p_button):
 	if p_button == active_button and enabled:
-		if $Laser/RayCast.is_colliding():
-			target = $Laser/RayCast.get_collider()
-			last_collided_at = $Laser/RayCast.get_collision_point()
+		if raycast.is_colliding():
+			target = raycast.get_collider()
+			last_collided_at = raycast.get_collision_point()
 			
 			emit_signal("pointer_pressed", target, last_collided_at)
 			
@@ -100,8 +105,13 @@ func _ready():
 	get_parent().connect("button_pressed", self, "_on_button_pressed")
 	get_parent().connect("button_release", self, "_on_button_release")
 	
+	laser = get_node(laser_pointer)
+	raycast = get_node(raycast_node)
+	
 	# apply our world scale to our laser position
-	$Laser.translation.y = laser_y * ws
+	laser.translation.y = laser_y * ws
+	
+	print_debug(laser)
 	
 	# init our state
 	set_distance(distance)
@@ -115,10 +125,10 @@ func _process(delta):
 	var new_ws = ARVRServer.world_scale
 	if (ws != new_ws):
 		ws = new_ws
-	$Laser.translation.y = laser_y * ws
+	laser.translation.y = laser_y * ws
 	
-	if enabled and $Laser/RayCast.is_colliding():
-		var new_at = $Laser/RayCast.get_collision_point()
+	if enabled and raycast.is_colliding():
+		var new_at = raycast.get_collision_point()
 		
 		if is_instance_valid(target):
 			# if target is set our mouse must be down, we keep "focus" on our target
@@ -128,7 +138,7 @@ func _process(delta):
 				if ducktyped_body and target.has_method("pointer_moved"):
 					target.pointer_moved(last_collided_at, new_at)
 		else:
-			var new_target = $Laser/RayCast.get_collider()
+			var new_target = raycast.get_collider()
 			
 			# are we pointing to a new target?
 			if new_target != last_target:

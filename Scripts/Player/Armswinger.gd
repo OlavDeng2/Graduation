@@ -65,24 +65,7 @@ func _ready():
 	if camera:
 		camera_node = get_node(camera)
 	# Our properties are set before our children are constructed so just re-issue
-	
 
-func armswinger(delta):
-	var movement_forward_min = Vector3(0, 0, 0)
-	
-	var movement_forward = Vector3(0, 0, 0)
-	#get velocity of controllers
-	#movement_forward = direction * average_speed * ARMSWINGER_SPEED * delta
-
-	
-	#move the player in the direction that the controller is pointing
-	if movement_forward_min.length() > movement_forward.length():
-		get_parent().global_translate(movement_forward)
-		#player_controller.player_rigidbody.set_axis_velocity(movement_forward_min)
-	
-	elif movement_forward_min.length() < movement_forward.length():
-		get_parent().global_translate(movement_forward)
-		#player_controller.player_rigidbody.set_axis_velocity(movement_forward)
 
 func _physics_process(delta):
 	
@@ -99,8 +82,6 @@ func _physics_process(delta):
 	# We should be the child or the controller on which the teleport is implemented
 	var controller = get_parent()
 	if controller.get_is_active():
-		var left_right = controller.get_joystick_axis(0)
-		var forwards_backwards = controller.get_joystick_axis(1)
 		
 		#Get some player transforms
 		var curr_transform = player_controller.kinematicbody.global_transform

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/VR_Controller.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Hand_Left.scn" type="PackedScene" id=2]
@@ -20,18 +20,10 @@ surfaces/0 = {
 "vertex_count": 404
 }
 
-[sub_resource type="CubeMesh" id=2]
-size = Vector3( 0.01, 3, 0.01 )
-
-[sub_resource type="SpatialMaterial" id=3]
-flags_transparent = true
-flags_unshaded = true
-albedo_color = Color( 0.460938, 0.633606, 1, 0.431373 )
-
-[sub_resource type="SphereShape" id=4]
+[sub_resource type="SphereShape" id=2]
 radius = 0.1
 
-[sub_resource type="SphereShape" id=5]
+[sub_resource type="SphereShape" id=3]
 
 [node name="Left_Controller" type="ARVRController"]
 script = ExtResource( 1 )
@@ -40,21 +32,12 @@ script = ExtResource( 1 )
 transform = Transform( -0.657785, 0.153893, 0.183402, 0, 0.536231, -0.449952, -0.239414, -0.422816, -0.503892, -0.00853791, 0, 0.0342013 )
 mesh = SubResource( 1 )
 
-[node name="RayCast" type="RayCast" parent="."]
-transform = Transform( -0.704196, -0.0820646, 0.705246, 0.626412, 0.395789, 0.671534, -0.334238, 0.914667, -0.227307, -0.0468995, 0.00399885, -0.131958 )
-cast_to = Vector3( 0, -16, 0 )
-
-[node name="Mesh" type="MeshInstance" parent="RayCast"]
-transform = Transform( 1, 0, 1.2666e-07, 5.96046e-08, 1, 4.47035e-08, -4.47035e-08, -4.47035e-08, 1, -2.98023e-08, -1.48814, 5.96046e-08 )
-mesh = SubResource( 2 )
-material/0 = SubResource( 3 )
-
 [node name="Area" type="Area" parent="."]
 input_ray_pickable = false
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0417899, -0.0449467 )
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 
 [node name="Grab_Pos" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0145124, -0.00105381 )
@@ -63,7 +46,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0145124, -0.00105381 )
 input_ray_pickable = false
 
 [node name="CollisionShape" type="CollisionShape" parent="Sleep_Area"]
-shape = SubResource( 5 )
+shape = SubResource( 3 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 4 )

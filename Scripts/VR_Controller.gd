@@ -1,10 +1,5 @@
 extends ARVRController
 
-var movement_mode = "Smooth"
-var move_button_down = false
-
-var is_moving = false
-
 var player_controller = null
 
 #0 = unkown, 1 = left, 2 = right
@@ -27,18 +22,9 @@ var grab_pos_node
 var hand_mesh
 var hand_pickup_drop_sound
 
-var teleport_pos = Vector3.ZERO
-var teleport_mesh
-var teleport_raycast
-
-# A constant to define the dead zone for both the trackpad and the joystick.
-const CONTROLLER_DEADZONE = 0.1
-
-const MOVEMENT_SPEED = 3.0
 
 const CONTROLLER_RUMBLE_FADE_SPEED = 2.0
 
-var directional_movement = false
 
 
 func _ready():
@@ -48,15 +34,6 @@ func _ready():
 	player_controller = get_parent()
 	controller_hand = get_controller_id()
 
-	move_button_down = false
-
-	teleport_raycast = get_node("RayCast")
-
-	teleport_mesh = get_tree().root.get_node("Game/Teleport_Mesh")
-
-	teleport_mesh.visible = false
-	teleport_raycast.visible = false
-	
 	grab_area = get_node("Area")
 	grab_pos_node = get_node("Grab_Pos")
 
@@ -142,16 +119,6 @@ func _physics_process_update_controller_velocity_global(delta):
 	if global_prior_controller_velocities.size() > 30:
 		global_prior_controller_velocities.remove(0)
 
-#func _move_player(delta):
-#	if movement_mode == "Smooth":
-#		return
-#	elif movement_mode == "Teleport":
-#		if controller_hand != player_controller.dominant_hand:
-#			var trackpad_vector = Vector2(-get_joystick_axis(1), get_joystick_axis(0))
-#			teleport(trackpad_vector)
-#	elif movement_mode == "Armswinger":
-#		return
-
 
 #func button_pressed(button_index):
 #	if button_index == 15:
@@ -176,10 +143,6 @@ func _physics_process_update_controller_velocity_global(delta):
 	#else:
 	#	_throw_rigidbody()
 #	hand_pickup_drop_sound.play()
-
-
-#func _on_button_pressed_b():
-#	move_button_down = true
 
 
 #func _pickup_rigidbody():
@@ -231,17 +194,8 @@ func _physics_process_update_controller_velocity_global(delta):
 
 
 #func button_released(button_index):
-#	if button_index == 1:
-#		_on_button_released_b()
 #	if button_index == 2:
 #		_on_button_released_grab()
-
-
-#func _on_button_released_b():
-#	move_button_down = false
-	
-	#Simple to slow down the player once they stop armswinging
-	#player_controller.player_rigidbody.linear_velocity = Vector3(0,0,0)
 	
 
 #func _on_button_released_grab():
@@ -261,25 +215,3 @@ func _physics_process_update_controller_velocity_global(delta):
 		# Allow the CollisionBody to sleep by setting the "can_sleep" variable to true
 #		body.can_sleep = true
 		
-
-#func teleport(trackpad_vector):
-#	if trackpad_vector.length() > CONTROLLER_DEADZONE:
-#		if teleport_mesh.visible == false:
-#			teleport_mesh.visible = true
-#			teleport_raycast.visible = true
-#					
-#		teleport_raycast.force_raycast_update()
-#		if teleport_raycast.is_colliding():
-#			if teleport_raycast.get_collider() is StaticBody:
-#				if teleport_raycast.get_collision_normal().y >= 0.85:
-#					teleport_pos = teleport_raycast.get_collision_point()
-#					teleport_mesh.global_transform.origin = teleport_pos
-	
-#	if trackpad_vector.length() < CONTROLLER_DEADZONE:
-#		if teleport_pos != null and teleport_mesh.visible == true:
-#			var camera_offset = get_parent().get_node("Player_Camera").global_transform.origin - get_parent().global_transform.origin
-#			camera_offset.y = 0
-#			player_controller.global_transform.origin = teleport_pos - camera_offset
-#			teleport_mesh.visible = false
-#			teleport_raycast.visible = false
-#			teleport_pos = null
