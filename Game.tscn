@@ -2020,7 +2020,7 @@ volume_db = -10.0
 autoplay = true
 
 [node name="Viewport2Din3D" parent="." instance=ExtResource( 23 )]
-transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, -2.12546, 1.14255, 8.0558 )
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, -2.12546, 1.73246, 8.0558 )
 screen_size = Vector2( 1.5, 3 )
 viewport_size = Vector2( 300, 400 )
 scene = ExtResource( 9 )

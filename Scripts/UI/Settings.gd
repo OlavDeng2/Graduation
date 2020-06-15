@@ -18,6 +18,9 @@ func _ready():
 	#set the current screen. by default will be main menu
 	current_screen = get_node("Main_Menu")
 	
+	if(main_menu_screen):
+		main_menu_screen = get_node(main_menu_screen)
+	
 	#By default, everything but the current screen should be set to invisible
 	if(settings_screen):
 		settings_screen = get_node(settings_screen)
@@ -32,7 +35,7 @@ func _ready():
 #function for switching between sub menus(including going back)
 func _switch_screen(var new_screen):
 	current_screen.visible = false
-	current_screen = get_node(new_screen)
+	current_screen = new_screen#get_node(new_screen)
 	current_screen.visible = true
 
 
