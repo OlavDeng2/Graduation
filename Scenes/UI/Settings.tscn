@@ -9,7 +9,6 @@ settings_screen = NodePath("Settings")
 credits_screen = NodePath("Credits")
 
 [node name="Main_Menu" type="ColorRect" parent="."]
-visible = false
 margin_right = 300.0
 margin_bottom = 400.0
 __meta__ = {
@@ -106,23 +105,64 @@ custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "Armswinger Settings"
 align = 1
 
-[node name="Text_Smooth_Locomotion_settings" type="Label" parent="Settings/VBoxContainer"]
+[node name="Button_Headset_Orientation_Armswinger" type="Button" parent="Settings/VBoxContainer"]
 margin_top = 154.0
 margin_right = 300.0
-margin_bottom = 168.0
+margin_bottom = 174.0
+text = "Follow Headset"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text_Armswinger_Min_Speed" type="Label" parent="Settings/VBoxContainer"]
+margin_top = 178.0
+margin_right = 300.0
+margin_bottom = 192.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+text = "Minimum Move Speed"
+align = 1
+
+[node name="HSlider" type="HSlider" parent="Settings/VBoxContainer"]
+margin_top = 196.0
+margin_right = 300.0
+margin_bottom = 212.0
+
+[node name="Text_Smooth_Locomotion_settings" type="Label" parent="Settings/VBoxContainer"]
+margin_top = 216.0
+margin_right = 300.0
+margin_bottom = 230.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "Smooth Locomotion Settings"
 align = 1
 
-[node name="Text_Teleport_Settings" type="Label" parent="Settings/VBoxContainer"]
-margin_top = 172.0
+[node name="Button_Headset_Orientation_Smooth" type="Button" parent="Settings/VBoxContainer"]
+margin_top = 234.0
 margin_right = 300.0
-margin_bottom = 186.0
+margin_bottom = 254.0
+text = "Follow Headset"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text_Teleport_Settings" type="Label" parent="Settings/VBoxContainer"]
+margin_top = 258.0
+margin_right = 300.0
+margin_bottom = 272.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "Teleport Settings"
 align = 1
+
+[node name="Button_Back" type="Button" parent="Settings/VBoxContainer"]
+margin_top = 276.0
+margin_right = 300.0
+margin_bottom = 296.0
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Credits" type="ColorRect" parent="."]
 visible = false
@@ -165,8 +205,7 @@ margin_top = 104.0
 margin_right = 300.0
 margin_bottom = 124.0
 text = "Back"
-[connection signal="button_down" from="Main_Menu/VBoxContainer/Button_input_settings" to="." method="_on_Button_button_down"]
+[connection signal="button_down" from="Main_Menu/VBoxContainer/Button_input_settings" to="." method="_main_menu_settings_button"]
 [connection signal="button_down" from="Main_Menu/VBoxContainer/Button_credits" to="." method="_main_menu_credits_button"]
-[connection signal="button_down" from="Settings/VBoxContainer/Button_Change_Movement_Mode" to="." method="_on_Button_button_down"]
-[connection signal="button_down" from="Settings/VBoxContainer/Button_Change_Dominant_Hand" to="." method="_main_menu_credits_button"]
+[connection signal="button_down" from="Settings/VBoxContainer/Button_Back" to="." method="_credits_back_button"]
 [connection signal="button_down" from="Credits/VBoxContainer/Button_Back" to="." method="_credits_back_button"]

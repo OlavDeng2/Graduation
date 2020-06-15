@@ -61,3 +61,8 @@ func _main_menu_credits_button():
 
 func _credits_back_button():
 	_switch_screen(main_menu_screen)
+
+
+func _main_menu_settings_button():
+	_switch_screen(settings_screen)
+
