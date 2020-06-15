@@ -23,7 +23,6 @@ enum Buttons {
 }
 
 export (Buttons) var teleport_button = Buttons.VR_TRIGGER
-export var joystick_teleport = false
 export (Color) var can_teleport_color = Color(0.0, 1.0, 0.0, 1.0)
 export (Color) var cant_teleport_color = Color(1.0, 0.0, 0.0, 1.0)
 export (Color) var no_collision_color = Color(45.0 / 255.0, 80.0 / 255.0, 220.0 / 255.0, 1.0)
@@ -148,7 +147,7 @@ func _physics_process(delta):
 		$Target.mesh.size = Vector2(ws, ws)
 		$Target/Player_figure.scale = Vector3(ws, ws, ws)
 	
-	if controller and controller.get_is_active() and controller.is_button_pressed(teleport_button):
+	if controller and controller.get_is_active() and controller.is_button_pressed(teleport_button) or (abs(controller.get_joystick_axis(1)) > 0.1 || abs(controller.get_joystick_axis(0)) > 0.1):
 		
 		if !is_teleporting:
 			is_teleporting = true
