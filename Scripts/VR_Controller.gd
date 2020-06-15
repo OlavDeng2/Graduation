@@ -1,5 +1,10 @@
 extends ARVRController
 
+export (NodePath) var function_player_rotate = null
+export (NodePath) var function_smooth_locomotion = null
+export (NodePath) var function_armswinger = null
+export (NodePath) var function_teleport = null
+
 var player_controller = null
 
 #0 = unkown, 1 = left, 2 = right

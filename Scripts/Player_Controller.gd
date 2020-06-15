@@ -42,6 +42,7 @@ export var max_speed = 5.0
 export var drag_factor = 0.1
 export var gravity_scale = 9.81
 
+
 var camera_node = null
 var velocity = Vector3(0.0, 0.0, 0.0)
 

@@ -1418,7 +1418,7 @@ transform = Transform( 0.223386, 0.830958, -0.509517, 0, 0.522726, 0.852501, 0.9
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.289724, 7.22115, 26.4981 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.289724, 2.05767, 5.53517 )
 
 [node name="Controlls_GUI" parent="." instance=ExtResource( 4 )]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, -4.75432, 4.96041, 19.7775 )
