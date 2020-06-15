@@ -26,16 +26,17 @@ enabled = false
 camera = NodePath("../../Player_Camera")
 
 [node name="Function_Direct_movement" parent="Left_Controller" instance=ExtResource( 7 )]
+enabled = false
 camera = NodePath("../../Player_Camera")
 player = NodePath("../..")
 headset_direction = false
 
 [node name="Function_Armswinger" parent="Left_Controller" instance=ExtResource( 6 )]
-enabled = false
 camera = NodePath("../../Player_Camera")
 player = NodePath("../..")
 vr_controller = NodePath("..")
 max_speed = 500.0
+min_speed = 500.0
 
 [node name="Function_pointer" parent="Left_Controller" instance=ExtResource( 8 )]
 collision_mask = 8

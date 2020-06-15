@@ -112,14 +112,24 @@ func _physics_process(delta):
 			#Direction based on headset orientation
 			if headset_direction:
 				var dir_forward = camera_transform.basis.z
-				dir_forward.y = 0.0				
+				dir_forward.y = 0.0	
 				velocity = (-dir_forward).normalized() * average_controller_speed * delta * max_speed * ARVRServer.world_scale
-			
+				
+				#Check if the speed is lower than the minimum velocity, if it is, apply the minimum velocity instead
+				var min_velocity = (-dir_forward).normalized() * delta * min_speed * ARVRServer.world_scale
+				if(min_velocity.length() > velocity.length()):
+					velocity = min_velocity
+					
 			#Direction based on controller orientation
 			else:
 				var dir_forward = controller.global_transform.basis.z
 				dir_forward.y = 0.0				
 				velocity = (-dir_forward).normalized() * average_controller_speed * delta * max_speed * ARVRServer.world_scale
+				
+				#Check if the speed is lower than the minimum velocity, if it is, apply the minimum velocity instead
+				var min_velocity = (-dir_forward).normalized() * delta * max_speed * ARVRServer.world_scale
+				if(min_velocity.length() > velocity.length()):
+					velocity = min_velocity
 		
 		#clear the armswinger speeds array otherwise the velocity will be remembered
 		elif !controller.is_button_pressed(armswinger_button):
