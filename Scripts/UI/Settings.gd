@@ -12,8 +12,7 @@ var current_screen = null
 var player = null
 
 func _ready():
-	#Find the player with the default name of player
-	find_node("Player")
+	player = PlayerSettings.player
 	
 	#set the current screen. by default will be main menu
 	current_screen = get_node("Main_Menu")
@@ -37,11 +36,6 @@ func _switch_screen(var new_screen):
 	current_screen.visible = false
 	current_screen = new_screen#get_node(new_screen)
 	current_screen.visible = true
-
-
-#Function for switching dominant hand
-func _switch_dominant_hand(var hand):
-	pass
 
 
 #Function for switching movement method
@@ -69,3 +63,8 @@ func _credits_back_button():
 func _main_menu_settings_button():
 	_switch_screen(settings_screen)
 
+
+
+func _settings_change_dominant_hand_button():
+	player.toggle_dominant_hand()
+	#todo: change the current text on the label

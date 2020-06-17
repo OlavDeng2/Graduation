@@ -111,7 +111,10 @@ func _ready():
 	# apply our world scale to our laser position
 	laser.translation.y = laser_y * ws
 	
-	print_debug(laser)
+	#Hide our laser unless it is pointing at something
+	laser.visible = false
+	
+	print_debug(laser.visible)
 	
 	# init our state
 	set_distance(distance)
@@ -128,6 +131,8 @@ func _process(delta):
 	laser.translation.y = laser_y * ws
 	
 	if enabled and raycast.is_colliding():
+		#set the laser visible when interacting with valid UI target
+		#laser.visible = true
 		var new_at = raycast.get_collision_point()
 		
 		if is_instance_valid(target):

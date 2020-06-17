@@ -223,5 +223,6 @@ margin_bottom = 124.0
 text = "Back"
 [connection signal="button_down" from="Main_Menu/VBoxContainer/Button_input_settings" to="." method="_main_menu_settings_button"]
 [connection signal="button_down" from="Main_Menu/VBoxContainer/Button_credits" to="." method="_main_menu_credits_button"]
+[connection signal="button_down" from="Settings/VBoxContainer/Button_Change_Dominant_Hand" to="." method="_settings_change_dominant_hand_button"]
 [connection signal="button_down" from="Settings/VBoxContainer/Button_Back" to="." method="_credits_back_button"]
 [connection signal="button_down" from="Credits/VBoxContainer/Button_Back" to="." method="_credits_back_button"]

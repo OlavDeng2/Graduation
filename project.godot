@@ -25,6 +25,10 @@ run/main_scene="res://Game.tscn"
 run/low_processor_mode=true
 config/icon="res://icon.png"
 
+[autoload]
+
+PlayerSettings="*res://Scripts/Managers/Player_settings.gd"
+
 [display]
 
 window/size/width=1920

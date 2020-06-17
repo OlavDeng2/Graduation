@@ -21,24 +21,29 @@ enum Buttons {
 
 enum Hands{
 	LEFT_HAND = 1,
-	RIGHT_HAND = 2
+	RIGHT_HAND = 2,
+}
+
+enum Movement_Modes{
+	SMOOTH_LOCOMOTION = 1,
+	ARMSWINGER = 2,
+	TELEPORT = 3
 }
 
 
 export (NodePath) var player_camera = null
 
-export var player_height = 0.9
+export var player_height = 1.8
 export var dominant_hand = Hands.RIGHT_HAND
 
-export (NodePath) var left_controller = null
-export (NodePath) var right_controller = null
-var movement_mode = "Smooth"
+export (NodePath) var left_controler = null
+export (NodePath) var right_controler = null
+var movement_mode = Movement_Modes.SMOOTH_LOCOMOTION
 
 # size of our player
 export var player_radius = 0.4 setget set_player_radius, get_player_radius
 
 # and movement
-export var max_speed = 5.0
 export var drag_factor = 0.1
 export var gravity_scale = 9.81
 
@@ -79,13 +84,29 @@ func get_player_radius():
 func set_player_radius(p_radius):
 	player_radius = p_radius
 
+#toggle the dominant hand.
+func toggle_dominant_hand():
+	if (dominant_hand == Hands.RIGHT_HAND):
+		get_node(right_controler).is_dominant_hand = true
+		get_node(left_controler).is_dominant_hand = false
+		dominant_hand = Hands.LEFT_HAND
+	elif(dominant_hand == Hands.LEFT_HAND):
+		get_node(right_controler).is_dominant_hand = false
+		get_node(left_controler).is_dominant_hand = true
+		dominant_hand = Hands.RIGHT_HAND
+	
+	#update controls to ensure the hand dominant controls are set
+	get_node(left_controler).update_controls(movement_mode)
+	get_node(right_controler).update_controls(movement_mode)
+	
+
 func _ready():
 	
 	#Get node if not assigned in the editor
-	if(!left_controller):
-		left_controller = get_node("Left_Controller")
-	if(!right_controller):
-		right_controller = get_node("Right_Controller")
+	if(!left_controler):
+		left_controler = get_node("Left_Controller")
+	if(!right_controler):
+		right_controler = get_node("Right_Controller")
 		
 	if(!player_camera):
 		player_camera = get_node("Player_Camera")
@@ -102,9 +123,8 @@ func _ready():
 	set_collision_layer(collision_layer)
 	set_collision_mask(collision_mask)
 	set_player_radius(player_radius)
-	
-	
-	
+	PlayerSettings.player = self
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -143,7 +163,6 @@ func _physics_process(delta):
 	# Apply our drag
 	velocity *= (1.0 - drag_factor)
 	
-	
 	# apply move and slide to our kinematic body
 	velocity = kinematicbody.move_and_slide(velocity, Vector3(0.0, 1.0, 0.0))
 	
@@ -155,21 +174,3 @@ func _physics_process(delta):
 	# now use our new position to move our origin point
 	var movement = (kinematicbody.global_transform.origin - curr_transform.origin)
 	self.global_transform.origin += movement
-
-	# Return this back to where it was so we can use its collision shape for other things too
-	# $KinematicBody.global_transform.origin = curr_transform.origin
-
-func _change_movement_mode(currentMovementMode):
-	if currentMovementMode == "Teleport":
-		movement_mode = "Smooth"
-	elif currentMovementMode == "Smooth":
-		movement_mode = "Armswinger"
-	elif currentMovementMode == "Armswinger":
-		movement_mode = "Teleport"
-	else:
-		movement_mode = "Smooth"
-		print_debug(currentMovementMode)
-	
-		
-	left_controller.movement_mode = movement_mode
-	right_controller.movement_mode = movement_mode

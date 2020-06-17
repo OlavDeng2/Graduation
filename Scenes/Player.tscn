@@ -13,25 +13,28 @@
 [node name="Player" type="ARVROrigin"]
 script = ExtResource( 3 )
 player_camera = NodePath("Player_Camera")
-left_controller = NodePath("Left_Controller")
-right_controller = NodePath("Right_Controller")
+left_controler = NodePath("Left_Controller")
+right_controler = NodePath("Right_Controller")
 
 [node name="Player_Camera" type="ARVRCamera" parent="."]
 current = true
 
 [node name="Left_Controller" parent="." instance=ExtResource( 1 )]
+function_player_rotate = NodePath("Function_Player_Rotate")
+function_smooth_locomotion = NodePath("Function_Direct_movement")
+function_armswinger = NodePath("Function_Armswinger")
 
 [node name="Function_Player_Rotate" parent="Left_Controller" instance=ExtResource( 4 )]
 enabled = false
 camera = NodePath("../../Player_Camera")
 
 [node name="Function_Direct_movement" parent="Left_Controller" instance=ExtResource( 7 )]
-enabled = false
 camera = NodePath("../../Player_Camera")
 player = NodePath("../..")
 headset_direction = false
 
 [node name="Function_Armswinger" parent="Left_Controller" instance=ExtResource( 6 )]
+enabled = false
 camera = NodePath("../../Player_Camera")
 player = NodePath("../..")
 vr_controller = NodePath("..")
@@ -42,6 +45,9 @@ min_speed = 500.0
 collision_mask = 8
 
 [node name="Right_Controller" parent="." instance=ExtResource( 2 )]
+function_player_rotate = NodePath("Function_Player_Rotate")
+function_smooth_locomotion = NodePath("Function_Direct_movement")
+function_armswinger = NodePath("Function_Armswinger")
 
 [node name="Function_Player_Rotate" parent="Right_Controller" instance=ExtResource( 4 )]
 camera = NodePath("../../Player_Camera")
@@ -58,6 +64,9 @@ camera = NodePath("../../Player_Camera")
 player = NodePath("../..")
 vr_controller = NodePath("..")
 max_speed = 500.0
+
+[node name="Function_pointer" parent="Right_Controller" instance=ExtResource( 8 )]
+collision_mask = 8
 
 [node name="KinematicBody" type="KinematicBody" parent="."]
 collision_mask = 1048574
