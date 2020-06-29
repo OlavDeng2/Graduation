@@ -7,6 +7,8 @@ export (NodePath) var function_smooth_locomotion = null
 export (NodePath) var function_armswinger = null
 export (NodePath) var function_teleport = null
 
+var function_player_rotate_node = null
+
 var player_controller = null
 
 var is_dominant_hand = false
@@ -67,6 +69,8 @@ func _ready():
 	# warning-ignore-all:return_value_discarded
 	player_controller = get_parent()
 	controller_hand = get_controller_id()
+	
+	function_player_rotate_node = get_node(function_player_rotate)
 
 	grab_area = get_node("Area")
 	grab_pos_node = get_node("Grab_Pos")

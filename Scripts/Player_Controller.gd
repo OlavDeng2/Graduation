@@ -38,6 +38,10 @@ export var dominant_hand = Hands.RIGHT_HAND
 
 export (NodePath) var left_controler = null
 export (NodePath) var right_controler = null
+
+var left_controler_node = null
+var right_controler_node = null
+
 var movement_mode = Movement_Modes.SMOOTH_LOCOMOTION
 
 # size of our player
@@ -100,13 +104,55 @@ func toggle_dominant_hand():
 	get_node(right_controler).update_controls(movement_mode)
 	
 
+
+func change_movement_mode():
+	#check current movement mode
+	#check current main hand
+	#move to next movement mode
+	pass
+	
+	
+func toggle_snapturn():
+	#if smooth turn is on, turn it off
+	if PlayerSettings.smooth_turn:
+		left_controler_node.function_player_rotate_node.smooth_turn = false
+		right_controler_node.function_player_rotate_node.smooth_turn = false
+		PlayerSettings.smooth_turn = false
+	
+	#if smooth turn is off, turn it on
+	elif !PlayerSettings.smooth_turn:
+		left_controler_node.function_player_rotate_node.smooth_turn = true
+		right_controler_node.function_player_rotate_node.smooth_turn = true
+		PlayerSettings.smooth_turn = true
+	
+
+func toggle_follow_headset_armswinger():
+	#check current mode on both hands
+	#Toggle mode on both hands
+	pass
+	
+	
+func set_armswinger_min_speed(var speed):
+	#change speed on both hands
+	pass
+
+
+func toggle_follow_headset_smooth_locomotion():
+	#check current mode on both hands
+	#Toggle mode on both hands
+	pass
+
 func _ready():
 	
+	#get the node if node path is set
+	left_controler_node = get_node(left_controler)
+	right_controler_node = get_node(right_controler)
+	
 	#Get node if not assigned in the editor
-	if(!left_controler):
-		left_controler = get_node("Left_Controller")
-	if(!right_controler):
-		right_controler = get_node("Right_Controller")
+	if(!left_controler_node):
+		left_controler_node = get_node("Left_Controller")
+	if(!right_controler_node):
+		right_controler_node = get_node("Right_Controller")
 		
 	if(!player_camera):
 		player_camera = get_node("Player_Camera")

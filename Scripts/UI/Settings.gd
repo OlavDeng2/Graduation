@@ -43,6 +43,8 @@ func _switch_movement_method(var new_movement_method):
 	pass
 
 
+
+
 #Armswinger settings
 
 
@@ -67,4 +69,9 @@ func _main_menu_settings_button():
 
 func _settings_change_dominant_hand_button():
 	player.toggle_dominant_hand()
+	#todo: change the current text on the label
+
+
+func _settings_toggle_turning_mode():
+	player.toggle_snapturn()
 	#todo: change the current text on the label

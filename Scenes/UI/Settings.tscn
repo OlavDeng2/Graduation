@@ -162,19 +162,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Text_Teleport_Settings" type="Label" parent="Settings/VBoxContainer"]
+[node name="Button_Back" type="Button" parent="Settings/VBoxContainer"]
 margin_top = 317.0
 margin_right = 300.0
-margin_bottom = 331.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-text = "Teleport Settings"
-align = 1
-
-[node name="Button_Back" type="Button" parent="Settings/VBoxContainer"]
-margin_top = 335.0
-margin_right = 300.0
-margin_bottom = 355.0
+margin_bottom = 337.0
 text = "Back"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -224,5 +215,6 @@ text = "Back"
 [connection signal="button_down" from="Main_Menu/VBoxContainer/Button_input_settings" to="." method="_main_menu_settings_button"]
 [connection signal="button_down" from="Main_Menu/VBoxContainer/Button_credits" to="." method="_main_menu_credits_button"]
 [connection signal="button_down" from="Settings/VBoxContainer/Button_Change_Dominant_Hand" to="." method="_settings_change_dominant_hand_button"]
+[connection signal="button_down" from="Settings/VBoxContainer/Button_Change_Turn_Method" to="." method="_settings_toggle_turning_mode"]
 [connection signal="button_down" from="Settings/VBoxContainer/Button_Back" to="." method="_credits_back_button"]
 [connection signal="button_down" from="Credits/VBoxContainer/Button_Back" to="." method="_credits_back_button"]
