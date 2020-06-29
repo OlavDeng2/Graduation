@@ -123,8 +123,8 @@ skin = SubResource( 2 )
 material/0 = SubResource( 3 )
 
 [node name="StaticBody" type="StaticBody" parent="World/Floor_Main"]
-collision_layer = 7
-collision_mask = 3
+collision_layer = 23
+collision_mask = 19
 
 [node name="CollisionShape" type="CollisionShape" parent="World/Floor_Main/StaticBody"]
 shape = SubResource( 4 )

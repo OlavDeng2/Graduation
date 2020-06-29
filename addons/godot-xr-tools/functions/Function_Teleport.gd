@@ -93,6 +93,7 @@ func set_player_radius(p_radius):
 		capsule.mesh.radius = player_radius
 
 func _ready():
+	
 	# We should be a child of an ARVRController and it should be a child or our ARVROrigin
 	origin_node = get_node("../..")
 
@@ -148,6 +149,7 @@ func _physics_process(delta):
 		$Target/Player_figure.scale = Vector3(ws, ws, ws)
 	
 	if controller and controller.get_is_active() and controller.is_button_pressed(teleport_button) or (abs(controller.get_joystick_axis(1)) > 0.1 || abs(controller.get_joystick_axis(0)) > 0.1):
+		
 		
 		if !is_teleporting:
 			is_teleporting = true

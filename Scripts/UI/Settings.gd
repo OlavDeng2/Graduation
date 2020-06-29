@@ -39,10 +39,8 @@ func _switch_screen(var new_screen):
 
 
 #Function for switching movement method
-func _switch_movement_method(var new_movement_method):
-	pass
-
-
+func _settings_switch_movement_method():
+	player.change_movement_mode()
 
 
 #Armswinger settings

@@ -106,10 +106,20 @@ func toggle_dominant_hand():
 
 
 func change_movement_mode():
-	#check current movement mode
-	#check current main hand
-	#move to next movement mode
-	pass
+	print_debug(movement_mode)
+	match movement_mode:
+		1:
+			movement_mode = Movement_Modes.ARMSWINGER
+			left_controler_node.update_controls(movement_mode)
+			right_controler_node.update_controls(movement_mode)
+		2:
+			movement_mode = Movement_Modes.TELEPORT
+			left_controler_node.update_controls(movement_mode)
+			right_controler_node.update_controls(movement_mode)
+		3:
+			movement_mode = Movement_Modes.SMOOTH_LOCOMOTION
+			left_controler_node.update_controls(movement_mode)
+			right_controler_node.update_controls(movement_mode)
 	
 	
 func toggle_snapturn():
@@ -127,20 +137,34 @@ func toggle_snapturn():
 	
 
 func toggle_follow_headset_armswinger():
-	#check current mode on both hands
-	#Toggle mode on both hands
-	pass
+	if PlayerSettings.armswinger_follow_headset:
+		left_controler_node.function_armswinger_node.headset_direction = false
+		right_controler_node.function_armswinger_node.headset_direction = false
+		PlayerSettings.armswinger_follow_headset = false
+		
+	elif !PlayerSettings.armswinger_follow_headset:
+		left_controler_node.function_armswinger_node.headset_direction = true
+		right_controler_node.function_armswinger_node.headset_direction = true
+		PlayerSettings.armswinger_follow_headset = true
 	
 	
 func set_armswinger_min_speed(var speed):
+	
 	#change speed on both hands
 	pass
 
 
 func toggle_follow_headset_smooth_locomotion():
-	#check current mode on both hands
-	#Toggle mode on both hands
-	pass
+	if PlayerSettings.smooth_follow_headset:
+		left_controler_node.function_smooth_locomotion_node.headset_direction = false
+		right_controler_node.function_smooth_locomotion_node.headset_direction = false
+		PlayerSettings.smooth_follow_headset = false
+		
+	elif !PlayerSettings.smooth_follow_headset:
+		left_controler_node.function_smooth_locomotion_node.headset_direction = true
+		right_controler_node.function_smooth_locomotion_node.headset_direction = true
+		PlayerSettings.smooth_follow_headset = true
+
 
 func _ready():
 	

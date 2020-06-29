@@ -8,6 +8,9 @@ export (NodePath) var function_armswinger = null
 export (NodePath) var function_teleport = null
 
 var function_player_rotate_node = null
+var function_smooth_locomotion_node = null
+var function_armswinger_node = null
+var function_teleport_node = null
 
 var player_controller = null
 
@@ -43,7 +46,9 @@ func update_controls(var current_movement_method):
 		get_node(function_player_rotate).enabled = false
 		get_node(function_smooth_locomotion).enabled = false
 		get_node(function_armswinger).enabled = false
-		#get_node(function_teleport).enabled = false
+		get_node(function_teleport).enabled = false
+		
+		print_debug(current_movement_method)
 		
 		match current_movement_method:
 			1:
@@ -51,14 +56,18 @@ func update_controls(var current_movement_method):
 			2:
 				get_node(function_armswinger).enabled = true
 			3:
-				pass
-				#function_teleport.enabled = true
+				function_teleport_node.enabled = true
 
 	elif(!is_dominant_hand):
 		get_node(function_player_rotate).enabled = true
 		get_node(function_smooth_locomotion).enabled = false
 		get_node(function_armswinger).enabled = false
-		#get_node(function_teleport).enabled = false
+		get_node(function_teleport).enabled = false
+		
+		#if the movement mode is armswinger, disable player rotate option.
+		if current_movement_method == 2:
+			get_node(function_player_rotate).enabled = false
+			get_node(function_armswinger).enabled = true
 	
 	
 
@@ -70,7 +79,14 @@ func _ready():
 	player_controller = get_parent()
 	controller_hand = get_controller_id()
 	
-	function_player_rotate_node = get_node(function_player_rotate)
+	if(function_player_rotate):
+		function_player_rotate_node = get_node(function_player_rotate)
+	if(function_smooth_locomotion):
+		function_smooth_locomotion_node = get_node(function_smooth_locomotion)
+	if(function_armswinger):
+		function_armswinger_node = get_node(function_armswinger)
+	if(function_teleport):
+		function_teleport_node = get_node(function_teleport)
 
 	grab_area = get_node("Area")
 	grab_pos_node = get_node("Grab_Pos")
