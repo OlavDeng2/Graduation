@@ -143,6 +143,7 @@ align = 1
 margin_top = 255.0
 margin_right = 300.0
 margin_bottom = 271.0
+max_value = 1000.0
 
 [node name="Text_Smooth_Locomotion_settings" type="Label" parent="Settings/VBoxContainer"]
 margin_top = 275.0
@@ -217,5 +218,8 @@ text = "Back"
 [connection signal="button_down" from="Settings/VBoxContainer/Button_Change_Movement_Mode" to="." method="_settings_switch_movement_method"]
 [connection signal="button_down" from="Settings/VBoxContainer/Button_Change_Dominant_Hand" to="." method="_settings_change_dominant_hand_button"]
 [connection signal="button_down" from="Settings/VBoxContainer/Button_Change_Turn_Method" to="." method="_settings_toggle_turning_mode"]
+[connection signal="button_down" from="Settings/VBoxContainer/Button_Headset_Orientation_Armswinger" to="." method="_settings_armswinger_follow_headset"]
+[connection signal="value_changed" from="Settings/VBoxContainer/HSlider" to="." method="_settings_armswinger_move_speed_value_changed"]
+[connection signal="button_down" from="Settings/VBoxContainer/Button_Headset_Orientation_Smooth" to="." method="_settings_smooth_follow_headset"]
 [connection signal="button_down" from="Settings/VBoxContainer/Button_Back" to="." method="_credits_back_button"]
 [connection signal="button_down" from="Credits/VBoxContainer/Button_Back" to="." method="_credits_back_button"]

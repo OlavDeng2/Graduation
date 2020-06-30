@@ -148,7 +148,7 @@ func _physics_process(delta):
 		$Target.mesh.size = Vector2(ws, ws)
 		$Target/Player_figure.scale = Vector3(ws, ws, ws)
 	
-	if controller and controller.get_is_active() and controller.is_button_pressed(teleport_button) or (abs(controller.get_joystick_axis(1)) > 0.1 || abs(controller.get_joystick_axis(0)) > 0.1):
+	if controller and controller.get_is_active() and (abs(controller.get_joystick_axis(1)) > 0.1 || abs(controller.get_joystick_axis(0)) > 0.1):# or controller.is_button_pressed(teleport_button):
 		
 		
 		if !is_teleporting:
