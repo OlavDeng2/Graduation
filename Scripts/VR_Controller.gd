@@ -14,7 +14,7 @@ var function_teleport_node = null
 
 var player_controller = null
 
-var is_dominant_hand = false
+export var is_dominant_hand = false
 
 #0 = unkown, 1 = left, 2 = right
 export var controller_hand = 0
@@ -42,7 +42,8 @@ const CONTROLLER_RUMBLE_FADE_SPEED = 2.0
 
 #Update controls based on dominant hand or not
 func update_controls(var current_movement_method):
-	if(is_dominant_hand):
+	#the movement will go on the non dominant hand
+	if(!is_dominant_hand):
 		get_node(function_player_rotate).enabled = false
 		get_node(function_smooth_locomotion).enabled = false
 		get_node(function_armswinger).enabled = false
@@ -57,8 +58,9 @@ func update_controls(var current_movement_method):
 				get_node(function_armswinger).enabled = true
 			3:
 				function_teleport_node.enabled = true
-
-	elif(!is_dominant_hand):
+	
+	#turning will go on the dominant hand, except for if using armswinger
+	elif(is_dominant_hand):
 		get_node(function_player_rotate).enabled = true
 		get_node(function_smooth_locomotion).enabled = false
 		get_node(function_armswinger).enabled = false

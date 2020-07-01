@@ -14,7 +14,6 @@
 [node name="Player" type="ARVROrigin"]
 script = ExtResource( 3 )
 player_camera = NodePath("Player_Camera")
-dominant_hand = 1
 left_controler = NodePath("Left_Controller")
 right_controler = NodePath("Right_Controller")
 
@@ -58,6 +57,7 @@ function_player_rotate = NodePath("Function_Player_Rotate")
 function_smooth_locomotion = NodePath("Function_Direct_movement")
 function_armswinger = NodePath("Function_Armswinger")
 function_teleport = NodePath("Function_Teleport")
+is_dominant_hand = true
 
 [node name="Function_Player_Rotate" parent="Right_Controller" instance=ExtResource( 4 )]
 camera = NodePath("../../Player_Camera")

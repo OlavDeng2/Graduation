@@ -106,7 +106,6 @@ func toggle_dominant_hand():
 
 
 func change_movement_mode():
-	print_debug(movement_mode)
 	match movement_mode:
 		1:
 			movement_mode = Movement_Modes.ARMSWINGER
