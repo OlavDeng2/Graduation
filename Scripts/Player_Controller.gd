@@ -90,14 +90,16 @@ func set_player_radius(p_radius):
 
 #toggle the dominant hand.
 func toggle_dominant_hand():
+	#if right hand is dominant, set left hand as dominant
 	if (dominant_hand == Hands.RIGHT_HAND):
-		get_node(right_controler).is_dominant_hand = true
-		get_node(left_controler).is_dominant_hand = false
-		dominant_hand = Hands.LEFT_HAND
-		PlayerSettings.current_dominant_hand = "Left Hand"
-	elif(dominant_hand == Hands.LEFT_HAND):
 		get_node(right_controler).is_dominant_hand = false
 		get_node(left_controler).is_dominant_hand = true
+		dominant_hand = Hands.LEFT_HAND
+		PlayerSettings.current_dominant_hand = "Left Hand"
+	#if left hand is dominant, set right hand as dominant
+	elif(dominant_hand == Hands.LEFT_HAND):
+		get_node(right_controler).is_dominant_hand = true
+		get_node(left_controler).is_dominant_hand = false
 		dominant_hand = Hands.RIGHT_HAND
 		PlayerSettings.current_dominant_hand = "Right Hand"
 	
