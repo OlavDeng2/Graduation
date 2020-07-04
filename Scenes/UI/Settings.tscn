@@ -7,6 +7,9 @@ script = ExtResource( 1 )
 main_menu_screen = NodePath("Main_Menu")
 settings_screen = NodePath("Settings")
 credits_screen = NodePath("Credits")
+movement_mode_text = NodePath("Settings/VBoxContainer/Text_Current_Movement_Mode")
+dominant_hand_text = NodePath("Settings/VBoxContainer/Text_Current_Dominant_Hand")
+current_turning_method_text = NodePath("Settings/VBoxContainer/Text_Current_Turn_Method")
 
 [node name="Main_Menu" type="ColorRect" parent="."]
 margin_right = 300.0

@@ -49,7 +49,6 @@ func update_controls(var current_movement_method):
 		get_node(function_armswinger).enabled = false
 		get_node(function_teleport).enabled = false
 		
-		print_debug(current_movement_method)
 		
 		match current_movement_method:
 			1:

@@ -94,10 +94,12 @@ func toggle_dominant_hand():
 		get_node(right_controler).is_dominant_hand = true
 		get_node(left_controler).is_dominant_hand = false
 		dominant_hand = Hands.LEFT_HAND
+		PlayerSettings.current_dominant_hand = "Left Hand"
 	elif(dominant_hand == Hands.LEFT_HAND):
 		get_node(right_controler).is_dominant_hand = false
 		get_node(left_controler).is_dominant_hand = true
 		dominant_hand = Hands.RIGHT_HAND
+		PlayerSettings.current_dominant_hand = "Right Hand"
 	
 	#update controls to ensure the hand dominant controls are set
 	get_node(left_controler).update_controls(movement_mode)
@@ -148,9 +150,8 @@ func toggle_follow_headset_armswinger():
 	
 	
 func set_armswinger_min_speed(var speed):
-	
-	#change speed on both hands
-	pass
+	left_controler_node.function_armswinger_node.min_speed = speed
+	right_controler_node.function_armswinger_node.min_speed = speed
 
 
 func toggle_follow_headset_smooth_locomotion():

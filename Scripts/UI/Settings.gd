@@ -58,6 +58,13 @@ func _switch_screen(var new_screen):
 #Function for switching movement method
 func _settings_switch_movement_method():
 	player.change_movement_mode()
+	match player.movement_mode: 
+		1:
+			movement_mode_text_node.text = "current Movement Mode: \n Smooth Locomotion" 
+		2:
+			movement_mode_text_node.text = "current Movement Mode: \n Armswinger"
+		3:
+			movement_mode_text_node.text = "current Movement Mode: \n Teleport"
 
 
 func _main_menu_credits_button():
@@ -72,25 +79,27 @@ func _main_menu_settings_button():
 	_switch_screen(settings_screen)
 
 
-
 func _settings_change_dominant_hand_button():
 	player.toggle_dominant_hand()
-	#todo: change the current text on the label
+	dominant_hand_text_node.text = "Dominant Hand: \n " + PlayerSettings.current_dominant_hand 
 
 
 func _settings_toggle_turning_mode():
 	player.toggle_snapturn()
-	#todo: change the current text on the label
+	if(PlayerSettings.smooth_turn):
+		current_turning_method_text_node.text = "Turning Method: \n " + "Smooth Turn"
+	elif(!PlayerSettings.smooth_turn):
+		current_turning_method_text_node.text = "Turning Method: \n " + "Snap Turn"
 
 
 func _settings_armswinger_follow_headset():
 	player.toggle_follow_headset_armswinger()
+	#todo: change the current text on the label
 
 
 func _settings_smooth_follow_headset():
 	player.toggle_follow_headset_smooth_locomotion()
-	pass # Replace with function body.
-
+	#todo: change the current text on the label
 
 func _settings_armswinger_move_speed_value_changed(value):
-	pass # Replace with function body.
+	player.set_armswinger_min_speed(value)
