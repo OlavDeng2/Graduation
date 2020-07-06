@@ -30,7 +30,7 @@ func _physics_process(delta):
 			flash_mesh.visible = false
 
 
-func interact():
+func action():
 	if flash_timer <= 0:
 
 		flash_timer = FLASH_TIME

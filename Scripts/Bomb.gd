@@ -79,7 +79,7 @@ func _physics_process(delta):
 			queue_free()
 
 
-func interact():
+func action():
 	set_physics_process(true)
 
 	fuse_particles.emitting = true
