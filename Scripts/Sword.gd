@@ -1,4 +1,4 @@
-extends VR_Interactable_Rigidbody
+extends "res://addons/godot-xr-tools/objects/Object_pickable.gd"
 
 const SWORD_DAMAGE = 1000
 
@@ -23,13 +23,13 @@ func _physics_process(_delta):
 			collision_results.collider.damage(SWORD_DAMAGE)
 
 		if collision_results.collider is RigidBody:
-			if controller == null:
+			if picked_up_by == null:
 				collision_results.collider.apply_impulse(
 					collision_results.position,
 					collision_results.normal * linear_velocity * COLLISION_FORCE)
 			else:
 				collision_results.collider.apply_impulse(
 					collision_results.position,
-					collision_results.normal * controller.controller_velocity * COLLISION_FORCE)
+					collision_results.normal * picked_up_by._get_velocity() * COLLISION_FORCE)
 
 		sword_noise.play()

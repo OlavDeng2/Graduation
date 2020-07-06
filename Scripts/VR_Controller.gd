@@ -74,9 +74,6 @@ func update_controls(var current_movement_method):
 
 
 func _ready():
-	# Ignore the warnings the from the connect function calls.
-	# (We will not need the returned values for this tutorial)
-	# warning-ignore-all:return_value_discarded
 	player_controller = get_parent()
 	controller_hand = get_controller_id()
 	
@@ -92,14 +89,8 @@ func _ready():
 	grab_area = get_node("Area")
 	grab_pos_node = get_node("Grab_Pos")
 
-	#get_node("Sleep_Area").connect("body_entered", self, "sleep_area_entered")
-	#get_node("Sleep_Area").connect("body_exited", self, "sleep_area_exited")
-
 	hand_mesh = get_node("Hand")
 	hand_pickup_drop_sound = get_node("AudioStreamPlayer3D")
-
-	#connect("button_pressed", self, "button_pressed")
-	#connect("button_release", self, "button_released")
 
 
 func _physics_process(delta):
@@ -156,100 +147,3 @@ func _physics_process_update_controller_velocity_global(delta):
 
 	if global_prior_controller_velocities.size() > 30:
 		global_prior_controller_velocities.remove(0)
-
-
-#func button_pressed(button_index):
-#	if button_index == 15:
-#		_on_button_pressed_trigger()
-
-#	if button_index == 2:
-#		_on_button_pressed_grab()
-		
-#	if button_index == 1:
-#		_on_button_pressed_b()
-
-
-#func _on_button_pressed_trigger():
-#	if held_object != null: 
-#		if held_object is VR_Interactable_Rigidbody:
-#			held_object.interact()
-
-
-#func _on_button_pressed_grab():
-#	if held_object == null:
-#		_pickup_rigidbody()
-	#else:
-	#	_throw_rigidbody()
-#	hand_pickup_drop_sound.play()
-
-
-#func _pickup_rigidbody():
-#	var rigid_body = null
-
-#	var bodies = grab_area.get_overlapping_bodies()
-#	if len(bodies) > 0:
-#		for body in bodies:
-#			if body is RigidBody:
-#				if !("NO_PICKUP" in body):
-#					rigid_body = body
-#					break
-
-#	if rigid_body != null:
-
-#		held_object = rigid_body
-
-#		held_object_data["mode"] = held_object.mode
-#		held_object_data["layer"] = held_object.collision_layer
-#		held_object_data["mask"] = held_object.collision_mask
-
-#		held_object.mode = RigidBody.MODE_STATIC
-#		held_object.collision_layer = 0
-#		held_object.collision_mask = 0
-
-#		hand_mesh.visible = false
-
-#		if held_object is VR_Interactable_Rigidbody:
-#			held_object.controller = self
-#			held_object.picked_up()
-
-
-#func _throw_rigidbody():
-#	if held_object == null:
-#		return
-
-#	held_object.mode = held_object_data["mode"]
-#	held_object.collision_layer = held_object_data["layer"]
-#	held_object.collision_mask = held_object_data["mask"]
-
-#	held_object.apply_impulse(Vector3(0, 0, 0), global_controller_velocity)
-
-#	if held_object is VR_Interactable_Rigidbody:
-#		held_object.dropped()
-#		held_object.controller = null
-
-#	held_object = null
-#	hand_mesh.visible = true
-
-
-#func button_released(button_index):
-#	if button_index == 2:
-#		_on_button_released_grab()
-	
-
-#func _on_button_released_grab():
-#	if held_object != null:
-#		_throw_rigidbody()
-#	hand_pickup_drop_sound.play()
-
-
-#func sleep_area_entered(body):
-#	if "can_sleep" in body:
-#		body.can_sleep = false
-#		body.sleeping = false
-
-
-#func sleep_area_exited(body):
-#	if "can_sleep" in body:
-		# Allow the CollisionBody to sleep by setting the "can_sleep" variable to true
-#		body.can_sleep = true
-		

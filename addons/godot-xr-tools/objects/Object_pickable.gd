@@ -112,6 +112,7 @@ func let_go(starting_linear_velocity = Vector3(0.0, 0.0, 0.0)):
 		picked_up_by = null
 		by_controller = null
 
+
 func _ready():
 	if highlight_mesh_instance:
 		# if we have a highlight mesh instance selected obtain our node

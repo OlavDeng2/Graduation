@@ -109,6 +109,7 @@ func _pick_up_object(p_object):
 		picked_up_object.pick_up(self, get_parent())
 		emit_signal("has_picked_up", picked_up_object)
 
+
 func _on_button_pressed(p_button):
 	if p_button == pickup_button_id:
 		if picked_up_object and !picked_up_object.press_to_hold:

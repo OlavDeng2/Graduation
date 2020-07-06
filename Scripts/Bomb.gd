@@ -1,4 +1,4 @@
-extends VR_Interactable_Rigidbody
+extends "res://addons/godot-xr-tools/objects/Object_pickable.gd"
 
 var bomb_mesh
 
@@ -73,12 +73,8 @@ func _physics_process(delta):
 
 			explosion_area.monitoring = false
 
-			if controller != null:
-				controller.held_object = null
-				controller.hand_mesh.visible = true
-
-				if controller.grab_mode == "RAYCAST":
-					controller.grab_raycast.visible = true
+			if picked_up_by != null:
+				picked_up_by.drop_object()
 
 			queue_free()
 

@@ -1,4 +1,4 @@
-extends VR_Interactable_Rigidbody
+extends "res://addons/godot-xr-tools/objects/Object_pickable.gd"
 
 var flash_mesh
 const FLASH_TIME = 0.25
@@ -58,9 +58,6 @@ func interact():
 					body.apply_impulse((raycast.global_transform.origin - body.global_transform.origin).normalized(), direction_vector * collision_force)
 
 		shotgun_fire_sound.play()
-
-		if controller != null:
-			controller.rumble = 0.25
 
 
 func picked_up():
