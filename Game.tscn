@@ -1,6 +1,6 @@
 [gd_scene load_steps=48 format=2]
 
-[ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Managers/Oculus_Quest_Game.gd" type="Script" id=1]
 [ext_resource path="res://Assets/CGTuts_OceanHDRI_Freebie_001.hdr" type="Texture" id=2]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Controlls_GUI.tscn" type="PackedScene" id=4]
@@ -124,7 +124,6 @@ skin = SubResource( 2 )
 material/0 = SubResource( 3 )
 
 [node name="StaticBody" type="StaticBody" parent="World/Floor_Main"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 collision_layer = 23
 collision_mask = 19
 
@@ -2025,7 +2024,9 @@ autoplay = true
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, -2.12546, 1.73246, 8.0558 )
 screen_size = Vector2( 1.5, 3 )
 viewport_size = Vector2( 300, 400 )
+transparent = true
 scene = ExtResource( 9 )
+collision_layer = 15
 
 [node name="PickableObject" parent="." instance=ExtResource( 5 )]
 transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -2.13243, 1.29437, 3.86968 )
