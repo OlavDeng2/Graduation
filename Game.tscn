@@ -1,12 +1,9 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://Scripts/Managers/Game.gd" type="Script" id=1]
 [ext_resource path="res://Assets/CGTuts_OceanHDRI_Freebie_001.hdr" type="Texture" id=2]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Controlls_GUI.tscn" type="PackedScene" id=4]
-[ext_resource path="res://addons/godot-xr-tools/objects/Object_pickable.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Sphere_Target.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Instructions_GUI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Pistol.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/UI/Settings.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Bomb.tscn" type="PackedScene" id=10]
@@ -1421,11 +1418,6 @@ shadow_enabled = true
 [node name="Player" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.289724, 2.05767, 5.53517 )
 
-[node name="Controlls_GUI" parent="." instance=ExtResource( 4 )]
-transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, -4.75432, 4.96041, 19.7775 )
-
-[node name="Instructions_GUI" parent="." instance=ExtResource( 7 )]
-
 [node name="Spheres" type="Spatial" parent="."]
 
 [node name="Sphere_Target" parent="Spheres" instance=ExtResource( 6 )]
@@ -2021,12 +2013,9 @@ volume_db = -10.0
 autoplay = true
 
 [node name="Viewport2Din3D" parent="." instance=ExtResource( 23 )]
-transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, -2.12546, 1.73246, 8.0558 )
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, -2.12546, 1.73246, 13.8739 )
 screen_size = Vector2( 1.5, 3 )
 viewport_size = Vector2( 300, 400 )
 transparent = true
 scene = ExtResource( 9 )
 collision_layer = 15
-
-[node name="PickableObject" parent="." instance=ExtResource( 5 )]
-transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -2.13243, 1.29437, 3.86968 )
