@@ -26,6 +26,8 @@ function_player_rotate = NodePath("Function_Player_Rotate")
 function_smooth_locomotion = NodePath("Function_Direct_movement")
 function_armswinger = NodePath("Function_Armswinger")
 function_teleport = NodePath("Function_Teleport")
+function_pickup = NodePath("Function_Pickup")
+function_pointer = NodePath("Function_pointer")
 
 [node name="Function_Player_Rotate" parent="Left_Controller" instance=ExtResource( 4 )]
 enabled = false
@@ -60,6 +62,8 @@ function_player_rotate = NodePath("Function_Player_Rotate")
 function_smooth_locomotion = NodePath("Function_Direct_movement")
 function_armswinger = NodePath("Function_Armswinger")
 function_teleport = NodePath("Function_Teleport")
+function_pickup = NodePath("Function_Pickup")
+function_pointer = NodePath("Function_pointer")
 is_dominant_hand = true
 
 [node name="Function_Player_Rotate" parent="Right_Controller" instance=ExtResource( 4 )]

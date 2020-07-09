@@ -47,6 +47,8 @@ var raycast = null
 onready var ws = ARVRServer.world_scale
 
 func set_enabled(p_enabled):
+	
+	print_debug(p_enabled)
 	enabled = p_enabled
 	
 	# this gets called before our scene is ready, we'll call this again in _ready to enable this
@@ -111,15 +113,15 @@ func _ready():
 	# apply our world scale to our laser position
 	laser.translation.y = laser_y * ws
 	
-	#Hide our laser unless it is pointing at something
-	laser.visible = false
-	
 	print_debug(laser.visible)
 	
 	# init our state
 	set_distance(distance)
 	set_collision_mask(collision_mask)
 	set_enabled(enabled)
+	
+	#Hide our laser unless it is pointing at something
+	laser.visible = false
 
 func _process(delta):
 	if !is_inside_tree():
@@ -132,7 +134,8 @@ func _process(delta):
 	
 	if enabled and raycast.is_colliding():
 		#set the laser visible when interacting with valid UI target
-		#laser.visible = true
+		laser.visible = true
+		
 		var new_at = raycast.get_collision_point()
 		
 		if is_instance_valid(target):
@@ -178,4 +181,5 @@ func _process(delta):
 			last_target.pointer_exited()
 		
 		last_target = null
+		laser.visible = false
 

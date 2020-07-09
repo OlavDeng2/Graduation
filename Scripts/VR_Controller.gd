@@ -6,11 +6,15 @@ export (NodePath) var function_player_rotate = null
 export (NodePath) var function_smooth_locomotion = null
 export (NodePath) var function_armswinger = null
 export (NodePath) var function_teleport = null
+export (NodePath) var function_pickup = null
+export (NodePath) var function_pointer = null
 
 var function_player_rotate_node = null
 var function_smooth_locomotion_node = null
 var function_armswinger_node = null
 var function_teleport_node = null
+var function_pickup_node = null
+var function_pointer_node = null
 
 var player_controller = null
 
@@ -85,12 +89,29 @@ func _ready():
 		function_armswinger_node = get_node(function_armswinger)
 	if(function_teleport):
 		function_teleport_node = get_node(function_teleport)
+	if(function_pickup):
+		function_pickup_node = get_node(function_pickup)
+	if(function_pointer):
+		function_pointer_node = get_node(function_pointer)
 
 	grab_area = get_node("Area")
 	grab_pos_node = get_node("Grab_Pos")
 
 	hand_mesh = get_node("Hand")
 	hand_pickup_drop_sound = get_node("AudioStreamPlayer3D")
+	$Function_Pickup.connect("has_picked_up", self, "_on_picked_up_object")
+	$Function_Pickup.connect("has_dropped", self, "_on_dropped_object")
+
+
+func _on_picked_up_object(_object):
+	#disable the pointer
+	function_pointer_node.set_enabled(false)
+	
+
+func _on_dropped_object():
+	#enable the pointer
+	function_pointer_node.set_enabled(true)
+	print_debug("has dropped")
 
 
 func _physics_process(delta):
