@@ -47,6 +47,8 @@ var raycast = null
 onready var ws = ARVRServer.world_scale
 
 func set_enabled(p_enabled):
+	
+	print_debug(p_enabled)
 	enabled = p_enabled
 	
 	# this gets called before our scene is ready, we'll call this again in _ready to enable this
